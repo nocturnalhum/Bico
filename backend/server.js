@@ -2,6 +2,11 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5050;
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+// Connect to MongoDB:
+const ConnectDB = require('./config/database');
+ConnectDB();
 
 // ============================================================================
 // =================<<< Middleware >>>=========================================
