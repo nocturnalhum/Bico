@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema(
       min: 3,
       max: 20,
       unique: true,
+      trim: true,
     },
 
     email: {
@@ -58,3 +59,19 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// ============================================================================
+// ==========<<< Password Hashing Method >>>===================================
+// ============================================================================
+
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+module.exports = mongoose.model('User', UserSchema);
