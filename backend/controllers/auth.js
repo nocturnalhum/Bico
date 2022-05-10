@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const ErrorResponse = require('../utils/errorResponse');
 
 // ============================================================================
 // =================<<< Registration >>>=======================================
@@ -29,26 +30,18 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    res
-      .status(400)
-      .json({ success: false, error: 'Please provide username and password' });
+    return next(new ErrorResponse(400, 'Please provide username and password'));
   }
   try {
     const user = await User.findOne({ username }).select('+password');
     if (!user) {
-      return res.status(404).json({
-        success: false,
-        error: 'Invalid username and password',
-      });
+      return next(new ErrorResponse(401, 'Invalid username and password'));
     }
 
     const verifiedPassword = await user.matchPasswords(password);
 
     if (!verifiedPassword) {
-      return res.status(400).json({
-        success: false,
-        error: 'Invalid username and password',
-      });
+      return next(new ErrorResponse(401, 'Invalid username and password'));
     }
 
     res.status(200).json({
