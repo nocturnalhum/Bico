@@ -74,4 +74,12 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+// ============================================================================
+// ==========<<< Password Matching Method >>>==================================
+// ============================================================================
+
+UserSchema.methods.matchPasswords = async function (passwordInput) {
+  return await bcrypt.compare(passwordInput, this.password);
+};
+
 module.exports = mongoose.model('User', UserSchema);
