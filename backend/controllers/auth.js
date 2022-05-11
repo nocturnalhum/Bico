@@ -38,9 +38,9 @@ exports.login = async (req, res, next) => {
       return next(new ErrorResponse(401, 'Invalid username and password'));
     }
 
-    const verifiedPassword = await user.matchPasswords(password);
+    const validPassword = await user.validatePassword(password);
 
-    if (!verifiedPassword) {
+    if (!validPassword) {
       return next(new ErrorResponse(401, 'Invalid username and password'));
     }
 
@@ -55,7 +55,7 @@ exports.login = async (req, res, next) => {
     );
     return res.status(500).json({
       success: false,
-      error: error.message,
+      error: `<<controllers/auth.js>>-Register  ` + error.message,
     });
   }
 };

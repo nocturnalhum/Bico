@@ -1,12 +1,15 @@
 require('dotenv').config();
 const PORT = process.env.PORT || 5050;
+const errorHandling = require('./middleware/errorHandling');
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const errorHandling = require('./middleware/errorHandling');
 const authRoute = require('./routes/auth');
 
-// Connect to MongoDB:
+// ============================================================================
+// =================<<< Mongo DB Connect >>>===================================
+// ============================================================================
+
+const mongoose = require('mongoose');
 const ConnectDB = require('./config/database');
 ConnectDB();
 
@@ -21,8 +24,13 @@ app.use(express.json());
 
 app.use('/api/v1/auth', authRoute);
 
+// ============================================================================
+// =================<<< ErrorHandling >>>======================================
+// ============================================================================
+
 // Errorhandler should be last piece of middleware:
 app.use(errorHandling);
+
 // ============================================================================
 // =================<<< Server >>>=============================================
 // ============================================================================
