@@ -4,7 +4,7 @@ import './register.css';
 
 export default function Register() {
   return (
-    <div className='register'>
+    <div className='register-container'>
       <div className='registerWrapper'>
         <div className='title'>Registration</div>
         <form action='#'>
