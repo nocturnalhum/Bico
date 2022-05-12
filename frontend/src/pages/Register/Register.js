@@ -38,7 +38,7 @@ export default function Register() {
       setError(error.response.data.error);
       setTimeout(() => {
         setError('');
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -46,7 +46,7 @@ export default function Register() {
     <div className='register-container'>
       <div className='registerWrapper'>
         <div className='title'>Registration</div>
-        {error && <span className='error-message'>{error}</span>}
+
         <form onSubmit={registerHandler}>
           <div className='form-details'>
             <div className='input-box'>
@@ -102,6 +102,7 @@ export default function Register() {
           <div className='profileAvatar'>
             <img src='/noAvatar.jpg' alt='' className='avatar' />
           </div>
+          {error && <span className='error-message'>{error}</span>}
           <div className='button'>
             <input type='submit' value='Register' />
           </div>

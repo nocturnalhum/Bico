@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // ============================================================================
 // ==========<<< Email Validation Method >>>===================================
@@ -80,6 +81,15 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.methods.validatePassword = async function (passwordInput) {
   return await bcrypt.compare(passwordInput, this.password);
+};
+
+// ============================================================================
+// ==========<<< Get Signed Token Method >>>===================================
+// ============================================================================
+UserSchema.methods.getSignedToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
 module.exports = mongoose.model('User', UserSchema);

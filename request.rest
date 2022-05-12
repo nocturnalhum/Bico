@@ -18,3 +18,8 @@ Content-Type: application/json
   "username": "Apple",
   "password": "123123"
 }
+
+
+### GET PRIVATE USER
+GET  http://localhost:5000/api/v1/private/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzk2MDZjM2IzMzJlNTI4ZmY1MmUzMyIsImlhdCI6MTY1MjMzODY2NCwiZXhwIjoxNjUyMzM5MjY0fQ.GLaEJMJlPMyyXC7Ob8QTp4T0A31R3KV6KaYY2DQpZIE

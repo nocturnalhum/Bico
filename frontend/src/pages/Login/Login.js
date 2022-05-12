@@ -29,7 +29,7 @@ export default function Login() {
       setError(error.response.data.error);
       setTimeout(() => {
         setError('');
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -37,7 +37,6 @@ export default function Login() {
     <div className='login-container'>
       <div className='loginWrapper'>
         <div className='title'>Login</div>
-        {error && <span className='error-message'>{error}</span>}
         <form onSubmit={loginHandler}>
           <div className='form-details'>
             <div className='input-box'>
@@ -66,6 +65,7 @@ export default function Login() {
               />
             </div>
           </div>
+          {error && <span className='error-message'>{error}</span>}
 
           <div className='button'>
             <input type='submit' value='Login' />

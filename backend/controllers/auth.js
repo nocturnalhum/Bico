@@ -17,6 +17,7 @@ exports.register = async (req, res, next) => {
     });
     res.status(201).json({
       success: true,
+      token: user.getSignedToken(),
     });
   } catch (error) {
     next(error);
@@ -29,9 +30,11 @@ exports.register = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     return next(new ErrorResponse(400, 'Please provide username and password'));
   }
+
   try {
     const user = await User.findOne({ username }).select('+password');
     if (!user) {
@@ -46,7 +49,7 @@ exports.login = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      user: user,
+      token: user.getSignedToken(),
     });
   } catch (error) {
     console.log(
