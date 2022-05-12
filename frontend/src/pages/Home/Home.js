@@ -2,5 +2,9 @@ import React from 'react';
 import './home.css';
 
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div className='home-container'>
+      <h1>Home</h1>
+    </div>
+  );
 }
