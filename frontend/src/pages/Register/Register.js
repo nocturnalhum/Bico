@@ -33,6 +33,9 @@ export default function Register() {
         { username, email, password },
         config
       );
+
+      localStorage.setItem('authToken', data.token);
+
       navigate('/login');
     } catch (error) {
       setError(error.response.data.error);

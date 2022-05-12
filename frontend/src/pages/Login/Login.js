@@ -24,6 +24,9 @@ export default function Login() {
         { username, password },
         config
       );
+
+      localStorage.setItem('authToken', data.token);
+
       navigate('/');
     } catch (error) {
       setError(error.response.data.error);
