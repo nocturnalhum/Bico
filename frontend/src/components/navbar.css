@@ -1,0 +1,44 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logo {
+  width: 33%;
+  /* background: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  width: 30px;
+  height: 30px;
+}
+
+.logo-text {
+  letter-spacing: 5px;
+  margin-left: 15px;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+}
+
+.sign-in {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  color: gray;
+}
+
+.active {
+  color: rgb(205, 123, 46);
+}

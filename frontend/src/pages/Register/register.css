@@ -1,5 +1,5 @@
 .registerWrapper {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.8);
   max-width: 700px;
   width: 95%;
   padding: 25px 30px;
@@ -91,11 +91,6 @@ form .button input {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3 ease;
-  background: linear-gradient(135deg, #68a1c4, #1b556f);
-}
-
-form .button input:hover {
-  background: linear-gradient(-135deg, #80b6d1, #1b556f);
 }
 
 .registerWrapper form .text {
