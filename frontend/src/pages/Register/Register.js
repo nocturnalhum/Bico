@@ -35,6 +35,7 @@ export default function Register() {
       );
 
       localStorage.setItem('authToken', data.token);
+      localStorage.setItem('username', username);
 
       navigate('/login');
     } catch (error) {
@@ -46,7 +47,7 @@ export default function Register() {
   };
 
   return (
-    <div className='register-container'>
+    <div className='container'>
       <div className='registerWrapper'>
         <div className='title'>Registration</div>
 

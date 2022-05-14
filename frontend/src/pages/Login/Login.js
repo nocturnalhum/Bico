@@ -26,6 +26,7 @@ export default function Login() {
       );
 
       localStorage.setItem('authToken', data.token);
+      localStorage.setItem('username', username);
 
       navigate('/');
     } catch (error) {
@@ -37,7 +38,7 @@ export default function Login() {
   };
 
   return (
-    <div className='login-container'>
+    <div className='container'>
       <div className='loginWrapper'>
         <div className='title'>Login</div>
         <form onSubmit={loginHandler}>

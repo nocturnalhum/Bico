@@ -1,17 +1,7 @@
-.login-container {
-  /* background-color: green; */
-  background: linear-gradient(135deg, #d8e0e4, #1b556f);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-}
-
 .loginWrapper {
   background-color: rgba(255, 255, 255, 1);
   max-width: 700px;
-  width: 100%;
+  width: 95%;
   /* height: 100%; */
   padding: 25px 30px;
   border-radius: 5px;
