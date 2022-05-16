@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
+const sendEmail = require('../utils/sendEmail');
 
 // ============================================================================
 // =================<<< Registration >>>=======================================
@@ -60,5 +61,46 @@ exports.login = async (req, res, next) => {
       success: false,
       error: `<<controllers/auth.js>>-Register  ` + error.message,
     });
+  }
+};
+
+// ============================================================================
+// ==========<<< Forgot Password >>>===========================================
+// ============================================================================
+exports.forgotpassword = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      next(new ErrorResponse(404, 'Email Could Not Be Sent'));
+    }
+
+    const resetToken = user.getResetPasswordToken();
+
+    await user.save();
+
+    const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+    const message = `<h1>You have requested a password reset</h1><p>Please go to this link to reset your password</p><a href=${resetUrl} clicktracking=off>${resetUrl}</a>`;
+
+    try {
+      // sendEmail function from utils/sendEmail using nodemailer library:
+      await sendEmail({
+        to: user.email,
+        subject: 'Password Reset Request',
+        text: message,
+      });
+
+      res.status(200).json({ success: true, data: 'Email Sent' });
+    } catch (error) {
+      // Clear reset password token if error sending email and save user:
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save();
+      return next(new ErrorResponse(500, 'Email could not be sent'));
+    }
+  } catch (error) {
+    next(error);
   }
 };
