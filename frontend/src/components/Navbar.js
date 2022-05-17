@@ -1,9 +1,23 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Navbar = () => {
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+  }, [username]);
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    setUsername('');
+    navigate('/');
+    window.location.reload(false);
+  };
+
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -13,26 +27,41 @@ const Navbar = () => {
       <div className='navLinks'>
         <NavLink
           to='/'
-          className={({ isActive }) => (isActive ? 'link active' : 'link')}
+          className={({ isActive }) =>
+            isActive ? 'link active nav-link' : 'link nav-link'
+          }
         >
           Home
         </NavLink>
-        <NavLink
-          to='/register'
-          className={({ isActive }) => (isActive ? 'link active' : 'link')}
-        >
-          Register
-        </NavLink>
 
-        <NavLink
-          to='/login'
-          className={({ isActive }) => (isActive ? 'link active' : 'link')}
-        >
-          <div className='sign-in'>
+        {localStorage.getItem('username') ? (
+          <div className='sign-in' onClick={logoutHandler}>
             <AccountCircleIcon />
-            Sign In
+            Sign Out
           </div>
-        </NavLink>
+        ) : (
+          <>
+            <NavLink
+              to='/register'
+              className={({ isActive }) =>
+                isActive ? 'link active nav-link' : 'link nav-link'
+              }
+            >
+              Register
+            </NavLink>
+            <NavLink
+              to='/login'
+              className={({ isActive }) =>
+                isActive ? 'link active nav-link' : 'link nav-link'
+              }
+            >
+              <div className='sign-in'>
+                <AccountCircleIcon />
+                Sign In
+              </div>
+            </NavLink>
+          </>
+        )}
       </div>
     </nav>
   );

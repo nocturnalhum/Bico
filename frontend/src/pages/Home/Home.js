@@ -4,7 +4,6 @@ import './home.css';
 
 export default function Home() {
   const username = localStorage.getItem('username');
-  console.log(username);
   return (
     <div className='home-container'>
       <h1>Home</h1>
