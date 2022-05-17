@@ -34,7 +34,7 @@ export default function AccountMenu() {
 
   const open = Boolean(anchorEl);
 
-  const userLetter = localStorage.getItem('username')[0];
+  const userLetter = localStorage.getItem('username')[0].toUpperCase();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

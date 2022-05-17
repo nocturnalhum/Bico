@@ -113,7 +113,7 @@ export default function Register() {
           <div className='text'>
             <span className='login'>
               Already have an account?
-              <Link to='/login' className='link'>
+              <Link to='/login' className='login-register'>
                 Login
               </Link>
             </span>

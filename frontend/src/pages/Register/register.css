@@ -2,6 +2,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   max-width: 700px;
   width: 95%;
+  /* height: 95%; */
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
@@ -57,7 +58,7 @@ form .form-details .input-box {
   outline: none;
   border-radius: 5px;
   border: 1px solid #bbb;
-  padding-left: 10px;
+  padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
@@ -84,7 +85,6 @@ form .button input {
   width: 100%;
   border: none;
   color: #fff;
-  border: none;
   border-radius: 5px;
   font-size: 18px;
   font-weight: 500;
@@ -95,18 +95,19 @@ form .button input {
 
 .registerWrapper form .text {
   /* background-color: purple; */
+  position: relative;
   text-align: center;
+  bottom: 25px;
+}
+
+.login-register {
+  margin-left: 3px;
+  color: red;
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {
   form .form-details .input-box {
     width: 100%;
-  }
-}
-
-@media (max-height: 668px) {
-  .registerWrapper {
-    height: 95vh;
-    overflow: hidden;
   }
 }

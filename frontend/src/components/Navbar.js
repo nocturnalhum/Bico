@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './navbar.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuListComposition from './MenuList';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountMenu from './AccountMenu';
 
 const Navbar = () => {
-  const [username, setUsername] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setUsername(localStorage.getItem('username'));
-  }, [username]);
-
-  const logoutHandler = () => {
-    localStorage.clear();
-    setUsername('');
-    navigate('/');
-    window.location.reload(false);
-  };
-
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -32,18 +19,17 @@ const Navbar = () => {
             isActive ? 'link active nav-link' : 'link nav-link'
           }
         >
-          Home
+          <div className='menu-item'>
+            <HomeIcon sx={{ marginRight: '3px' }} />
+            Home
+          </div>
         </NavLink>
 
         {localStorage.getItem('username') ? (
           <div className='menuList'>
-            <MenuListComposition />
+            <AccountMenu />
           </div>
         ) : (
-          // <div className='sign-in' onClick={logoutHandler}>
-          //   <AccountCircleIcon />
-          //   Sign Out
-          // </div>
           <>
             <NavLink
               to='/register'
@@ -59,8 +45,8 @@ const Navbar = () => {
                 isActive ? 'link active nav-link' : 'link nav-link'
               }
             >
-              <div className='sign-in'>
-                <AccountCircleIcon />
+              <div className='menu-item'>
+                <AccountCircleIcon sx={{ marginRight: '3px' }} />
                 Sign In
               </div>
             </NavLink>

@@ -27,8 +27,8 @@ export default function Login() {
 
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('username', username);
-
       navigate('/');
+      window.location.reload(false);
     } catch (error) {
       setError(error.response.data.error);
       setTimeout(() => {
@@ -77,7 +77,7 @@ export default function Login() {
           <div className='text'>
             <span className='register'>
               Don't have an account?
-              <Link to='/register' className='link'>
+              <Link to='/register' className='login-register '>
                 Register
               </Link>
             </span>
