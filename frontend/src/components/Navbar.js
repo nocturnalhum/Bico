@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MenuListComposition from './MenuList';
 
 const Navbar = () => {
   const [username, setUsername] = useState('');
@@ -35,11 +36,14 @@ const Navbar = () => {
         </NavLink>
 
         {localStorage.getItem('username') ? (
-          <div className='sign-in' onClick={logoutHandler}>
-            <AccountCircleIcon />
-            Sign Out
+          <div className='menuList'>
+            <MenuListComposition />
           </div>
         ) : (
+          // <div className='sign-in' onClick={logoutHandler}>
+          //   <AccountCircleIcon />
+          //   Sign Out
+          // </div>
           <>
             <NavLink
               to='/register'
