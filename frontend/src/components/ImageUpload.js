@@ -28,12 +28,8 @@ const ImageUpload = () => {
     }
   };
 
-  const onDownload = () => {
-    generateDownload(image, croppedArea);
-  };
-
   return (
-    <div className='container'>
+    <div className='upload-container'>
       <div className='container-cropper'>
         {image ? (
           <>
@@ -48,7 +44,6 @@ const ImageUpload = () => {
                 onCropComplete={onCropComplete}
               />
             </div>
-
             <div className='slider'>
               <Slider
                 min={1}
@@ -61,24 +56,22 @@ const ImageUpload = () => {
           </>
         ) : null}
       </div>
-
       <div className='container-buttons'>
         <input
           type='file'
           accept='image/*'
           ref={inputRef}
-          onChange={onSelectFile}
           style={{ display: 'none' }}
+          onChange={onSelectFile}
         />
         <Button
+          sx={{ width: '120px' }}
           variant='contained'
-          color='primary'
           onClick={triggerFileSelectPopup}
-          style={{ marginRight: '10px' }}
         >
           Choose
         </Button>
-        <Button variant='contained' color='secondary' onClick={onDownload}>
+        <Button sx={{ width: '120px' }} variant='contained'>
           Download
         </Button>
       </div>

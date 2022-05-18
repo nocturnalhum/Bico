@@ -6,6 +6,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountMenu from './AccountMenu';
 
 const Navbar = () => {
+  const checkActive = ({ isActive }) => {
+    return isActive ? 'link active nav-link' : 'link nav-link';
+  };
+
   return (
     <nav className='navbar'>
       <div className='logo'>
@@ -13,12 +17,7 @@ const Navbar = () => {
         <h3 className='logo-text'>Bico</h3>
       </div>
       <div className='navLinks'>
-        <NavLink
-          to='/'
-          className={({ isActive }) =>
-            isActive ? 'link active nav-link' : 'link nav-link'
-          }
-        >
+        <NavLink to='/' className={checkActive}>
           <div className='menu-item'>
             <HomeIcon sx={{ marginRight: '3px' }} />
             Home
@@ -31,20 +30,10 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <NavLink
-              to='/register'
-              className={({ isActive }) =>
-                isActive ? 'link active nav-link' : 'link nav-link'
-              }
-            >
+            <NavLink to='/register' className={checkActive}>
               Register
             </NavLink>
-            <NavLink
-              to='/login'
-              className={({ isActive }) =>
-                isActive ? 'link active nav-link' : 'link nav-link'
-              }
-            >
+            <NavLink to='/login' className={checkActive}>
               <div className='menu-item'>
                 <AccountCircleIcon sx={{ marginRight: '3px' }} />
                 Sign In

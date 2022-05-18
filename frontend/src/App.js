@@ -13,8 +13,8 @@ function App() {
         <Route path='/' element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
           <Route path='/upload' element={<ImageUpload />} />
+          <Route path='/login' element={<Login />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
