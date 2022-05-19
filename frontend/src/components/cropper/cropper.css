@@ -1,10 +1,11 @@
 .upload-container {
-  height: 95vh;
+  height: 80vh;
   width: 100vw;
 }
 
 .container-cropper {
-  height: 90%;
+  position: relative;
+  height: 100%;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -12,20 +13,24 @@
 }
 
 .cropper {
-  height: 90%;
+  height: 100%;
 }
 
 .slider {
+  position: relative;
+  top: 45vh;
   height: 10%;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin: auto;
-  width: 70%;
+  width: 50%;
 }
 
 .container-buttons {
   border: 1px solid #f5f5f5;
-  height: 10%;
+  position: relative;
+  top: 55px;
+  height: 11%;
   display: flex;
   align-items: center;
   justify-content: center;

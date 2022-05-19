@@ -10,6 +10,7 @@ import { Button, IconButton } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CameraIcon from '@mui/icons-material/Camera';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import { Link } from 'react-router-dom';
 
 const RenderAvatar = () => {
   const [showCropper, setShowCropper] = useState(null);
@@ -97,7 +98,9 @@ const RenderAvatar = () => {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleClose}>View</MenuItem>
-                  <MenuItem onClick={handleClose}>Change</MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link to='/upload'>Change</Link>
+                  </MenuItem>
                   <MenuItem onClick={handleClose}>Delete</MenuItem>
                 </MenuList>
               </ClickAwayListener>
