@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ImageUpload from './components/ImageUpload';
+import ImageUpload from './components/cropper/Cropper';
 import Error from './pages/Error/Error';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';

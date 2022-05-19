@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './register.css';
+import RenderAvatar from '../../components/avatar/Avatar';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -103,9 +104,8 @@ export default function Register() {
             </div>
           </div>
 
-          <div className='profileAvatar'>
-            <img src='/noAvatar.jpg' alt='' className='avatar' />
-          </div>
+          <RenderAvatar />
+
           {error && <span className='error-message'>{error}</span>}
           <div className='button'>
             <input type='submit' value='Register' />

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import './imageUpload.css';
+import './cropper.css';
 import Cropper from 'react-easy-crop';
 import { Slider, Button } from '@mui/material';
-import { generateDownload } from '../utils/cropImage';
+import { generateDownload } from '../../utils/cropImage';
 
 const ImageUpload = () => {
   const inputRef = useRef();
@@ -54,7 +54,11 @@ const ImageUpload = () => {
               />
             </div>
           </>
-        ) : null}
+        ) : (
+          <div className='avatar'>
+            <img src='/noAvatar.jpg' alt='' />
+          </div>
+        )}
       </div>
       <div className='container-buttons'>
         <input
@@ -64,16 +68,13 @@ const ImageUpload = () => {
           style={{ display: 'none' }}
           onChange={onSelectFile}
         />
-        <Button
-          sx={{ width: '120px' }}
-          variant='contained'
-          onClick={triggerFileSelectPopup}
-        >
+        <Button variant='contained' onClick={triggerFileSelectPopup}>
           Choose
         </Button>
-        <Button sx={{ width: '120px' }} variant='contained'>
-          Download
+        <Button variant='contained' onClick={() => setImage(null)}>
+          Clear
         </Button>
+        <Button variant='contained'>Upload</Button>
       </div>
     </div>
   );

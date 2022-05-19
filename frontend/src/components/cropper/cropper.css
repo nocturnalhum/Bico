@@ -6,11 +6,13 @@
 .container-cropper {
   height: 90%;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cropper {
   height: 90%;
-  position: relative;
 }
 
 .slider {
@@ -27,4 +29,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.container-buttons Button {
+  margin-left: 15px;
+  width: 100px;
 }

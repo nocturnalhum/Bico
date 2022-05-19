@@ -2,10 +2,11 @@
   background-color: rgba(255, 255, 255, 0.8);
   max-width: 700px;
   width: 95%;
-  /* height: 95%; */
+  height: 100%;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  z-index: 0;
 }
 
 .registerWrapper .title {
@@ -31,14 +32,12 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 12px 2px 12px 2px;
-  /* flex: 200px; */
 }
 
 form .form-details .input-box {
   /* background-color: blueviolet; */
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
-  /* width: 100%; */
 }
 
 .form-details .input-box .details {
@@ -64,21 +63,10 @@ form .form-details .input-box {
   transition: all 0.3s ease;
 }
 
-.registerWrapper form .profileAvatar {
-  /* background-color: salmon; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.registerWrapper form .profileAvatar img {
-  width: 30%;
-  border-radius: 50%;
-  border: 5px double #fff;
-}
 .registerWrapper form .button {
   /* background-color: mediumaquamarine; */
   height: 45px;
-  margin: 45px 0;
+  margin: 30px 0;
 }
 
 form .button input {
@@ -99,11 +87,13 @@ form .button input {
   position: relative;
   text-align: center;
   bottom: 25px;
+  z-index: -1;
 }
 
 .login-register {
   margin-left: 3px;
   color: red;
+  bottom: 50px;
   text-decoration: none;
 }
 
