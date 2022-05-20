@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
+const crypto = require('crypto');
 
 // ============================================================================
 // =================<<< Registration >>>=======================================
@@ -81,7 +82,7 @@ exports.forgotpassword = async (req, res, next) => {
 
     await user.save();
 
-    const resetUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+    const resetUrl = `http://localhost:3000/resetpassword/${resetToken}`;
     const message = `<h1>You have requested a password reset</h1><p>Please go to this link to reset your password</p><a href=${resetUrl} clicktracking=off>${resetUrl}</a>`;
 
     try {
@@ -100,6 +101,42 @@ exports.forgotpassword = async (req, res, next) => {
       await user.save();
       return next(new ErrorResponse(500, 'Email could not be sent'));
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ============================================================================
+// ==========<<< Reset Password >>>============================================
+// ============================================================================
+
+exports.resetpassword = async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.resetToken)
+    .digest('hex');
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+    console.log(user);
+
+    if (!user) {
+      return next(new ErrorResponse(400, 'Invalid Token'));
+    }
+
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      data: 'Password successfully updated',
+      // token: user.getSignedJwtToken(),
+    });
   } catch (error) {
     next(error);
   }

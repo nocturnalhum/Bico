@@ -101,4 +101,11 @@ form .button input {
   form .form-details .input-box {
     width: 100%;
   }
+
+  body {
+    height: 100%;
+  }
+  .section {
+    height: 100%;
+  }
 }

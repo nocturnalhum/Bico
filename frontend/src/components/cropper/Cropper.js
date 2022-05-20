@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
 import './cropper.css';
 import Cropper from 'react-easy-crop';
-import { Slider, Button } from '@mui/material';
+import { Slider, Button, IconButton } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 import { generateDownload } from '../../utils/cropImage';
+import { Link } from 'react-router-dom';
 
 const ImageUpload = () => {
   const inputRef = useRef();
@@ -30,6 +32,11 @@ const ImageUpload = () => {
 
   return (
     <div className='upload-container'>
+      <IconButton className='clear-container'>
+        <Link to='/register'>
+          <ClearIcon className='clear-icon' />
+        </Link>
+      </IconButton>
       <div className='container-cropper'>
         {image ? (
           <>
@@ -51,6 +58,19 @@ const ImageUpload = () => {
                 step={0.1}
                 value={zoom}
                 onChange={(e, zoom) => setZoom(zoom)}
+                sx={{
+                  color: '#3880ff',
+                  '& .MuiSlider-thumb': {
+                    height: 24,
+                    width: 24,
+                    backgroundColor: '#fff',
+                    opacity: '80%',
+                    border: '2px solid currentColor',
+                    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+                      boxShadow: 'inherit',
+                    },
+                  },
+                }}
               />
             </div>
           </>

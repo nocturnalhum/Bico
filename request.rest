@@ -33,3 +33,13 @@ Content-Type: application/json
 {
   "email": "claska2@yahoo.com"
 }
+
+
+### New Password Reset Route:
+
+PUT http://localhost:5000/api/v1/auth/resetpassword/c0382a47cde816e3792813e50a7d1b823bd05bfe
+Content-Type: application/json
+
+{
+  "password": "new password"
+}
