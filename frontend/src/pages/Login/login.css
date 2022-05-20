@@ -77,7 +77,7 @@ form .form-details .input-box {
 .loginWrapper form .button {
   /* background-color: mediumaquamarine; */
   height: 45px;
-  margin: 45px 0;
+  margin: 30px 0;
 }
 
 form .button input {
@@ -99,9 +99,15 @@ form .button input:hover {
   background: linear-gradient(-135deg, #80b6d1, #1b556f);
 }
 
-.loginWrapper form .text {
+.loginWrapper form .text .register {
   /* background-color: purple; */
-  text-align: center;
+  margin-left: 10px;
+}
+
+.loginWrapper form .text .reset-password {
+  /* background-color: purple; */
+  margin-left: 10px;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 600px) {

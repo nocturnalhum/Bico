@@ -73,13 +73,13 @@ const RenderAvatar = () => {
         </div>
       </div>
 
+      {/* Remove disablePort prop to fix z-index issue */}
       <Popper
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
         placement='bottom-start'
         transition
-        disablePortal
       >
         {({ TransitionProps, placement }) => (
           <Grow

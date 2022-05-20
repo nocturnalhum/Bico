@@ -67,6 +67,14 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <div className='text'>
+                <span className='reset-password'>
+                  Forgot your password?
+                  <Link to='/register' className='login-register '>
+                    Reset Password
+                  </Link>
+                </span>
+              </div>
             </div>
           </div>
           {error && <span className='error-message'>{error}</span>}
