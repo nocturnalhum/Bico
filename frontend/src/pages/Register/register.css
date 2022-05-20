@@ -95,6 +95,10 @@ form .button input {
   text-decoration: none;
 }
 
+.avatar-popper {
+  z-index: 100;
+}
+
 @media (max-width: 600px) {
   form .form-details .input-box {
     width: 100%;
