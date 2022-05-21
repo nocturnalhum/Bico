@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
     try {
       const { data } = await axios.post(
-        '/api/auth/v1/forgotpassword',
+        '/auth/forgotpassword',
         { email },
         config
       );
@@ -27,19 +27,21 @@ const ForgotPassword = () => {
       setEmail('');
       setTimeout(() => {
         setError('');
-      }, 5000);
+      }, 3000);
     }
   };
   return (
-    <div className='forgotpassword-container'>
-      <form onSubmit={forgotPasswordHandler} className='forgotpassword-form'>
-        <h3 className='forgotpassword-screen__title'>Forgot Password</h3>
+    <div className='forgotpassword-screen'>
+      <form
+        onSubmit={forgotPasswordHandler}
+        className='forgotpassword-screen__form'
+      >
+        <div className='forgotpassword-screen__title'>Forgot Password</div>
         {error && <span className='error-message'>{error}</span>}
         {success && <span className='success-message'>{success}</span>}
         <div className='form-group'>
           <p className='forgotpassword-screen__subtext'>
-            Please enter the email address you register your account with. We
-            will send you reset password confirmation to this email
+            We will send you a link to reset your password to this email.
           </p>
           <label htmlFor='email'>Email:</label>
           <input

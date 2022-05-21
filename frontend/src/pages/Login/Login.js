@@ -38,60 +38,49 @@ export default function Login() {
   };
 
   return (
-    <div className='section'>
-      <div className='loginWrapper'>
-        <div className='title'>Login</div>
-        <form onSubmit={loginHandler}>
-          <div className='form-details'>
-            <div className='input-box'>
-              <label htmlFor='username' className='details'>
-                Username
-              </label>
-              <input
-                required
-                type='text'
-                placeholder='Enter your username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
+    <div className='login-screen'>
+      <form onSubmit={loginHandler} className='login-screen__form'>
+        <div className='login-screen__title'>Login</div>
+        {error && <span className='error-message'>{error}</span>}
+        <div className='form-group'>
+          <label htmlFor='username'>Username:</label>
+          <input
+            required
+            type='text'
+            id='username'
+            placeholder='Enter your username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
 
-            <div className='input-box'>
-              <label htmlFor='password' className='details'>
-                Password
-              </label>
-              <input
-                required
-                type='password'
-                placeholder='Enter your password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div className='text'>
-                <span className='reset-password'>
-                  Forgot your password?
-                  <Link to='/resetpassword' className='login-register '>
-                    Reset Password
-                  </Link>
-                </span>
-              </div>
-            </div>
-          </div>
-          {error && <span className='error-message'>{error}</span>}
+        <div className='form-group'>
+          <label htmlFor='password'>
+            Password:
+            <Link to='/resetpassword' className='login-screen__forgotPassword '>
+              Forgot your password?
+            </Link>
+          </label>
+          <input
+            required
+            type='password'
+            id='password'
+            placeholder='Enter your password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-          <div className='button'>
-            <input type='submit' value='Login' />
-          </div>
-          <div className='text'>
-            <span className='register'>
-              Don't have an account?
-              <Link to='/register' className='login-register '>
-                Register
-              </Link>
-            </span>
-          </div>
-        </form>
-      </div>
+        <button type='submit' className='btn btn-primary'>
+          Login
+        </button>
+        <span className='login-screen__subtext'>
+          Don't have an account?
+          <Link to='/register' className='link'>
+            Register
+          </Link>
+        </span>
+      </form>
     </div>
   );
 }

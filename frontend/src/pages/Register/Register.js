@@ -12,6 +12,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
   const navigate = useNavigate();
 
   const registerHandler = async (e) => {
@@ -50,79 +51,71 @@ export default function Register() {
   };
 
   return (
-    <div className='registerWrapper'>
-      <div className='title'>Registration</div>
-
-      <form onSubmit={registerHandler}>
-        <div className='form-details'>
-          <div className='input-box'>
-            <label htmlFor='username' className='details'>
-              Username
-            </label>
-            <input
-              required
-              type='text'
-              placeholder='Enter your username'
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-                localStorage.setItem('usernameStore', e.target.value);
-              }}
-            />
-          </div>
-          <div className='input-box'>
-            <label htmlFor='email' className='details'>
-              Email
-            </label>
-            <input
-              required
-              type='email'
-              placeholder='Enter your email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className='input-box'>
-            <label htmlFor='password' className='details'>
-              Password
-            </label>
-            <input
-              required
-              type='password'
-              placeholder='Enter your password'
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
-          <div className='input-box'>
-            <label htmlFor='confirmPassword' className='details'>
-              Confirm Password
-            </label>
-            <input
-              required
-              type='password'
-              placeholder='Confirm your password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
+    <div className='register-screen'>
+      <form onSubmit={registerHandler} className='register-screen__form'>
+        <div className='register-screen__title'>Registration</div>
+        {error && <span className='error-message'>{error}</span>}
+        <div className='form-group'>
+          <label htmlFor='username'>Username:</label>
+          <input
+            required
+            type='text'
+            id='username'
+            placeholder='Enter your username'
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              localStorage.setItem('usernameStore', e.target.value);
+            }}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='email'>Email:</label>
+          <input
+            required
+            type='email'
+            id='email'
+            placeholder='Enter your email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='password'>Password:</label>
+          <input
+            required
+            type='password'
+            id='password'
+            placeholder='Enter your password'
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='confirmPassword'>Confirm Password:</label>
+          <input
+            required
+            type='password'
+            id='confirmPassword'
+            placeholder='Confirm your password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
         <RenderAvatar />
 
-        {error && <span className='error-message'>{error}</span>}
-        <div className='button'>
-          <input type='submit' value='Register' />
-        </div>
-        <div className='text'>
-          <span className='login'>
-            Already have an account?
-            <Link to='/login' className='login-register'>
-              Login
-            </Link>
-          </span>
-        </div>
+        <button type='submit' className='btn btn-primary'>
+          Register
+        </button>
+
+        <span className='register-screen__subtext'>
+          Already have an account?
+          <Link to='/login' className='link'>
+            Login
+          </Link>
+        </span>
       </form>
     </div>
   );

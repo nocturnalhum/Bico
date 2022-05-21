@@ -1,0 +1,113 @@
+.registerWrapper {
+  background-color: rgba(255, 255, 255, 0.8);
+  max-width: 700px;
+  width: 95%;
+  height: 100%;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.registerWrapper .title {
+  /* background-color: red; */
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.registerWrapper .title::before {
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 160px;
+  bottom: 0;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #d8e0e4, #1b556f);
+}
+
+.registerWrapper form .form-details {
+  /* background-color: orange; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 12px 2px 12px 2px;
+}
+
+form .form-details .input-box {
+  /* background-color: blueviolet; */
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.form-details .input-box .details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+  border-color: #1b556f;
+}
+
+.form-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.registerWrapper form .button {
+  /* background-color: mediumaquamarine; */
+  height: 45px;
+  margin: 30px 0;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+
+.registerWrapper form .text {
+  /* background-color: purple; */
+  position: relative;
+  text-align: center;
+  bottom: 25px;
+}
+
+.login-register {
+  margin-left: 3px;
+  color: rgb(72, 0, 255);
+  bottom: 50px;
+  text-decoration: none;
+}
+
+.avatar-popper {
+  z-index: 100;
+}
+
+@media (max-width: 600px) {
+  form .form-details .input-box {
+    width: 100%;
+  }
+
+  body {
+    height: 100%;
+  }
+  .section {
+    height: 100%;
+  }
+}

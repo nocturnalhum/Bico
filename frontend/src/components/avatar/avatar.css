@@ -39,3 +39,16 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 375px) {
+  .avatar {
+    height: 120px;
+  }
+  .camera-btn {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    bottom: 45px;
+    left: 90px;
+  }
+}
