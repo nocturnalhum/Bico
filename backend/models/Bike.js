@@ -6,35 +6,24 @@ const bikeSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-  },
-  {
     bikeModel: {
       type: String,
     },
-  },
-  {
     serialNum: {
       type: Number,
       require: true,
     },
-  },
-  {
+    bikeImage: {
+      type: String,
+      default: '',
+    },
     color: {
       type: String,
     },
-  },
-  {
-    color: {
-      type: String,
-    },
-  },
-  {
     category: {
       type: Number,
       enum: [1, 2, 3, 4],
     },
-  },
-  {
     description: {
       type: String,
     },
