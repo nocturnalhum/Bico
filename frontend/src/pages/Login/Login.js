@@ -70,7 +70,7 @@ export default function Login() {
               <div className='text'>
                 <span className='reset-password'>
                   Forgot your password?
-                  <Link to='/register' className='login-register '>
+                  <Link to='/resetpassword' className='login-register '>
                     Reset Password
                   </Link>
                 </span>
