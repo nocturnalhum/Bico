@@ -57,7 +57,10 @@ export default function Login() {
         <div className='form-group'>
           <label htmlFor='password'>
             Password:
-            <Link to='/resetpassword' className='login-screen__forgotPassword '>
+            <Link
+              to='/forgotpassword'
+              className='login-screen__forgotPassword '
+            >
               Forgot your password?
             </Link>
           </label>

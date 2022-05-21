@@ -22,6 +22,7 @@ const ForgotPassword = () => {
         { email },
         config
       );
+      setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);
       setEmail('');
