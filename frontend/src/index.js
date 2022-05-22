@@ -2,10 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import RenderSnackbar from './components/snackbar/Snackbar';
+import SimpleBackdrop from './components/backdrop/Backdrop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RenderSnackbar>
+      <SimpleBackdrop>
+        <App />
+      </SimpleBackdrop>
+    </RenderSnackbar>
   </React.StrictMode>
 );
