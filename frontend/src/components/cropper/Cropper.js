@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
-import './cropper.css';
 import Cropper from 'react-easy-crop';
-import { Slider, Button, IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import { generateDownload } from '../../utils/cropImage';
+import { Slider, Button, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import './cropper.css';
 
-const ImageUpload = () => {
+const ImageUpload = ({ handleImageUpload }) => {
   const inputRef = useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
@@ -31,11 +30,9 @@ const ImageUpload = () => {
   };
 
   return (
-    <div className='upload-container'>
+    <div className='upload-screen'>
       <IconButton className='clear-container'>
-        <Link to='/register'>
-          <ClearIcon className='clear-icon' />
-        </Link>
+        <ClearIcon className='clear-icon' onClick={handleImageUpload} />
       </IconButton>
       <div className='container-cropper'>
         {image ? (
@@ -74,11 +71,7 @@ const ImageUpload = () => {
               />
             </div>
           </>
-        ) : (
-          <div className='avatar'>
-            <img src='/noAvatar.jpg' alt='' />
-          </div>
-        )}
+        ) : null}
       </div>
       <div className='container-buttons'>
         <input

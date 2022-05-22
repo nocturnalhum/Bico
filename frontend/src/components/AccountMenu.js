@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import EmailIcon from '@mui/icons-material/Email';
 import PedalBikeIcon from '@mui/icons-material/PedalBike';
@@ -16,25 +16,29 @@ import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const [username, setUsername] = React.useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
+  // const [username, setUsername] = useState('');
+  const [firstLetter, setFirstLetter] = useState('');
   const navigate = useNavigate();
 
-  React.useEffect(() => {
-    setUsername(localStorage.getItem('username'));
-  }, [username]);
+  // useEffect(() => {
+  //   setUsername(localStorage.getItem('username'));
+  // }, [username]);
+
+  useEffect(() => {
+    if (localStorage.getItem('username')) {
+      setFirstLetter(localStorage.getItem('username')[0].toUpperCase());
+    }
+  }, []);
 
   const logoutHandler = () => {
     localStorage.clear();
-    setUsername('');
+    // setUsername('');
     navigate('/');
     window.location.reload(false);
   };
 
   const open = Boolean(anchorEl);
-
-  const userLetter = localStorage.getItem('username')[0].toUpperCase();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +71,7 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ background: 'orange', width: 32, height: 32 }}>
-              {userLetter}
+              {firstLetter ? firstLetter : null}
             </Avatar>
           </IconButton>
         </Tooltip>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './avatar.css';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -6,16 +6,19 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import { Button, IconButton } from '@mui/material';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import CameraIcon from '@mui/icons-material/Camera';
+import { IconButton } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Link } from 'react-router-dom';
+import ImageUpload from '../cropper/Cropper';
 
 const RenderAvatar = () => {
-  const [showCropper, setShowCropper] = useState(null);
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  const handleImageUpload = () => {
+    setShowCropper((prev) => !prev);
+  };
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -38,8 +41,8 @@ const RenderAvatar = () => {
     }
   }
 
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -48,7 +51,7 @@ const RenderAvatar = () => {
   }, [open]);
 
   return (
-    <div className='avatar-container'>
+    <div className='avatar-screen'>
       <div className='avatar'>
         <img src='/noAvatar.jpg' alt='' />
         <div className='camera-btn'>
@@ -62,12 +65,7 @@ const RenderAvatar = () => {
             sx={{ '&:hover': { backgroundColor: 'rgba(225, 225, 225, 0.0)' } }}
           >
             <div className='camera-icon'>
-              <PhotoCameraIcon
-                style={{
-                  fontSize: '35px',
-                  opacity: '100%',
-                }}
-              />
+              <PhotoCameraIcon />
             </div>
           </IconButton>
         </div>
@@ -99,8 +97,13 @@ const RenderAvatar = () => {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleClose}>View</MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link to='/upload'>Change</Link>
+                  <MenuItem
+                    onClick={(event) => {
+                      handleImageUpload();
+                      handleClose(event);
+                    }}
+                  >
+                    Change
                   </MenuItem>
                   <MenuItem onClick={handleClose}>Delete</MenuItem>
                 </MenuList>
@@ -109,7 +112,12 @@ const RenderAvatar = () => {
           </Grow>
         )}
       </Popper>
-      {showCropper && <RenderAvatar />}
+      {showCropper && (
+        <ImageUpload
+          className='image-upload'
+          handleImageUpload={handleImageUpload}
+        />
+      )}
     </div>
   );
 };

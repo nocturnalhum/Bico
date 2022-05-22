@@ -33,7 +33,7 @@ export default function Login() {
       setError(error.response.data.error);
       setTimeout(() => {
         setError('');
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -51,6 +51,7 @@ export default function Login() {
             placeholder='Enter your username'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            tabIndex={1}
           />
         </div>
 
@@ -60,6 +61,7 @@ export default function Login() {
             <Link
               to='/forgotpassword'
               className='login-screen__forgotPassword '
+              tabIndex={3}
             >
               Forgot your password?
             </Link>
@@ -71,15 +73,16 @@ export default function Login() {
             placeholder='Enter your password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            tabIndex={2}
           />
         </div>
 
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className='btn btn-primary' tabIndex={4}>
           Login
         </button>
         <span className='login-screen__subtext'>
           Don't have an account?
-          <Link to='/register' className='link'>
+          <Link to='/register' className='link' tabIndex={5}>
             Register
           </Link>
         </span>

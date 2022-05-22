@@ -5,13 +5,12 @@ import './register.css';
 import RenderAvatar from '../../components/avatar/Avatar';
 
 export default function Register() {
-  const [username, setUsername] = useState(
-    localStorage.getItem('usernameStore')
-  );
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const navigate = useNavigate();
 
@@ -37,10 +36,7 @@ export default function Register() {
         { username, email, password },
         config
       );
-
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('username', username);
-
+      setSuccess(data.data);
       navigate('/login');
     } catch (error) {
       setError(error.response.data.error);
@@ -55,6 +51,11 @@ export default function Register() {
       <form onSubmit={registerHandler} className='register-screen__form'>
         <div className='register-screen__title'>Registration</div>
         {error && <span className='error-message'>{error}</span>}
+        {success && (
+          <span className='success-message'>
+            {success} <Link to='/login'>Login</Link>
+          </span>
+        )}
         <div className='form-group'>
           <label htmlFor='username'>Username:</label>
           <input

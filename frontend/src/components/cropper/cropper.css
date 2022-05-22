@@ -1,33 +1,23 @@
-.upload-container {
+.upload-screen {
+  /* background: red; */
+  background-color: rgba(0, 0, 0, 0.95);
+  position: absolute;
+  top: 5vh;
   height: 100vh;
   width: 100vw;
 }
 
-.container-cropper {
-  position: relative;
-  height: 80vh;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cropper {
-  height: 50vh;
-}
-
 .slider {
   position: relative;
-  top: 41vh;
+  top: 5vh;
   display: flex;
   margin: auto;
-  width: 60%;
+  width: 75%;
 }
 
 .container-buttons {
-  border: 1px solid #f5f5f5;
   position: relative;
-  top: 7.5vh;
+  top: 70vh;
   height: 11%;
   display: flex;
   align-items: center;
@@ -35,17 +25,21 @@
 }
 
 .container-buttons Button {
-  margin-left: 15px;
-  width: 100px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 6.5rem;
 }
+
 .clear-container {
   background: green;
   position: absolute;
-  top: 0vh;
-  left: 85vw;
+  top: 1vh;
+  left: 86vw;
 }
 .clear-icon {
   color: white;
+  z-index: 100;
 }
 
 .clear-icon:hover {
