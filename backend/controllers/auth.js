@@ -178,8 +178,6 @@ exports.setProfileImage = (req, res, next) => {
     }
 
     console.log(req.file);
-
-    await User.create({ profilePicture: req.file.location });
     res.status(200).json({ data: req.file.location });
   });
 };

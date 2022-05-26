@@ -8,7 +8,7 @@ import getCroppedImg from '../../utils/cropImage';
 import { dataURLtoFile } from '../../utils/dataURLtoFile';
 import './cropper.css';
 
-const ImageUpload = ({ handleImageUpload, setAvatar }) => {
+const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
   const inputRef = useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
@@ -70,7 +70,8 @@ const ImageUpload = ({ handleImageUpload, setAvatar }) => {
       const res2 = await res.json();
       console.log(res2);
       closeBackdrop();
-      setAvatar(res2.data);
+      setProfilePicture(res2.data);
+      handleImageUpload();
     } catch (error) {
       closeBackdrop();
       console.warn(error);

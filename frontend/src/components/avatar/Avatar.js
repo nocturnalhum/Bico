@@ -8,13 +8,11 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { IconButton } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import { Link } from 'react-router-dom';
 import ImageUpload from '../cropper/Cropper';
 
-const RenderAvatar = () => {
+const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
   const [showCropper, setShowCropper] = useState(false);
   const [open, setOpen] = useState(false);
-  const [avatar, setAvatar] = useState('');
   const anchorRef = useRef(null);
 
   const handleImageUpload = () => {
@@ -54,7 +52,7 @@ const RenderAvatar = () => {
   return (
     <div className='avatar-screen'>
       <div className='avatar'>
-        <img src={avatar ? avatar : '/noAvatar.jpg'} alt='' />
+        <img src={profilePicture ? profilePicture : '/noAvatar.jpg'} alt='' />
         <div className='camera-btn'>
           <IconButton
             ref={anchorRef}
@@ -117,7 +115,7 @@ const RenderAvatar = () => {
         <ImageUpload
           className='image-upload'
           handleImageUpload={handleImageUpload}
-          setAvatar={setAvatar}
+          setProfilePicture={setProfilePicture}
         />
       )}
     </div>

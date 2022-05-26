@@ -9,6 +9,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -31,9 +32,10 @@ export default function Register() {
       return setError('Passwords do not match');
     }
     try {
+      console.log(profilePicture);
       const { data } = await axios.post(
         '/auth/register',
-        { username, email, password },
+        { username, email, password, profilePicture },
         config
       );
       setSuccess(data.data);
@@ -105,7 +107,10 @@ export default function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <RenderAvatar />
+        <RenderAvatar
+          profilePicture={profilePicture}
+          setProfilePicture={setProfilePicture}
+        />
 
         <button type='submit' className='btn btn-primary'>
           Register
