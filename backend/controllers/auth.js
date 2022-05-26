@@ -164,7 +164,7 @@ const upload = (bucketName) =>
         cb(null, { fieldName: file.fieldname });
       },
       key: function (req, res, cb) {
-        cb(null, `image-${Date.now()}.jpeg`);
+        cb(null, `profile-image-${Date.now()}.jpeg`);
       },
     }),
   });
@@ -179,7 +179,7 @@ exports.setProfileImage = (req, res, next) => {
 
     console.log(req.file);
 
-    await User.create({ profileImgUrl: req.file.location });
+    await User.create({ profilePicture: req.file.location });
     res.status(200).json({ data: req.file.location });
   });
 };
