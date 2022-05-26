@@ -3,6 +3,9 @@ const User = require('../models/User');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 
 // ============================================================================
 // =================<<< Registration >>>=======================================
@@ -110,6 +113,12 @@ exports.forgotpassword = async (req, res, next) => {
 // ==========<<< Reset Password >>>============================================
 // ============================================================================
 
+const s3 = new aws.S3({
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: process.env.S3_BUCKET_REGION,
+});
+
 exports.resetpassword = async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash('sha256')
@@ -140,4 +149,37 @@ exports.resetpassword = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+// ============================================================================
+// =================<<< Set Profile Pic >>>====================================
+// ============================================================================
+
+const upload = (bucketName) =>
+  multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: bucketName,
+      metadata: function (req, file, cb) {
+        cb(null, { fieldName: file.fieldname });
+      },
+      key: function (req, res, cb) {
+        cb(null, `image-${Date.now()}.jpeg`);
+      },
+    }),
+  });
+
+exports.setProfileImage = (req, res, next) => {
+  const uploadSingle = upload('bico-profile-images').single('croppedImage');
+
+  uploadSingle(req, req, async (error) => {
+    if (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+
+    console.log(req.file);
+
+    await User.create({ profileImgUrl: req.file.location });
+    res.status(200).json({ data: req.file.location });
+  });
 };

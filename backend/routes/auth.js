@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 // Import controllers from controllers/auth.js:
 const {
@@ -7,11 +6,13 @@ const {
   login,
   forgotpassword,
   resetpassword,
+  setProfileImage,
 } = require('../controllers/auth');
 
 router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/forgotpassword').post(forgotpassword);
 router.route('/resetpassword/:resetToken').put(resetpassword);
+router.route('/setprofileimg').post(setProfileImage);
 
 module.exports = router;

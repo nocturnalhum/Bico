@@ -3,6 +3,8 @@ import Cropper from 'react-easy-crop';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Slider, Button, IconButton } from '@mui/material';
 import { SnackbarContext } from '../snackbar/Snackbar';
+import getCroppedImg from '../../utils/cropImage';
+import { dataURLtoFile } from '../../utils/dataURLtoFile';
 import './cropper.css';
 
 const ImageUpload = ({ handleImageUpload }) => {
@@ -16,13 +18,6 @@ const ImageUpload = ({ handleImageUpload }) => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-
-  const onClear = () => {
-    if (!image) {
-      return setStateSnackbarContext(true, 'Please select an image', 'warning');
-    }
-    setImage(null);
-  };
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -38,9 +33,42 @@ const ImageUpload = ({ handleImageUpload }) => {
     }
   };
 
-  const onUpload = () => {
-    if (!image)
+  const onClear = () => {
+    if (!image) {
       return setStateSnackbarContext(true, 'Please select an image', 'warning');
+    }
+    setImage(null);
+  };
+
+  const onUpload = async () => {
+    if (!image) {
+      return setStateSnackbarContext(true, 'Please select an image', 'warning');
+    }
+
+    const canvas = await getCroppedImg(image, croppedArea);
+    const canvasDataUrl = canvas.toDataURL('image/jpeg');
+    const convertedUrlToFile = dataURLtoFile(
+      canvasDataUrl,
+      'profile-image.jpeg'
+    );
+    console.log(convertedUrlToFile);
+
+    try {
+      const formdata = new FormData();
+      formdata.append('croppedImage', convertedUrlToFile);
+
+      const res = await fetch(
+        'http://localhost:5000/api/v1/auth/setprofileimg',
+        {
+          method: 'POST',
+          body: formdata,
+        }
+      );
+      const res2 = await res.json();
+      console.log(res2);
+    } catch (error) {
+      console.warn(error);
+    }
   };
 
   return (

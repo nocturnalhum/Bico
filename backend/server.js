@@ -2,6 +2,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5050;
 const errorHandling = require('./middleware/errorHandling');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const authRoute = require('./routes/auth');
 const privateRoute = require('./routes/private');
@@ -17,7 +18,7 @@ ConnectDB();
 // ============================================================================
 // =================<<< Middleware >>>=========================================
 // ============================================================================
-app.use(express.json());
+app.use(cors(), express.json());
 
 // ============================================================================
 // =================<<< API Routes >>>=========================================
