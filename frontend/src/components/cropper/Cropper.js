@@ -3,16 +3,18 @@ import Cropper from 'react-easy-crop';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Slider, Button, IconButton } from '@mui/material';
 import { SnackbarContext } from '../snackbar/Snackbar';
+import { BackdropContext } from '../../components/backdrop/Backdrop';
 import getCroppedImg from '../../utils/cropImage';
 import { dataURLtoFile } from '../../utils/dataURLtoFile';
 import './cropper.css';
 
-const ImageUpload = ({ handleImageUpload }) => {
+const ImageUpload = ({ handleImageUpload, setAvatar }) => {
   const inputRef = useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
   const setStateSnackbarContext = useContext(SnackbarContext);
+  const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
 
   const [image, setImage] = useState(null);
   const [croppedArea, setCroppedArea] = useState(null);
@@ -57,6 +59,7 @@ const ImageUpload = ({ handleImageUpload }) => {
       const formdata = new FormData();
       formdata.append('croppedImage', convertedUrlToFile);
 
+      showBackdrop();
       const res = await fetch(
         'http://localhost:5000/api/v1/auth/setprofileimg',
         {
@@ -66,7 +69,10 @@ const ImageUpload = ({ handleImageUpload }) => {
       );
       const res2 = await res.json();
       console.log(res2);
+      closeBackdrop();
+      setAvatar(res2.data);
     } catch (error) {
+      closeBackdrop();
       console.warn(error);
     }
   };

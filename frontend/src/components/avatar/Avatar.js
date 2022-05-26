@@ -14,6 +14,7 @@ import ImageUpload from '../cropper/Cropper';
 const RenderAvatar = () => {
   const [showCropper, setShowCropper] = useState(false);
   const [open, setOpen] = useState(false);
+  const [avatar, setAvatar] = useState('');
   const anchorRef = useRef(null);
 
   const handleImageUpload = () => {
@@ -53,7 +54,7 @@ const RenderAvatar = () => {
   return (
     <div className='avatar-screen'>
       <div className='avatar'>
-        <img src='/noAvatar.jpg' alt='' />
+        <img src={avatar ? avatar : '/noAvatar.jpg'} alt='' />
         <div className='camera-btn'>
           <IconButton
             ref={anchorRef}
@@ -116,6 +117,7 @@ const RenderAvatar = () => {
         <ImageUpload
           className='image-upload'
           handleImageUpload={handleImageUpload}
+          setAvatar={setAvatar}
         />
       )}
     </div>
