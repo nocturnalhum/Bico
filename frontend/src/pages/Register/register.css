@@ -33,3 +33,10 @@
   margin-left: 0.4rem;
   color: rgb(220, 110, 20);
 }
+
+@media screen and (max-height: 700px) {
+  .register-screen {
+    width: 100%;
+    height: 100%;
+  }
+}
