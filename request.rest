@@ -48,3 +48,19 @@ Content-Type: application/json
 ### Set Profile Picture Route:
 POST http://localhost:5000/api/v1/auth/setprofileimg
 Content-Type: application/json
+
+
+### REGISTER BIKE
+POST http://localhost:5000/api/v1/bike/registerbike
+Content-Type: application/json
+
+{
+  "manufacturer": "Schwinn",
+  "bikeModel": "Volare",
+  "serialNum": 54321,
+  "bikeImage": "",
+  "color": "red",
+  "category": 1,
+  "description": "Bike was found on corner of St.Clair/Bathurst"
+
+}

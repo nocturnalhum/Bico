@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const authRoute = require('./routes/auth');
+const bikeRoute = require('./routes/bike');
 const privateRoute = require('./routes/private');
 
 // ============================================================================
@@ -25,6 +26,7 @@ app.use(cors(), express.json());
 // ============================================================================
 
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/bike', bikeRoute);
 app.use('/api/v1/private', privateRoute);
 
 // ============================================================================

@@ -1,16 +1,19 @@
 const mongoose = require('mongoose');
 
-const bikeSchema = new mongoose.Schema(
+const BikeSchema = new mongoose.Schema(
   {
     manufacturer: {
       type: String,
       require: true,
+      trim: true,
     },
     bikeModel: {
       type: String,
+      trim: true,
     },
     serialNum: {
       type: Number,
+      unique: true,
       require: true,
     },
     bikeImage: {
@@ -19,6 +22,7 @@ const bikeSchema = new mongoose.Schema(
     },
     color: {
       type: String,
+      trim: true,
     },
     category: {
       type: Number,
@@ -30,3 +34,5 @@ const bikeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+module.exports = mongoose.model('Bike', BikeSchema);

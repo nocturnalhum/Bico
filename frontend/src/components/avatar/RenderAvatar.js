@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { IconButton } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import ImageUpload from '../cropper/Cropper';
+import Cropper from '../cropper/Cropper';
 
 const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
   const [showCropper, setShowCropper] = useState(false);
@@ -112,7 +112,7 @@ const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
         )}
       </Popper>
       {showCropper && (
-        <ImageUpload
+        <Cropper
           className='image-upload'
           handleImageUpload={handleImageUpload}
           setProfilePicture={setProfilePicture}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './register.css';
-import RenderAvatar from '../../components/avatar/Avatar';
+import RenderAvatar from '../../components/avatar/RenderAvatar';
 
 export default function Register() {
   const [username, setUsername] = useState('');
