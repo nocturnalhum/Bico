@@ -38,6 +38,24 @@ exports.registerbike = async (req, res, next) => {
 };
 
 // ============================================================================
+// =================<<< Get Bikes >>>==========================================
+// ============================================================================
+
+exports.getbikes = async (req, res, next) => {
+  try {
+    const bikes = await Bike.find({});
+    console.log(bikes);
+    if (!bikes) {
+      res.send({ success: false, message: 'Bike not found!' });
+    } else {
+      res.status(200).json(bikes);
+    }
+  } catch (error) {
+    next(error.message);
+  }
+};
+
+// ============================================================================
 // =================<<< Update Bike >>>========================================
 // ============================================================================
 
@@ -69,12 +87,10 @@ exports.deletebike = async (req, res, next) => {
     if (!bike) {
       res.send({ success: false, message: 'Bike not found!' });
     } else {
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: `Bike[Serial Number: ${bike.serialNum}] Deleted`,
-        });
+      res.status(200).json({
+        success: true,
+        message: `Bike[Serial Number: ${bike.serialNum}] Deleted`,
+      });
     }
   } catch (error) {
     next(error.message);
