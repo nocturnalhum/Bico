@@ -14,6 +14,7 @@ exports.registerbike = async (req, res, next) => {
     bikeImage,
     color,
     category,
+    status,
     description,
   } = req.body;
   try {
@@ -55,3 +56,7 @@ exports.updatebike = async (req, res, next) => {
     throw new Error('Bike Update Failed');
   }
 };
+
+// ============================================================================
+// =================<<< Delete Bike >>>========================================
+// ============================================================================

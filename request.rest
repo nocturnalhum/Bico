@@ -61,6 +61,7 @@ Content-Type: application/json
   "bikeImage": "",
   "color": "red",
   "category": 1,
+  "status": 2,
   "description": "Bike was found on corner of St.Clair/Bathurst"
 
 }
