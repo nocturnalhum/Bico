@@ -32,7 +32,8 @@ exports.registerbike = async (req, res, next) => {
       data: bike,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500);
+    throw new Error('Bike Registration Failed');
   }
 };
 
@@ -43,7 +44,9 @@ exports.registerbike = async (req, res, next) => {
 exports.updatebike = async (req, res, next) => {
   try {
     const bike = await Bike.findById(req.params.bikeId);
-    if (bike) {
+    if (!bike) {
+      res.send({ success: false, message: 'Bike not found!' });
+    } else {
       const updatedBike = await Bike.findByIdAndUpdate(
         req.params.bikeId,
         req.body,
@@ -52,11 +55,28 @@ exports.updatebike = async (req, res, next) => {
       res.status(200).json(updatedBike);
     }
   } catch (error) {
-    res.status(500);
-    throw new Error('Bike Update Failed');
+    next(error.message);
   }
 };
 
 // ============================================================================
 // =================<<< Delete Bike >>>========================================
 // ============================================================================
+
+exports.deletebike = async (req, res, next) => {
+  try {
+    const bike = await Bike.findByIdAndDelete(req.params.bikeId);
+    if (!bike) {
+      res.send({ success: false, message: 'Bike not found!' });
+    } else {
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: `Bike[Serial Number: ${bike.serialNum}] Deleted`,
+        });
+    }
+  } catch (error) {
+    next(error.message);
+  }
+};
