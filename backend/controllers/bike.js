@@ -51,7 +51,7 @@ exports.getbikes = async (req, res, next) => {
       res.status(200).json(bikes);
     }
   } catch (error) {
-    next(error.message);
+    next(error);
   }
 };
 
@@ -73,7 +73,7 @@ exports.updatebike = async (req, res, next) => {
       res.status(200).json(updatedBike);
     }
   } catch (error) {
-    next(error.message);
+    next(error);
   }
 };
 
@@ -93,6 +93,6 @@ exports.deletebike = async (req, res, next) => {
       });
     }
   } catch (error) {
-    next(error.message);
+    next(error);
   }
 };

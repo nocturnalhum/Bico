@@ -181,3 +181,25 @@ exports.setProfileImage = (req, res, next) => {
     res.status(200).json({ data: req.file.location });
   });
 };
+
+// ============================================================================
+// =================<<< Update User >>>========================================
+// ============================================================================
+
+exports.updateuser = async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    res.send({ success: false, message: 'Update failed' });
+  } else {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.userId,
+        req.body,
+        { new: true, runValidators: true }
+      );
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      next(error);
+    }
+  }
+};
