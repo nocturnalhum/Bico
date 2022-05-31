@@ -57,10 +57,18 @@ Content-Type: application/json
 {
   "manufacturer": "Schwinn",
   "bikeModel": "Volare",
-  "serialNum": 54321,
+  "serialNum": 123123,
   "bikeImage": "",
   "color": "red",
   "category": 1,
   "description": "Bike was found on corner of St.Clair/Bathurst"
 
+}
+
+### UPDATE BIKE
+PUT http://localhost:5000/api/v1/bike/updatebike/6294356f6b8e32ed42825207
+Content-Type: application/json
+
+{
+  "color":"green"
 }
