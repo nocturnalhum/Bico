@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -86,6 +86,7 @@ export default function AccountMenu() {
           elevation: 0,
           sx: {
             overflow: 'visible',
+
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
             '& .MuiAvatar-root': {
@@ -118,9 +119,10 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <PersonAdd fontSize='small' />
+            <PedalBikeIcon fontSize='small' />
           </ListItemIcon>
-          Register Bike
+
+          <Link to='/registerbike'>Register Bike</Link>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

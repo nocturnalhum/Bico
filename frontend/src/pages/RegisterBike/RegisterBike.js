@@ -6,6 +6,7 @@ import {
   Select,
 } from '@mui/material';
 import React, { useState } from 'react';
+import RenderAvatar from '../../components/avatar/RenderAvatar';
 import './registerBike.css';
 
 const styles = [
@@ -45,18 +46,15 @@ const RegisterBike = () => {
   const [bikeImage, setBikeImage] = useState('');
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   return (
     <div className='registerbike-screen'>
       <form className='registerbike-screen__form'>
         <div className='registerbike-screen__title'>Bike Registration</div>
+
+        <RenderAvatar
+          profilePicture={bikeImage}
+          setProfilePicture={setBikeImage}
+        />
         {/* =========<<< Bike Model >>>======================================== */}
         <div className='form-group'>
           <label htmlFor='bikeModel'>Bike Model: </label>
@@ -102,10 +100,11 @@ const RegisterBike = () => {
             </InputLabel>
             <FormControl sx={{ width: '95%' }}>
               <Select
+                className='select'
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
                 displayEmpty
-                sx={{ background: 'white', textTransform: 'capitalize' }}
+                // sx={{ background: 'white', textTransform: 'capitalize' }}
               >
                 {colors.map((color) => {
                   return (
@@ -128,10 +127,11 @@ const RegisterBike = () => {
             </InputLabel>
             <FormControl sx={{ width: '95%' }}>
               <Select
+                className='select'
                 value={style}
                 onChange={(e) => setStyle(e.target.value)}
                 displayEmpty
-                sx={{ background: 'white', textTransform: 'capitalize' }}
+                // sx={{ background: 'white', textTransform: 'capitalize' }}
               >
                 {styles.map((style) => {
                   return (
@@ -149,20 +149,25 @@ const RegisterBike = () => {
           </div>
         </div>
         {/* =========<<< Description and Details >>>=========================== */}
-        <div className='form-group description'>
-          <label htmlFor='description'>Description: </label>
-          <textarea
-            type='text'
-            id='description'
-            placeholder='Provide description and details ...'
-            value={description}
-            onChange={(e) => setDescription(e.target.vaule)}
-          />
+        <div className='form-group '>
+          <div className='description'>
+            <label htmlFor='description'>Description: </label>
+            <textarea
+              type='text'
+              id='description'
+              placeholder='Provide description and details ...'
+              value={description}
+              onChange={(e) => setDescription(e.target.vaule)}
+            />
+          </div>
         </div>
         {/* =========<<< Register Bike Button >>>============================== */}
-        <button type='submit' className='btn btn-primary'>
-          Register Bike
-        </button>
+
+        <input
+          type='submit'
+          value='Register Bike'
+          className='btn btn-primary'
+        />
       </form>
     </div>
   );

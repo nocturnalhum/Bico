@@ -19,7 +19,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
   const [image, setImage] = useState(null);
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(0.1);
 
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
@@ -91,7 +91,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
                 image={image}
                 crop={crop}
                 zoom={zoom}
-                aspect={1}
+                aspect={2}
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
@@ -99,7 +99,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
             </div>
             <div className='slider'>
               <Slider
-                min={1}
+                min={0.1}
                 max={3}
                 step={0.1}
                 value={zoom}

@@ -13,6 +13,11 @@ body {
   background: linear-gradient(135deg, #d8e0e4, #1b556f);
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .form-group,
 .form-group label,
 .form-group input,

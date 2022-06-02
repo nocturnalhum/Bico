@@ -4,7 +4,7 @@
   position: absolute;
   top: 5vh;
   height: 100vh;
-
+  z-index: 99;
   width: 100vw;
   max-width: 500px;
 }
@@ -35,7 +35,7 @@
   background: green;
   position: absolute;
   top: 1vh;
-  left: 86vw;
+  left: 85%;
 }
 .clear-icon {
   color: white;
