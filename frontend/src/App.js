@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
+import RegisterBike from './pages/RegisterBike/RegisterBike';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             element={<ResetPassword />}
           />
           <Route path='/upload' element={<ImageUpload />} />
+          <Route path='/registerbike' element={<RegisterBike />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>

@@ -15,24 +15,27 @@ body {
 
 .form-group,
 .form-group label,
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
   margin-bottom: 1rem;
 }
 
-.form-group label {
+.form-group label,
+.form-group textarea {
   font-size: 1rem;
   margin-left: 0.1rem;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
   padding: 0.5rem 0.8rem;
   margin-top: 0.2rem;
   border: 1px solid #bbb;
   border-radius: 5px;
   border-bottom: 1px solid transparent;
   background-color: #fff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.5);
 }
 
