@@ -81,7 +81,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
   return (
     <div className='upload-screen'>
       <IconButton className='clear-container' onClick={handleImageUpload}>
-        <ClearIcon className='clear-icon' />
+        <ClearIcon className='clear-icon' sx={{ fontSize: '30px' }} />
       </IconButton>
       <div className='container-cropper'>
         {image ? (

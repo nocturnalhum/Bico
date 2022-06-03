@@ -8,15 +8,19 @@
 }
 
 .avatar {
-  height: 180px;
+  height: 170px;
+  width: 300px;
   align-items: center;
   position: absolute;
+  margin-bottom: 10px;
 }
 
 .avatar img {
   height: 100%;
+  width: 100%;
   border-radius: 50%;
   border: 5px double white;
+  object-fit: none;
 }
 
 .camera-btn {
@@ -46,13 +50,13 @@
   z-index: 100;
 }
 
-.image-upload {
+/* .image-upload {
   height: 0;
-}
+} */
 
 @media (max-width: 375px) {
   .avatar {
-    height: 120px;
+    height: 150px;
   }
   .camera-btn {
     position: relative;

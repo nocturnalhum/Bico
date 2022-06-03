@@ -14,9 +14,9 @@ const createImage = (url) =>
     image.src = url;
   });
 
-function getRadianAngle(degreeValue) {
-  return (degreeValue * Math.PI) / 180;
-}
+// function getRadianAngle(degreeValue) {
+//   return (degreeValue * Math.PI) / 180;
+// }
 
 export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
   const image = await createImage(imageSrc);
@@ -33,7 +33,7 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
 
   // translate canvas context to a central location on image to allow rotating around the center.
   ctx.translate(safeArea / 2, safeArea / 2);
-  ctx.rotate(getRadianAngle(rotation));
+  // ctx.rotate(getRadianAngle(rotation));
   ctx.translate(-safeArea / 2, -safeArea / 2);
 
   // draw rotated image and store data.

@@ -1,9 +1,10 @@
 import {
-  bottomNavigationActionClasses,
+  Autocomplete,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
+  TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
@@ -40,11 +41,10 @@ const RegisterBike = () => {
   const [manufacturer, setManufacturer] = useState('');
   const [serialNum, setSerialNum] = useState('');
   const [color, setColor] = useState('');
-  const [style, setStyle] = useState('');
+  const [type, setType] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
   const [bikeImage, setBikeImage] = useState('');
-  const [open, setOpen] = useState(false);
 
   return (
     <div className='registerbike-screen'>
@@ -64,7 +64,7 @@ const RegisterBike = () => {
             id='bikeModel'
             placeholder='Enter Bike Model'
             value={bikeModel}
-            onChange={(e) => setBikeModel(e.target.vaule)}
+            onChange={(e) => setBikeModel((prev) => e.target.value)}
           />
         </div>
         {/* =========<<< Manufacturer >>>====================================== */}
@@ -76,7 +76,7 @@ const RegisterBike = () => {
             id='manufacturer'
             placeholder='Enter Bike Manufacturer'
             value={manufacturer}
-            onChange={(e) => setManufacturer(e.target.vaule)}
+            onChange={(e) => setManufacturer((prev) => e.target.value)}
           />
         </div>
         {/* =========<<< Serial Number >>>===================================== */}
@@ -88,7 +88,7 @@ const RegisterBike = () => {
             id='serialNum'
             placeholder='Enter Bike Manufacturer'
             value={serialNum}
-            onChange={(e) => setSerialNum(e.target.vaule)}
+            onChange={(e) => setSerialNum((prev) => e.target.value)}
           />
         </div>
 
@@ -98,20 +98,34 @@ const RegisterBike = () => {
             <InputLabel htmlFor='color' sx={{ color: 'black' }}>
               Bike Colour:{' '}
             </InputLabel>
-            <FormControl sx={{ width: '95%' }}>
+            <FormControl sx={{ textTransform: 'capitalize' }}>
+              {/* <Autocomplete
+                required
+                className='select'
+                disablePortal
+                id='combo-box-demo'
+                options={colors}
+                value={color}
+                onChange={(e) => setColor(e.target.value)}
+                renderInput={(params) => (
+                  <TextField {...params} label='Bike Colour' />
+                )}
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
+              /> */}
               <Select
                 className='select'
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
                 displayEmpty
-                // sx={{ background: 'white', textTransform: 'capitalize' }}
               >
                 {colors.map((color) => {
                   return (
                     <MenuItem
+                      className='bike-menu-item'
                       key={color}
                       value={color}
-                      sx={{ textTransform: 'capitalize' }}
                     >
                       {color}
                     </MenuItem>
@@ -120,27 +134,43 @@ const RegisterBike = () => {
               </Select>
             </FormControl>
           </div>
-          {/* =========<<< Bike Style Select >>>=============================== */}
+          {/* =========<<< Bike Type Select >>>=============================== */}
           <div className='form-group'>
-            <InputLabel htmlFor='style' sx={{ color: 'black' }}>
-              Bike Style:{' '}
+            <InputLabel htmlFor='type' sx={{ color: 'black' }}>
+              Bike Type:{' '}
             </InputLabel>
-            <FormControl sx={{ width: '95%' }}>
+            <FormControl sx={{ textTransform: 'capitalize' }}>
+              {/* <Autocomplete
+                className='select'
+                disablePortal
+                id='combo-box-demo'
+                value={type}
+                options={styles}
+                onChange={(e) => setType(e.target.value)}
+                sx={{ textTransform: 'capitalize' }}
+                renderInput={(params) => (
+                  <TextField {...params} label='Bike Type' />
+                )}
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
+              /> */}
               <Select
                 className='select'
-                value={style}
-                onChange={(e) => setStyle(e.target.value)}
+                value={type}
+                onChange={(e) => {
+                  setType(e.target.value);
+                }}
                 displayEmpty
-                // sx={{ background: 'white', textTransform: 'capitalize' }}
               >
-                {styles.map((style) => {
+                {styles.map((type) => {
                   return (
                     <MenuItem
-                      key={style}
-                      value={style}
-                      sx={{ textTransform: 'capitalize' }}
+                      key={type}
+                      value={type}
+                      className='bike-menu-item'
                     >
-                      {style}
+                      {type}
                     </MenuItem>
                   );
                 })}

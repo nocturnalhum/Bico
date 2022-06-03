@@ -56,7 +56,7 @@
   display: none;
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 570px) {
   .nav-links {
     display: flex;
     flex-direction: column;

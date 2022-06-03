@@ -7,7 +7,7 @@
 }
 
 .registerbike-screen__form {
-  width: 100%;
+  width: 380px;
   padding: 1.5rem;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.8);
@@ -21,20 +21,27 @@
   font-weight: 500;
 }
 
+.form-group .select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  text-transform: capitalize;
+}
+
 .form-group__select {
   display: flex;
-  justify-content: space-between;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
   width: 100%;
+  /* background: red; */
+}
+
+.form-group__select .select {
+  width: 10rem;
 }
 
 .description textarea {
   height: 8rem;
   resize: none;
-}
-
-.select {
-  background: 'red';
-  text-transform: 'capitalize';
 }
 
 .registerbike-screen .avatar img {
