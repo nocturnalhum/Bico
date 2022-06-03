@@ -91,7 +91,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
                 image={image}
                 crop={crop}
                 zoom={zoom}
-                aspect={2}
+                aspect={1}
                 onCropChange={setCrop}
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
@@ -99,7 +99,7 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
             </div>
             <div className='slider'>
               <Slider
-                min={0.1}
+                min={1}
                 max={3}
                 step={0.1}
                 value={zoom}

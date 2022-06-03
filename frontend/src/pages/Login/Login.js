@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import Axios from 'axios';
 import './login.css';
 
 export default function Login() {
@@ -19,7 +19,7 @@ export default function Login() {
     };
 
     try {
-      const { data } = await axios.post(
+      const { data } = await Axios.post(
         '/auth/login',
         { username, password },
         config

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import Axios from 'axios';
 import './register.css';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
 
@@ -33,7 +33,7 @@ export default function Register() {
     }
     try {
       console.log(profilePicture);
-      const { data } = await axios.post(
+      const { data } = await Axios.post(
         '/auth/register',
         { username, email, password, profilePicture },
         config

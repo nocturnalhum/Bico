@@ -113,12 +113,6 @@ exports.forgotpassword = async (req, res, next) => {
 // ==========<<< Reset Password >>>============================================
 // ============================================================================
 
-const s3 = new aws.S3({
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-  region: process.env.S3_BUCKET_REGION,
-});
-
 exports.resetpassword = async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash('sha256')
@@ -154,6 +148,12 @@ exports.resetpassword = async (req, res, next) => {
 // ============================================================================
 // =================<<< Set Profile Pic >>>====================================
 // ============================================================================
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: process.env.S3_BUCKET_REGION,
+});
 
 const upload = (bucketName) =>
   multer({

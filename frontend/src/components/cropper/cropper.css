@@ -1,9 +1,9 @@
 .upload-screen {
-  /* background: red; */
+  background: red;
   background-color: rgba(0, 0, 0, 0.95);
   position: absolute;
-  top: 5vh;
-  height: 100vh;
+  top: 7vh;
+  height: 95vh;
   z-index: 99;
   width: 100vw;
   max-width: 500px;

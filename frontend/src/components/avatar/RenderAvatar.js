@@ -53,21 +53,21 @@ const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
     <div className='avatar-screen'>
       <div className='avatar'>
         <img src={profilePicture ? profilePicture : '/noAvatar.jpg'} alt='' />
-        <div className='camera-btn'>
-          <IconButton
-            ref={anchorRef}
-            id='composition-button'
-            aria-controls={open ? 'composition-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}
-            aria-haspopup='true'
-            onClick={handleToggle}
-            sx={{ '&:hover': { backgroundColor: 'rgba(225, 225, 225, 0.0)' } }}
-          >
-            <div className='camera-icon'>
-              <PhotoCameraIcon />
-            </div>
-          </IconButton>
-        </div>
+      </div>
+      <div className='camera-btn'>
+        <IconButton
+          ref={anchorRef}
+          id='composition-button'
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup='true'
+          onClick={handleToggle}
+          sx={{ '&:hover': { backgroundColor: 'rgba(225, 225, 225, 0.0)' } }}
+        >
+          <div className='camera-icon'>
+            <PhotoCameraIcon />
+          </div>
+        </IconButton>
       </div>
 
       <Popper
