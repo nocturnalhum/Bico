@@ -1,5 +1,20 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Grow,
+  ClickAwayListener,
+  Paper,
+  Popper,
+  MenuList,
+} from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
 import './registerBike.css';
 
@@ -29,6 +44,8 @@ const colors = [
   'other...',
 ];
 
+const options = ['Bike Status', 'Found', 'Lost', 'My Bike'];
+
 const RegisterBike = () => {
   const [bikeModel, setBikeModel] = useState('');
   const [manufacturer, setManufacturer] = useState('');
@@ -36,14 +53,85 @@ const RegisterBike = () => {
   const [color, setColor] = useState('');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(0);
   const [bikeImage, setBikeImage] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  const navigate = useNavigate();
+
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleClick = () => {
+    console.info(`You clicked ${options[status]}`);
+  };
+
+  const handleMenuItemClick = (event, index) => {
+    setStatus(index);
+    setOpen(false);
+  };
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const registerBikeHandler = async (e) => {
+    e.preventDefault();
+    const config = {
+      header: {
+        'Content-Type': 'application/jason',
+      },
+    };
+
+    try {
+      console.log(bikeImage);
+      const { data } = await Axios.post(
+        '/bike/registerbike',
+        {
+          bikeModel,
+          manufacturer,
+          serialNum,
+          color,
+          type,
+          description,
+          status,
+          bikeImage,
+        },
+        config
+      );
+      setSuccess(data.data);
+      navigate('/');
+    } catch (error) {
+      setError(error.response.data.error);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  };
 
   return (
     <div className='registerbike-screen'>
-      <form className='registerbike-screen__form'>
+      <form
+        onSubmit={registerBikeHandler}
+        className='registerbike-screen__form'
+      >
         {/* =========<<< Screen Title >>>====================================== */}
         <div className='registerbike-screen__title'>Bike Registration</div>
+        {error && <span className='error-message'>{error}</span>}
+        {success && (
+          <span className='success-message'>
+            {success} <Link to='/'>Login</Link>
+          </span>
+        )}
         {/* =========<<< Bike Image >>>======================================== */}
         <div className='form-group'>
           <RenderAvatar
@@ -53,6 +141,58 @@ const RegisterBike = () => {
         </div>
 
         {/* =========<<< Bike Status >>>======================================= */}
+        <div className='form-group'>
+          <ButtonGroup
+            variant='contained'
+            ref={anchorRef}
+            aria-label='split button'
+          >
+            <Button onClick={handleClick}>{options[status]}</Button>
+            <Button
+              size='small'
+              aria-controls={open ? 'split-button-menu' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-label='select merge strategy'
+              aria-haspopup='menu'
+              onClick={handleToggle}
+            >
+              <ArrowDropDownIcon />
+            </Button>
+          </ButtonGroup>
+          <Popper
+            open={open}
+            anchorEl={anchorRef.current}
+            role={undefined}
+            transition
+            disablePortal
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin:
+                    placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList id='split-button-menu' autoFocusItem>
+                      {options.map((option, index) => (
+                        <MenuItem
+                          key={option}
+                          selected={index === status}
+                          onClick={(event) => handleMenuItemClick(event, index)}
+                        >
+                          {option}
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </div>
 
         {/* =========<<< Bike Model >>>======================================== */}
         <div className='form-group'>
@@ -156,17 +296,16 @@ const RegisterBike = () => {
               id='description'
               placeholder='Provide description and details ...'
               value={description}
-              onChange={(e) => setDescription(e.target.vaule)}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
         </div>
+
         {/* =========<<< Register Bike Button >>>============================== */}
 
-        <input
-          type='submit'
-          value='Register Bike'
-          className='btn btn-primary'
-        />
+        <button type='submit' className='btn btn-primary'>
+          Register Bike
+        </button>
       </form>
     </div>
   );
