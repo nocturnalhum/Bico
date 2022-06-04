@@ -24,13 +24,12 @@ const BikeSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    category: {
-      type: Number,
-      enum: [1, 2, 3, 4],
+    bikeType: {
+      type: String,
     },
     status: {
-      type: Number,
-      enum: [1, 2, 3],
+      type: String,
+      require: true,
     },
     description: {
       type: String,

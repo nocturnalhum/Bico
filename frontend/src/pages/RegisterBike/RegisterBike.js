@@ -2,87 +2,29 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import {
-  Button,
-  ButtonGroup,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  Grow,
-  ClickAwayListener,
-  Paper,
-  Popper,
-  MenuList,
+  TextField,
 } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
 import './registerBike.css';
-
-const styles = [
-  "child's bike",
-  'electric',
-  'hybrid',
-  'mountain',
-  'road',
-  'scooter',
-  'tricycle',
-  'other',
-];
-const colors = [
-  'black',
-  'blue',
-  'brown',
-  'cyan',
-  'green',
-  'orange',
-  'pink',
-  'purple',
-  'red',
-  'silver',
-  'white',
-  'yellow',
-  'other...',
-];
-
-const options = ['Bike Status', 'Found', 'Lost', 'My Bike'];
+import { styles, colors, options } from './bikeData';
 
 const RegisterBike = () => {
   const [bikeModel, setBikeModel] = useState('');
   const [manufacturer, setManufacturer] = useState('');
   const [serialNum, setSerialNum] = useState('');
   const [color, setColor] = useState('');
-  const [type, setType] = useState('');
+  const [bikeType, setBikeType] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState('');
   const [bikeImage, setBikeImage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   const navigate = useNavigate();
-
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
-
-  const handleClick = () => {
-    console.info(`You clicked ${options[status]}`);
-  };
-
-  const handleMenuItemClick = (event, index) => {
-    setStatus(index);
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   const registerBikeHandler = async (e) => {
     e.preventDefault();
@@ -93,21 +35,21 @@ const RegisterBike = () => {
     };
 
     try {
-      console.log(bikeImage);
       const { data } = await Axios.post(
         '/bike/registerbike',
         {
-          bikeModel,
           manufacturer,
+          bikeModel,
           serialNum,
+          bikeImage,
           color,
-          type,
+          bikeType,
           description,
           status,
-          bikeImage,
         },
         config
       );
+      console.log(data.data);
       setSuccess(data.data);
       navigate('/');
     } catch (error) {
@@ -132,66 +74,34 @@ const RegisterBike = () => {
             {success} <Link to='/'>Login</Link>
           </span>
         )}
+
+        {/* =========<<< Bike Status >>>======================================= */}
+        <div className='form-group'>
+          <TextField
+            required
+            className='bike-status'
+            id='bike-status'
+            select
+            label='Bike Status'
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            helperText='Please select the current status of this bike'
+            variant='standard'
+            sx={{ color: 'red' }}
+          >
+            {options.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
         {/* =========<<< Bike Image >>>======================================== */}
         <div className='form-group'>
           <RenderAvatar
             profilePicture={bikeImage}
             setProfilePicture={setBikeImage}
           />
-        </div>
-
-        {/* =========<<< Bike Status >>>======================================= */}
-        <div className='form-group'>
-          <ButtonGroup
-            variant='contained'
-            ref={anchorRef}
-            aria-label='split button'
-          >
-            <Button onClick={handleClick}>{options[status]}</Button>
-            <Button
-              size='small'
-              aria-controls={open ? 'split-button-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-label='select merge strategy'
-              aria-haspopup='menu'
-              onClick={handleToggle}
-            >
-              <ArrowDropDownIcon />
-            </Button>
-          </ButtonGroup>
-          <Popper
-            open={open}
-            anchorEl={anchorRef.current}
-            role={undefined}
-            transition
-            disablePortal
-          >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin:
-                    placement === 'bottom' ? 'center top' : 'center bottom',
-                }}
-              >
-                <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
-                    <MenuList id='split-button-menu' autoFocusItem>
-                      {options.map((option, index) => (
-                        <MenuItem
-                          key={option}
-                          selected={index === status}
-                          onClick={(event) => handleMenuItemClick(event, index)}
-                        >
-                          {option}
-                        </MenuItem>
-                      ))}
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
         </div>
 
         {/* =========<<< Bike Model >>>======================================== */}
@@ -239,6 +149,7 @@ const RegisterBike = () => {
             </InputLabel>
             <FormControl sx={{ textTransform: 'capitalize' }}>
               <Select
+                required
                 className='select color'
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
@@ -265,10 +176,11 @@ const RegisterBike = () => {
             </InputLabel>
             <FormControl sx={{ textTransform: 'capitalize' }}>
               <Select
+                required
                 className='select type'
-                value={type}
+                value={bikeType}
                 onChange={(e) => {
-                  setType(e.target.value);
+                  setBikeType(e.target.value);
                 }}
                 displayEmpty
               >

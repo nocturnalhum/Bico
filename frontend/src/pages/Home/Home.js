@@ -13,30 +13,24 @@ export default function Home() {
     getBikes();
   }, []);
 
-  const username = localStorage.getItem('username');
   return (
     <>
       <div className='home-screen'>
-        {username ? (
-          <h2>Welcome {username}</h2>
-        ) : (
-          <>
-            <h1>Homes</h1>
-            {bikes.map((bike) => {
-              return (
-                <div className='bike' key={bike._id}>
-                  <ul>
-                    <li>
-                      <h2>Manufacturer: {bike.manufacturer}</h2>
-                      <h3>Model: {bike.bikeModel}</h3>
-                      <p>Description: {bike.description}</p>
-                    </li>
-                  </ul>
-                </div>
-              );
-            })}
-          </>
-        )}
+        <h1>Homes</h1>
+        {bikes.map((bike) => {
+          return (
+            <div className='bike' key={bike._id}>
+              <img src={bike.bikeImage} alt='' />
+              <ul>
+                <li>
+                  <h2>Manufacturer: {bike.manufacturer}</h2>
+                  <h3>Model: {bike.bikeModel}</h3>
+                  <p>Description: {bike.description}</p>
+                </li>
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </>
   );

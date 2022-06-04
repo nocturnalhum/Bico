@@ -55,6 +55,7 @@ exports.login = async (req, res, next) => {
     res.status(200).json({
       success: true,
       token: user.getSignedToken(),
+      user,
     });
   } catch (error) {
     console.log(

@@ -16,10 +16,10 @@
 }
 
 .registerbike-screen__title {
-  color: white;
+  /* color: white; */
   height: 50px;
   width: 100%;
-  background: linear-gradient(135deg, #68a1c4, #1b556f);
+  /* background: linear-gradient(135deg, #68a1c4, #1b556f); */
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.8rem;

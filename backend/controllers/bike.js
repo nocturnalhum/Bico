@@ -13,9 +13,9 @@ exports.registerbike = async (req, res, next) => {
     serialNum,
     bikeImage,
     color,
-    category,
-    status,
+    bikeType,
     description,
+    status,
   } = req.body;
   try {
     const bike = await Bike.create({
@@ -24,8 +24,9 @@ exports.registerbike = async (req, res, next) => {
       serialNum,
       bikeImage,
       color,
-      category,
+      bikeType,
       description,
+      status,
     });
     res.status(201).json({
       success: true,
@@ -33,6 +34,7 @@ exports.registerbike = async (req, res, next) => {
     });
   } catch (error) {
     res.status(500);
+    console.log(error);
     throw new Error('Bike Registration Failed');
   }
 };
@@ -44,7 +46,6 @@ exports.registerbike = async (req, res, next) => {
 exports.getbikes = async (req, res, next) => {
   try {
     const bikes = await Bike.find({});
-    console.log(bikes);
     if (!bikes) {
       res.send({ success: false, message: 'Bike not found!' });
     } else {
