@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './avatar.css';
+import './renderAvatar.css';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -10,7 +10,11 @@ import { IconButton } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import Cropper from '../cropper/Cropper';
 
-const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
+const RenderAvatar = ({
+  profilePicture,
+  setProfilePicture,
+  registrationType,
+}) => {
   const [showCropper, setShowCropper] = useState(false);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -52,7 +56,16 @@ const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
   return (
     <div className='avatar-screen'>
       <div className='avatar'>
-        <img src={profilePicture ? profilePicture : '/noAvatar.jpg'} alt='' />
+        <img
+          src={
+            profilePicture
+              ? profilePicture
+              : registrationType === 'profile'
+              ? '/noAvatar.jpg'
+              : '/placeholderBike.jpg'
+          }
+          alt=''
+        />
       </div>
       <div className='camera-btn'>
         <IconButton
@@ -69,6 +82,14 @@ const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
           </div>
         </IconButton>
       </div>
+      {showCropper && (
+        <Cropper
+          // className='image-upload'
+          handleImageUpload={handleImageUpload}
+          setProfilePicture={setProfilePicture}
+          registrationType={registrationType}
+        />
+      )}
 
       <Popper
         className='avatar-popper'
@@ -111,13 +132,6 @@ const RenderAvatar = ({ profilePicture, setProfilePicture }) => {
           </Grow>
         )}
       </Popper>
-      {showCropper && (
-        <Cropper
-          className='image-upload'
-          handleImageUpload={handleImageUpload}
-          setProfilePicture={setProfilePicture}
-        />
-      )}
     </div>
   );
 };

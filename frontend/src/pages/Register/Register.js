@@ -110,6 +110,7 @@ export default function Register() {
         <RenderAvatar
           profilePicture={profilePicture}
           setProfilePicture={setProfilePicture}
+          registrationType='profile'
         />
 
         <button type='submit' className='btn btn-primary'>

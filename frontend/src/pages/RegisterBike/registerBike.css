@@ -4,27 +4,45 @@
   display: flex;
   margin-top: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .registerbike-screen__form {
   width: 380px;
   padding: 1.5rem;
-  border-radius: 5px;
   background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .registerbike-screen__title {
+  color: white;
+  height: 50px;
+  width: 100%;
+  background: linear-gradient(135deg, #68a1c4, #1b556f);
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.8rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
 }
 
 .form-group .select {
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  height: 40px;
   text-transform: capitalize;
+  text-align: center;
+}
+
+.form-group .select.color {
+  border-radius: 25px 5px 5px 25px;
+}
+
+.form-group .select.type {
+  border-radius: 5px 25px 25px 5px;
 }
 
 .form-group__select {
@@ -42,8 +60,26 @@
 .description textarea {
   height: 8rem;
   resize: none;
+  border-radius: 5px;
+}
+
+.registerbike-screen .avatar-screen {
+  height: 200px;
+  border-radius: 10px;
+  border: none;
 }
 
 .registerbike-screen .avatar img {
-  border-radius: 0%;
+  background: gray;
+  border-radius: 10px;
+  height: 200px;
+  width: 100%;
+  object-fit: contain;
+  border: none;
+}
+
+.registerbike-screen .camera-icon {
+  position: relative;
+  top: 60px;
+  left: 72px;
 }

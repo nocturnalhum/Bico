@@ -1,11 +1,4 @@
-import {
-  Autocomplete,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useState } from 'react';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
 import './registerBike.css';
@@ -49,12 +42,18 @@ const RegisterBike = () => {
   return (
     <div className='registerbike-screen'>
       <form className='registerbike-screen__form'>
+        {/* =========<<< Screen Title >>>====================================== */}
         <div className='registerbike-screen__title'>Bike Registration</div>
+        {/* =========<<< Bike Image >>>======================================== */}
+        <div className='form-group'>
+          <RenderAvatar
+            profilePicture={bikeImage}
+            setProfilePicture={setBikeImage}
+          />
+        </div>
 
-        <RenderAvatar
-          profilePicture={bikeImage}
-          setProfilePicture={setBikeImage}
-        />
+        {/* =========<<< Bike Status >>>======================================= */}
+
         {/* =========<<< Bike Model >>>======================================== */}
         <div className='form-group'>
           <label htmlFor='bikeModel'>Bike Model: </label>
@@ -99,23 +98,8 @@ const RegisterBike = () => {
               Bike Colour:{' '}
             </InputLabel>
             <FormControl sx={{ textTransform: 'capitalize' }}>
-              {/* <Autocomplete
-                required
-                className='select'
-                disablePortal
-                id='combo-box-demo'
-                options={colors}
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-                renderInput={(params) => (
-                  <TextField {...params} label='Bike Colour' />
-                )}
-                isOptionEqualToValue={(option, value) =>
-                  option.value === value.value
-                }
-              /> */}
               <Select
-                className='select'
+                className='select color'
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
                 displayEmpty
@@ -140,23 +124,8 @@ const RegisterBike = () => {
               Bike Type:{' '}
             </InputLabel>
             <FormControl sx={{ textTransform: 'capitalize' }}>
-              {/* <Autocomplete
-                className='select'
-                disablePortal
-                id='combo-box-demo'
-                value={type}
-                options={styles}
-                onChange={(e) => setType(e.target.value)}
-                sx={{ textTransform: 'capitalize' }}
-                renderInput={(params) => (
-                  <TextField {...params} label='Bike Type' />
-                )}
-                isOptionEqualToValue={(option, value) =>
-                  option.value === value.value
-                }
-              /> */}
               <Select
-                className='select'
+                className='select type'
                 value={type}
                 onChange={(e) => {
                   setType(e.target.value);

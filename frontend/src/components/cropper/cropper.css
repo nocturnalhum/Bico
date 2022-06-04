@@ -1,41 +1,47 @@
 .upload-screen {
-  background: red;
+  /* background: red; */
   background-color: rgba(0, 0, 0, 0.95);
   position: absolute;
-  top: 7vh;
-  height: 95vh;
+  left: 0;
+  right: 0;
+  bottom: 95vh;
+  top: 5vh;
+  height: 100vh;
+
   z-index: 99;
-  width: 100vw;
   max-width: 500px;
+  /* display: flex;
+  justify-content: center; */
 }
 
 .slider {
   position: relative;
-  top: 5vh;
+  top: 10vh;
   margin: auto;
   width: 75%;
 }
 
 .container-buttons {
-  position: relative;
+  /* background: red; */
+  position: absolute;
   top: 70vh;
-  height: 10%;
+  height: 30%;
+  width: 100%;
+  max-width: 500px;
   display: flex;
-  align-content: center;
+  justify-content: center;
 }
 
 .container-buttons Button {
-  display: flex;
-  justify-content: center;
   margin: auto;
   width: 6.5rem;
+  text-align: center;
 }
 
 .clear-container {
-  background: green;
-  position: absolute;
-  top: 1vh;
-  left: 85%;
+  position: relative;
+  bottom: 45vh;
+  left: 40%;
 }
 .clear-icon {
   color: white;

@@ -8,7 +8,11 @@ import getCroppedImg from '../../utils/cropImage';
 import { dataURLtoFile } from '../../utils/dataURLtoFile';
 import './cropper.css';
 
-const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
+const ImageUpload = ({
+  handleImageUpload,
+  setProfilePicture,
+  registrationType,
+}) => {
   const inputRef = useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
@@ -17,11 +21,11 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
   const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
 
   const [image, setImage] = useState(null);
-  const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(0.1);
+  const [zoom, setZoom] = useState(1);
+  const [croppedArea, setCroppedArea] = useState(null);
 
-  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
 
@@ -86,17 +90,15 @@ const ImageUpload = ({ handleImageUpload, setProfilePicture }) => {
       <div className='container-cropper'>
         {image ? (
           <>
-            <div className='cropper'>
-              <Cropper
-                image={image}
-                crop={crop}
-                zoom={zoom}
-                aspect={1}
-                onCropChange={setCrop}
-                onZoomChange={setZoom}
-                onCropComplete={onCropComplete}
-              />
-            </div>
+            <Cropper
+              image={image}
+              crop={crop}
+              zoom={zoom}
+              aspect={registrationType === 'profile' ? 1 : 5 / 3}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={onCropComplete}
+            />
             <div className='slider'>
               <Slider
                 min={1}
