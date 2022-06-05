@@ -21,11 +21,11 @@ const ImageUpload = ({
   const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
 
   const [image, setImage] = useState(null);
+  const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedArea, setCroppedArea] = useState(null);
 
-  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
 

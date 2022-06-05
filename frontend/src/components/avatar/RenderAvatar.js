@@ -96,7 +96,7 @@ const RenderAvatar = ({
         open={open}
         anchorEl={anchorRef.current}
         role={undefined}
-        placement='bottom-start'
+        // placement='bottom-start'
         transition
         disablePortal
       >
@@ -105,7 +105,7 @@ const RenderAvatar = ({
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === 'bottom-start' ? 'left top' : 'left bottom',
+                placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper>

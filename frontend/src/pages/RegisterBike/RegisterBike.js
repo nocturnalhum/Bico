@@ -135,7 +135,7 @@ const RegisterBike = () => {
             required
             type='text'
             id='serialNum'
-            placeholder='Enter Bike Manufacturer'
+            placeholder='Enter Serial Number'
             value={serialNum}
             onChange={(e) => setSerialNum((prev) => e.target.value)}
           />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './home.css';
 import Axios from 'axios';
+import BikeCard from '../../components/bikeCard/BikeCard';
 
 export default function Home() {
   const [bikes, setBikes] = useState([]);
@@ -16,21 +17,13 @@ export default function Home() {
   return (
     <>
       <div className='home-screen'>
-        <h1>Homes</h1>
-        {bikes.map((bike) => {
-          return (
-            <div className='bike' key={bike._id}>
-              <img src={bike.bikeImage} alt='' />
-              <ul>
-                <li>
-                  <h2>Manufacturer: {bike.manufacturer}</h2>
-                  <h3>Model: {bike.bikeModel}</h3>
-                  <p>Description: {bike.description}</p>
-                </li>
-              </ul>
-            </div>
-          );
-        })}
+        <div className='grid-container'>
+          {bikes.map((bike) => {
+            return (
+              <BikeCard className='grid-item' bike={bike} key={bike._id} />
+            );
+          })}
+        </div>
       </div>
     </>
   );

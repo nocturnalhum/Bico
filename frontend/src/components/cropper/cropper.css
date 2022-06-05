@@ -10,8 +10,6 @@
 
   z-index: 99;
   max-width: 500px;
-  /* display: flex;
-  justify-content: center; */
 }
 
 .slider {
@@ -40,8 +38,8 @@
 
 .clear-container {
   position: relative;
-  bottom: 45vh;
-  left: 40%;
+
+  left: 85%;
 }
 .clear-icon {
   color: white;
