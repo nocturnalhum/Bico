@@ -27,9 +27,9 @@ function App() {
           <Route
             path='/registerbike'
             element={
-              // <PrivateRoute>
-              <RegisterBike />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <RegisterBike />
+              </PrivateRoute>
             }
           />
           <Route path='*' element={<Error />} />

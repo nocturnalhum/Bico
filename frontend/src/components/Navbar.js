@@ -37,13 +37,6 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <NavLink
-              to='/register'
-              className={checkActive}
-              onClick={clickHandler}
-            >
-              Register
-            </NavLink>
             <NavLink to='/login' className={checkActive} onClick={clickHandler}>
               <div className='menu-item'>
                 <AccountCircleIcon sx={{ marginRight: '3px' }} />

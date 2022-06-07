@@ -49,7 +49,7 @@ const RegisterBike = () => {
         },
         config
       );
-      console.log(data.data);
+      // console.log(data.data);
       setSuccess(data.data);
       navigate('/');
     } catch (error) {
@@ -87,10 +87,14 @@ const RegisterBike = () => {
             onChange={(e) => setStatus(e.target.value)}
             helperText='Please select the current status of this bike'
             variant='standard'
-            sx={{ color: 'red' }}
+            sx={{ color: 'red', textTransform: 'capitalize' }}
           >
             {options.map((option) => (
-              <MenuItem key={option} value={option}>
+              <MenuItem
+                key={option}
+                value={option}
+                sx={{ textTransform: 'capitalize' }}
+              >
                 {option}
               </MenuItem>
             ))}
@@ -161,6 +165,7 @@ const RegisterBike = () => {
                       className='bike-menu-item'
                       key={color}
                       value={color}
+                      sx={{ textTransform: 'capitalize' }}
                     >
                       {color}
                     </MenuItem>
@@ -179,10 +184,10 @@ const RegisterBike = () => {
                 required
                 className='select type'
                 value={bikeType}
+                displayEmpty
                 onChange={(e) => {
                   setBikeType(e.target.value);
                 }}
-                displayEmpty
               >
                 {styles.map((type) => {
                   return (
@@ -190,6 +195,7 @@ const RegisterBike = () => {
                       key={type}
                       value={type}
                       className='bike-menu-item'
+                      sx={{ textTransform: 'capitalize' }}
                     >
                       {type}
                     </MenuItem>
@@ -206,7 +212,7 @@ const RegisterBike = () => {
             <textarea
               type='text'
               id='description'
-              placeholder='Provide description and details ...'
+              placeholder='Please do not include serial numbers or other information that you can use to confirm bike ownership ...'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

@@ -1,4 +1,4 @@
-export const options = ['Found', 'Lost', 'Owner'];
+export const options = ['found', 'lost', 'owner'];
 
 export const styles = [
   "child's bike",
