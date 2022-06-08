@@ -7,16 +7,17 @@ const Bikes = ({ bikes }) => {
       {bikes.map((bike) => {
         return (
           <article className='bike-item' key={bike._id}>
+            <div className='bike-card-status'>status: {bike.status}</div>
             <img
               className='bike-card-image'
               src={bike.bikeImage}
               alt={bike.bikeModel}
             />
+
             <div className='bike-info'>
               <header>
-                <h4>Manufacturer: {bike.manufacturer}</h4>
-                <h4>Model: {bike.bikeModel}</h4>
-                <h5>Status: {bike.status}</h5>
+                <h4>{bike.manufacturer}</h4>
+                <h4>{bike.bikeModel}</h4>
               </header>
               <p className='bike-description'>{bike.description}</p>
             </div>

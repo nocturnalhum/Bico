@@ -1,12 +1,13 @@
 .home-screen {
   width: 90vw;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
 }
 
 .bike-title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .underline {

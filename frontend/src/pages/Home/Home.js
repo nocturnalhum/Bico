@@ -18,6 +18,7 @@ export default function Home() {
         (bike) => bike.status !== 'owner'
       );
       setAllBikes(lostAndFoundBikes);
+      setBikes(lostAndFoundBikes);
       setCategories(allCategories);
     }
     getBikes();
