@@ -15,6 +15,7 @@
   width: 20rem;
   height: 20rem;
   border-radius: 15px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .bike-card-status {
@@ -32,6 +33,11 @@
   transition: all 0.4s;
 }
 
+.bike-card-image:hover {
+  transform: scale(1.01);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
 .bike-info header {
   display: flex;
   justify-content: space-between;
@@ -39,10 +45,6 @@
   margin-top: -2px;
   background: #ddd;
   text-transform: capitalize;
-}
-
-.bike-card-image:hover {
-  transform: scale(1.01);
 }
 
 .bike-info {
