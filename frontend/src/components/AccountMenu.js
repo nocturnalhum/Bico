@@ -15,20 +15,20 @@ export default function AccountMenu() {
 
   useEffect(() => {
     (async function getUser() {
+      const config = {
+        headers: {
+          Authorization: localStorage.getItem('authToken'),
+        },
+      };
       try {
         const id = localStorage.getItem('id');
-        const user = await Axios.get('/getUser/id');
-        console.log(user);
+        const getUser = await Axios.get(`/auth/getuser/${id}`, config);
+        setUser(getUser);
+        setFirstLetter(getUser.data.username[0].toUpperCase());
       } catch (error) {
         console.log(error);
       }
     })();
-
-    // if (localStorage.getItem('username')) {
-
-    // setFirstLetter(localStorage.getItem('username')[0].toUpperCase());
-
-    // }
   }, []);
 
   const logoutHandler = () => {

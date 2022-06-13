@@ -4,7 +4,7 @@ const ErrorResponse = require('../utils/errorResponse');
 
 exports.authHandler = async (req, res, next) => {
   let token;
-
+  console.log('TEST AUTH TOKEN', req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -13,7 +13,9 @@ exports.authHandler = async (req, res, next) => {
   }
 
   if (!token) {
-    return next(new ErrorResponse(401, 'Not Authorized: Invalid Token'));
+    return next(
+      new ErrorResponse(401, 'Not Authorized: NOT TOKEN Invalid Token')
+    );
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

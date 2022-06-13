@@ -13,13 +13,18 @@ export default function Home() {
 
   useEffect(() => {
     (async function getBikes() {
+      const config = {
+        header: {
+          'Content-Type': 'application/json',
+        },
+      };
       try {
-        const response = await Axios.get('/bike/');
-        const lostAndFoundBikes = response.data.filter(
+        const response = await Axios.get('/bike/', {}, config);
+        const lostAndFoundBikes = await response.data.filter(
           (bike) => bike.status !== 'owner'
         );
-        setAllBikes(lostAndFoundBikes);
-        setBikes(lostAndFoundBikes);
+        await setAllBikes(lostAndFoundBikes);
+        await setBikes(lostAndFoundBikes);
         setCategories(allCategories);
       } catch (error) {
         console.log(error);

@@ -189,6 +189,7 @@ exports.setProfileImage = (req, res, next) => {
 // ============================================================================
 exports.getuser = async (req, res, next) => {
   const user = await User.findById(req.params.userId);
+
   if (!user) {
     res.send({ success: false, message: 'User not found' });
   } else {

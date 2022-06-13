@@ -34,8 +34,7 @@ export default function Login() {
         { username, password },
         config
       );
-      console.log(data);
-      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('authToken', 'Bearer ' + data.token);
       localStorage.setItem('id', data.user._id);
       closeBackdrop();
       navigate('/');
@@ -62,6 +61,7 @@ export default function Login() {
             type='text'
             id='username'
             placeholder='Enter your username'
+            autoComplete='off'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             tabIndex={1}

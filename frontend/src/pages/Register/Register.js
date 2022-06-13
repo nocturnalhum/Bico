@@ -26,7 +26,7 @@ export default function Register() {
     e.preventDefault();
     const config = {
       header: {
-        'Content-Type': 'application/jason',
+        'Content-Type': 'application/json',
       },
     };
 
@@ -73,6 +73,7 @@ export default function Register() {
             type='text'
             id='username'
             placeholder='Enter your username'
+            autoComplete='off'
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
