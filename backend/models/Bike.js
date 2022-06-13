@@ -19,7 +19,6 @@ const BikeSchema = new mongoose.Schema(
 
     username: {
       type: String,
-      unique: true,
       require: true,
     },
     bikeImage: {
