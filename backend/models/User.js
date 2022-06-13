@@ -48,13 +48,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    bikes: {
+      type: Array,
+      default: [],
+    },
     isAdmin: {
       type: Boolean,
       default: false,
-    },
-    city: {
-      type: String,
-      max: 50,
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,

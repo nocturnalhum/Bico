@@ -12,7 +12,7 @@ export default function Login() {
   const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
 
   useEffect(() => {
-    const user = localStorage.getItem('username');
+    const user = localStorage.getItem('id');
     if (user) {
       navigate('/');
     }
@@ -36,6 +36,8 @@ export default function Login() {
       );
       localStorage.setItem('authToken', 'Bearer ' + data.token);
       localStorage.setItem('id', data.user._id);
+      localStorage.setItem('username', data.user.username);
+
       closeBackdrop();
       navigate('/');
       window.location.reload(false);

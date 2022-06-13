@@ -12,13 +12,19 @@ const BikeSchema = new mongoose.Schema(
       trim: true,
     },
     serialNum: {
-      type: Number,
+      type: String,
+      unique: true,
+      require: true,
+    },
+
+    username: {
+      type: String,
       unique: true,
       require: true,
     },
     bikeImage: {
       type: String,
-      default: '',
+      default: '/placeholderBike.jpg',
     },
     color: {
       type: String,

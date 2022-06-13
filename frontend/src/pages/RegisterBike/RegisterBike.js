@@ -20,7 +20,7 @@ const RegisterBike = () => {
   const [bikeType, setBikeType] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('');
-  const [bikeImage, setBikeImage] = useState('');
+  const [bikeImage, setBikeImage] = useState('/placeholderBike.jpg');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -28,9 +28,16 @@ const RegisterBike = () => {
 
   const registerBikeHandler = async (e) => {
     e.preventDefault();
+
+    const authConfig = {
+      headers: {
+        Authorization: localStorage.getItem('authToken'),
+      },
+    };
+
     const config = {
       header: {
-        'Content-Type': 'application/jason',
+        'Content-Type': 'application/json',
       },
     };
 
@@ -41,6 +48,7 @@ const RegisterBike = () => {
           manufacturer,
           bikeModel,
           serialNum,
+          username: localStorage.getItem('username'),
           bikeImage,
           color,
           bikeType,
@@ -49,7 +57,17 @@ const RegisterBike = () => {
         },
         config
       );
-      // console.log(data.data);
+
+      const id = localStorage.getItem('id');
+      const user = await Axios.get(`/auth/getuser/${id}`, authConfig);
+
+      const response = await Axios.put(
+        `/auth/updateuser/${id}`,
+        { bikes: [...user.data.bikes, data.data._id] },
+        authConfig
+      );
+      console.log('RESPONSE', response);
+      console.log('DATA', data.data);
       setSuccess(data.data);
       navigate('/');
     } catch (error) {

@@ -4,7 +4,6 @@ const ErrorResponse = require('../utils/errorResponse');
 
 exports.authHandler = async (req, res, next) => {
   let token;
-  console.log('TEST AUTH TOKEN', req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

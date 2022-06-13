@@ -12,13 +12,14 @@ const multerS3 = require('multer-s3');
 // ============================================================================
 
 exports.register = async (req, res, next) => {
-  const { username, email, password, profilePicture } = req.body;
+  const { username, email, password, bikes, profilePicture } = req.body;
 
   try {
     const user = await User.create({
       username,
       email,
       password,
+      bikes,
       profilePicture,
     });
     res.status(201).json({
