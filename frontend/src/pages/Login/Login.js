@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './login.css';
+import { BackdropContext } from '../../components/backdrop/Backdrop';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -19,17 +28,20 @@ export default function Login() {
     };
 
     try {
+      showBackdrop();
       const { data } = await Axios.post(
         '/auth/login',
         { username, password },
         config
       );
-
+      console.log(data);
       localStorage.setItem('authToken', data.token);
-      localStorage.setItem('username', username);
+      localStorage.setItem('id', data.user._id);
+      closeBackdrop();
       navigate('/');
       window.location.reload(false);
     } catch (error) {
+      closeBackdrop();
       setError(error.response.data.error);
       setTimeout(() => {
         setError('');
@@ -40,7 +52,8 @@ export default function Login() {
   return (
     <div className='login-screen'>
       <form onSubmit={loginHandler} className='login-screen__form'>
-        <div className='login-screen__title'>Login</div>
+        <div className='login-screen__title'>Sign In</div>
+        <hr></hr>
         {error && <span className='error-message'>{error}</span>}
         <div className='form-group'>
           <label htmlFor='username'>Username:</label>

@@ -1,5 +1,11 @@
 const ErrorResponse = require('../utils/errorResponse');
 
+const notFoundErrorHandling = (req, res, next) => {
+  const error = new Error(`Not Found - ${req.originalUrl}`);
+  res.status(404);
+  next(error);
+};
+
 const errorHandling = (err, req, res, next) => {
   let error = { ...err };
 
@@ -8,7 +14,7 @@ const errorHandling = (err, req, res, next) => {
   console.log(error);
 
   if (err.code === 11000) {
-    const message = `Duplicate Key Value`;
+    const message = `User Already Exists`;
     error = new ErrorResponse(400, message);
   }
 
@@ -23,4 +29,4 @@ const errorHandling = (err, req, res, next) => {
   });
 };
 
-module.exports = errorHandling;
+module.exports = { notFoundErrorHandling, errorHandling };

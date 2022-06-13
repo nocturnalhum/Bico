@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
+import { EmailRounded, PedalBikeRounded } from '@mui/icons-material';
+import { Settings, Logout } from '@mui/icons-material';
+import { Avatar, Menu, MenuItem, ListItemIcon } from '@mui/material';
+import { Divider, IconButton, Typography, Tooltip } from '@mui/material';
 import Box from '@mui/material/Box';
-import EmailIcon from '@mui/icons-material/Email';
-import PedalBikeIcon from '@mui/icons-material/PedalBike';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
-  // const [username, setUsername] = useState('');
+  const [user, setUser] = useState({});
   const [firstLetter, setFirstLetter] = useState('');
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setUsername(localStorage.getItem('username'));
-  // }, [username]);
-
   useEffect(() => {
-    if (localStorage.getItem('username')) {
-      setFirstLetter(localStorage.getItem('username')[0].toUpperCase());
-    }
+    (async function getUser() {
+      try {
+        const id = localStorage.getItem('id');
+        const user = await Axios.get('/getUser/id');
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+    // if (localStorage.getItem('username')) {
+
+    // setFirstLetter(localStorage.getItem('username')[0].toUpperCase());
+
+    // }
   }, []);
 
   const logoutHandler = () => {
     localStorage.clear();
-    // setUsername('');
     navigate('/');
     window.location.reload(false);
   };
@@ -49,13 +49,13 @@ export default function AccountMenu() {
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Typography sx={{ minWidth: 150 }}>
-          <PedalBikeIcon
+          <PedalBikeRounded
             sx={{ color: 'white', verticalAlign: 'middle', marginRight: '3px' }}
           />
           My Bikes
         </Typography>
         <Typography sx={{ minWidth: 100 }}>
-          <EmailIcon
+          <EmailRounded
             sx={{ color: 'white', verticalAlign: 'middle', marginRight: '3px' }}
           />
           Messages
@@ -118,7 +118,7 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <PedalBikeIcon fontSize='small' />
+            <PedalBikeRounded fontSize='small' />
           </ListItemIcon>
 
           <Link to='/registerbike'>Register Bike</Link>

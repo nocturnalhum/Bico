@@ -31,10 +31,12 @@ const Navbar = () => {
           </div>
         </NavLink>
 
-        {localStorage.getItem('username') ? (
-          <div className='menuList'>
-            <AccountMenu />
-          </div>
+        {localStorage.getItem('id') ? (
+          <NavLink to='/login' className={checkActive} onClick={clickHandler}>
+            <div className='menuList'>
+              <AccountMenu />
+            </div>
+          </NavLink>
         ) : (
           <>
             <NavLink to='/login' className={checkActive} onClick={clickHandler}>

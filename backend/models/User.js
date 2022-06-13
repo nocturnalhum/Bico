@@ -88,7 +88,10 @@ UserSchema.methods.validatePassword = async function (passwordInput) {
 // ==========<<< Get Signed Token Method >>>===================================
 // ============================================================================
 UserSchema.methods.getSignedToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+  const payload = {
+    id: this._id,
+  };
+  return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };

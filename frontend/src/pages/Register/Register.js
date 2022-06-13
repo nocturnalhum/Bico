@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './register.css';
@@ -9,11 +9,18 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [profilePicture, setProfilePicture] = useState('');
+  const [profilePicture, setProfilePicture] = useState('/noAvatar.jpg');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = localStorage.getItem('username');
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -52,6 +59,7 @@ export default function Register() {
     <div className='register-screen'>
       <form onSubmit={registerHandler} className='register-screen__form'>
         <div className='register-screen__title'>Registration</div>
+        <hr></hr>
         {error && <span className='error-message'>{error}</span>}
         {success && (
           <span className='success-message'>
@@ -68,7 +76,7 @@ export default function Register() {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
-              localStorage.setItem('usernameStore', e.target.value);
+              // localStorage.setItem('usernameStore', e.target.value);
             }}
           />
         </div>

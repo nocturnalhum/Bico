@@ -56,6 +56,10 @@
   display: none;
 }
 
+.account-icon img {
+  color: white;
+}
+
 @media screen and (max-width: 570px) {
   .nav-links {
     display: flex;

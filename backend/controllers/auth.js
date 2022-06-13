@@ -13,6 +13,7 @@ const multerS3 = require('multer-s3');
 
 exports.register = async (req, res, next) => {
   const { username, email, password, profilePicture } = req.body;
+
   try {
     const user = await User.create({
       username,
@@ -181,6 +182,22 @@ exports.setProfileImage = (req, res, next) => {
     console.log(req.file);
     res.status(200).json({ data: req.file.location });
   });
+};
+
+// ============================================================================
+// =================<<< Get User >>>===========================================
+// ============================================================================
+exports.getuser = async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    res.send({ success: false, message: 'User not found' });
+  } else {
+    try {
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
 };
 
 // ============================================================================

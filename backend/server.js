@@ -1,6 +1,9 @@
 require('dotenv').config();
 const PORT = process.env.PORT || 5050;
-const errorHandling = require('./middleware/errorHandling');
+const {
+  notFoundErrorHandling,
+  errorHandling,
+} = require('./middleware/errorHandling');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -34,7 +37,7 @@ app.use('/api/v1/private', privateRoute);
 // ============================================================================
 
 // Errorhandler should be last piece of middleware:
-app.use(errorHandling);
+app.use(notFoundErrorHandling, errorHandling);
 
 // ============================================================================
 // =================<<< Server >>>=============================================

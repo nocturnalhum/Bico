@@ -15,8 +15,8 @@ POST http://localhost:5000/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "Apple",
-  "password": "123123"
+  "username": "Claska1",
+  "password": "123456"
 }
 
 
@@ -50,12 +50,18 @@ POST http://localhost:5000/api/v1/auth/setprofileimg
 Content-Type: application/json
 
 
-### UPDATE USER
-PUT http://localhost:5000/api/v1/auth/updateuser/628f626f8b07941ad943c72e
+### Get User 
+GET http://localhost:5000/api/v1/auth/getuser/62a6075d21b034adfbefbe99
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTYwNzVkMjFiMDM0YWRmYmVmYmU5OSIsImlhdCI6MTY1NTA5MDY1NSwiZXhwIjoxNjU1MDkxMjU1fQ.N4vs4RxYOG2ASpbDkg59y3S_jOkvLvj5b2SCfRqzKBM
+
+### UPDATE USER
+PUT http://localhost:5000/api/v1/auth/updateuser/62a6075d21b034adfbefbe99
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTYwNzVkMjFiMDM0YWRmYmVmYmU5OSIsImlhdCI6MTY1NTA4ODQyOSwiZXhwIjoxNjU1MDg5MDI5fQ.vijlCDD3OAFL_oYQS5GD4PGLSdUEmC6BUioDZhY8ywM
 
 {
-  "email": "profileImageTest@mail.com"
+  "email": "newEmail2@mail.com"
 }
 
 ###############################################################################

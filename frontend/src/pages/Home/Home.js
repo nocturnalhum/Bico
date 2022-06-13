@@ -12,16 +12,19 @@ export default function Home() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function getBikes() {
-      const response = await Axios.get('/bike');
-      const lostAndFoundBikes = response.data.filter(
-        (bike) => bike.status !== 'owner'
-      );
-      setAllBikes(lostAndFoundBikes);
-      setBikes(lostAndFoundBikes);
-      setCategories(allCategories);
-    }
-    getBikes();
+    (async function getBikes() {
+      try {
+        const response = await Axios.get('/bike/');
+        const lostAndFoundBikes = response.data.filter(
+          (bike) => bike.status !== 'owner'
+        );
+        setAllBikes(lostAndFoundBikes);
+        setBikes(lostAndFoundBikes);
+        setCategories(allCategories);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   const filterBikes = (category) => {
@@ -36,10 +39,7 @@ export default function Home() {
   return (
     <main>
       <section className='home-screen'>
-        <div className='bike-title'>
-          <h2>Bikes </h2>
-          <div className='underline'></div>
-        </div>
+        <div className='bike-title'></div>
         <SearchBar categories={categories} filterItems={filterBikes} />
         <Bikes bikes={bikes} setBikes={setBikes} allBikes={allBikes} />
       </section>
