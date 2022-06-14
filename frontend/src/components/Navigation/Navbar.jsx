@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import './navbar.css';
+import React from 'react';
+import GuestLinks from './GuestLinks';
+import UserLinks from './UserLinks';
+
+import './Navbar.css';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import HomeIcon from '@mui/icons-material/Home';
 // import AccountMenu from './AccountMenu';
 // import ClearIcon from '@mui/icons-material/Clear';
 // import MenuIcon from '@mui/icons-material/Menu';
-
-const LiWithNavLink = ({ children, to }) => {
-  const { pathname } = useLocation();
-
-  return (
-    <li className={pathname === to ? 'active' : ''}>
-      <NavLink to={to}>{children}</NavLink>
-    </li>
-  );
-};
 
 const Navbar = () => {
   // const [click, setClick] = useState(false);
@@ -33,24 +25,14 @@ const Navbar = () => {
           <img src='/logo4.svg' alt='' />
           <h3 className='logo-text'>Bico</h3>
         </div>
-        <ul>
-          <LiWithNavLink to='/'>
-            <div className='link'>
-              <span className='icon'>
-                <ion-icon name='home-outline' />
-              </span>
-              <span className='text'>Home</span>
-            </div>
-          </LiWithNavLink>
-          <LiWithNavLink to='/login'>
-            <div className='link'>
-              <span className='icon'>
-                <ion-icon name='person-outline' />
-              </span>
-              <span className='text'>Sign In</span>
-            </div>
-          </LiWithNavLink>
-        </ul>
+        <div className='search'>
+          <ion-icon name='search-outline' />
+        </div>
+        {localStorage.getItem('authToken') ? (
+          <UserLinks />
+        ) : (
+          <GuestLinks></GuestLinks>
+        )}
       </nav>
     </div>
     // <nav className='navbar'>

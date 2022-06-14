@@ -20,11 +20,15 @@ a {
 }
 
 hr {
-  width: 100%;
+  width: 90%;
   height: 1px;
-  margin: 1rem auto 2rem auto;
+  margin: 0.5rem auto;
   background: rgba(200, 200, 200, 0.8);
   border: none;
+}
+
+.active {
+  color: red;
 }
 
 .form-group,

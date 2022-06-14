@@ -4,11 +4,13 @@ import Error from './pages/Error/Error';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import Messages from './pages/Messages/Messages';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import RegisterBike from './pages/RegisterBike/RegisterBike';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navigation/Navbar';
+import MyBikes from './pages/MyBikes/MyBikes';
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/passwordreset/:resetToken' element={<ResetPassword />} />
         <Route path='/upload' element={<ImageUpload />} />
+        <Route path='/messages' element={<Messages />} />
+        <Route path='/mybikes' element={<MyBikes />} />
+
         <Route
           path='/registerbike'
           element={
