@@ -42,12 +42,10 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <section className='home-screen'>
-        <div className='bike-title'></div>
-        <SearchBar categories={categories} filterItems={filterBikes} />
-        <Bikes bikes={bikes} setBikes={setBikes} allBikes={allBikes} />
-      </section>
-    </main>
+    <section className='home-screen'>
+      <div className='bike-title'></div>
+      <SearchBar categories={categories} filterItems={filterBikes} />
+      <Bikes bikes={bikes} setBikes={setBikes} allBikes={allBikes} />
+    </section>
   );
 }
