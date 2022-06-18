@@ -14,29 +14,34 @@ import MyBikes from './pages/MyBikes/MyBikes';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/forgotpassword' element={<ForgotPassword />} />
-        <Route path='/passwordreset/:resetToken' element={<ResetPassword />} />
-        <Route path='/upload' element={<ImageUpload />} />
-        <Route path='/messages' element={<Messages />} />
-        <Route path='/mybikes' element={<MyBikes />} />
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/forgotpassword' element={<ForgotPassword />} />
+          <Route
+            path='/passwordreset/:resetToken'
+            element={<ResetPassword />}
+          />
+          <Route path='/upload' element={<ImageUpload />} />
+          <Route path='/messages' element={<Messages />} />
+          <Route path='/mybikes' element={<MyBikes />} />
 
-        <Route
-          path='/registerbike'
-          element={
-            <PrivateRoute>
-              <RegisterBike />
-            </PrivateRoute>
-          }
-        />
-        <Route path='*' element={<Error />} />
-      </Routes>
-    </Router>
+          <Route
+            path='/registerbike'
+            element={
+              <PrivateRoute>
+                <RegisterBike />
+              </PrivateRoute>
+            }
+          />
+          <Route path='*' element={<Error />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

@@ -25,7 +25,7 @@ const Links = () => {
       <LiWithNavLink to='/login'>
         <div className='link'>
           <span className='icon'>
-            <ion-icon name='person-outline' />
+            <ion-icon name='person-circle-outline' />
           </span>
           <span className='text'>Sign In</span>
         </div>

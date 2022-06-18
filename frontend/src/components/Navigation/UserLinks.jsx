@@ -12,7 +12,12 @@ const LiWithNavLink = ({ children, to }) => {
 };
 
 const Links = () => {
+  const [click, setClick] = useState(false);
   const navigate = useNavigate();
+
+  const clickHandler = () => {
+    setClick((click) => !click);
+  };
 
   const logoutHandler = () => {
     localStorage.clear();
@@ -23,7 +28,7 @@ const Links = () => {
   return (
     <ul className='dropdown-close'>
       <LiWithNavLink to='/'>
-        <div className='link'>
+        <div className='link' onClick={() => setClick(false)}>
           <span className='icon'>
             <ion-icon name='home-outline' />
           </span>
@@ -32,14 +37,14 @@ const Links = () => {
       </LiWithNavLink>
 
       <div className='dropdown'>
-        <button className='settings-icon'>
+        <div className='settings-icon' onClick={clickHandler}>
           <span className='icon'>
             <ion-icon name='settings-outline' />
           </span>
-        </button>
-        <div className='dropdown-menu'>
+        </div>
+        <div className={click ? 'dropdown-menu open' : ' dropdown-menu'}>
           <LiWithNavLink to='/messages'>
-            <div className='link'>
+            <div className='link' onClick={clickHandler}>
               <span className='icon'>
                 <ion-icon name='chatbubble-outline' />
               </span>
@@ -49,7 +54,7 @@ const Links = () => {
           </LiWithNavLink>
 
           <LiWithNavLink to='/mybikes'>
-            <div className='link'>
+            <div className='link' onClick={clickHandler}>
               <span className='icon'>
                 <ion-icon name='bicycle-outline' />
               </span>
@@ -57,7 +62,7 @@ const Links = () => {
             </div>
           </LiWithNavLink>
           <LiWithNavLink to='/registerbike'>
-            <div className='link'>
+            <div className='link' onClick={clickHandler}>
               <span className='icon'>
                 <ion-icon name='pencil-outline'></ion-icon>
               </span>
@@ -66,8 +71,8 @@ const Links = () => {
           </LiWithNavLink>
           <hr />
           <div className='link' onClick={logoutHandler}>
-            <span className='icon'>
-              <ion-icon name='person-outline' />
+            <span className='icon' onClick={clickHandler}>
+              <ion-icon name='log-out-outline' />
             </span>
             <span className='text'>Sign Out</span>
           </div>

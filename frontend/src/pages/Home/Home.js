@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './home.css';
 import Axios from 'axios';
 import Bikes from '../../components/bikeCard/Bikes';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import BikeContext from '../../components/Context/BikeContext';
 
 const allCategories = ['all', 'found', 'lost'];
 
@@ -10,6 +11,8 @@ export default function Home() {
   const [allBikes, setAllBikes] = useState([]);
   const [bikes, setBikes] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const { item } = useContext(BikeContext);
 
   useEffect(() => {
     (async function getBikes() {
@@ -26,6 +29,7 @@ export default function Home() {
         await setAllBikes(lostAndFoundBikes);
         await setBikes(lostAndFoundBikes);
         setCategories(allCategories);
+        console.log('TEST', item);
       } catch (error) {
         console.log(error);
       }

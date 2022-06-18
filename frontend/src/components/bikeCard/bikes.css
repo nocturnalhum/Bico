@@ -7,18 +7,19 @@
   display: grid;
   gap: 2rem;
   justify-items: center;
-  align-items: center;
 }
 
 .bike-item {
+  position: relative;
   background: white;
   width: 20rem;
-  height: 20rem;
+  height: 15rem;
   border-radius: 15px;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.5);
 }
 
 .bike-card-status {
+  z-index: 0;
   background: #ddd;
   height: 1.75rem;
   border-radius: 15px 15px 0 0;
@@ -53,12 +54,22 @@
 }
 
 .bike-description {
+  position: relative;
+  background: white;
   color: rgba(0, 0, 0, 0.6);
-  margin-bottom: 0;
-  height: 5rem;
-  padding: 0.5rem 0.5rem;
+  /* margin-bottom: 0; */
+  height: inherit;
+  width: 100%;
+  padding: 1rem 1rem;
   border-radius: 0 0 15px 15px;
   text-transform: capitalize;
+  box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  display: none;
+}
+
+.bike-item:hover .bike-info .bike-description {
+  display: block;
 }
 
 @media screen and (min-width: 350px) {
