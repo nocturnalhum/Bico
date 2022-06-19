@@ -8,11 +8,13 @@ const Bikes = ({ bikes }) => {
         return (
           <article className='bike-item' key={bike._id}>
             <div className='bike-card-status'>status: {bike.status}</div>
-            <img
-              className='bike-card-image'
-              src={bike.bikeImage}
-              alt={bike.bikeModel}
-            />
+            <div className='image-wrapper'>
+              <img
+                className='bike-card-image'
+                src={bike.bikeImage}
+                alt={bike.bikeModel}
+              />
+            </div>
 
             <div className='bike-info'>
               <header>

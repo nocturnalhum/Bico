@@ -102,3 +102,7 @@ nav ul {
   border-radius: 50%;
   font-weight: 700;
 }
+
+.settings-icon {
+  background: white;
+}

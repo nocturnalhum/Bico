@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const LiWithNavLink = ({ children, to }) => {
@@ -16,7 +17,7 @@ const Links = () => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
-    setClick((click) => !click);
+    setClick((prev) => !prev);
   };
 
   const logoutHandler = () => {
@@ -24,6 +25,17 @@ const Links = () => {
     navigate('/');
     window.location.reload(false);
   };
+
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'ION-ICON') {
+        setClick(false);
+      }
+    };
+    document.body.addEventListener('click', closeDropdown);
+
+    return () => document.body.removeEventListener('click', closeDropdown);
+  }, []);
 
   return (
     <ul className='dropdown-close'>
@@ -37,11 +49,9 @@ const Links = () => {
       </LiWithNavLink>
 
       <div className='dropdown'>
-        <div className='settings-icon' onClick={clickHandler}>
-          <span className='icon'>
-            <ion-icon name='settings-outline' />
-          </span>
-        </div>
+        <button className='settings-icon' onClick={clickHandler}>
+          <ion-icon name='settings-outline' />
+        </button>
         <div className={click ? 'dropdown-menu open' : ' dropdown-menu'}>
           <LiWithNavLink to='/messages'>
             <div className='link' onClick={clickHandler}>
