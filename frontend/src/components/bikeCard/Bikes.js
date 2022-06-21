@@ -5,6 +5,7 @@ const Bikes = ({ bikes }) => {
   return (
     <div className='section-center'>
       {bikes.map((bike) => {
+        console.log(bike);
         return (
           <article className='bike-item' key={bike._id}>
             <div className='bike-card-status'>status: {bike.status}</div>
