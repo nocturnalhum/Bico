@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav>
         <div className='logo'>
           <img src='/logo4.svg' alt='' />
-          <h3 className='logo-text'>Mocken</h3>
+          <h3 className='logo-text'>Where Is My Bike?!</h3>
         </div>
         <div className='search'>
           <Search placeholder='Enter Bike Manufacturer' />

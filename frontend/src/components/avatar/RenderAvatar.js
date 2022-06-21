@@ -116,16 +116,15 @@ const RenderAvatar = ({
                   aria-labelledby='composition-button'
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>View</MenuItem>
                   <MenuItem
                     onClick={(event) => {
                       handleImageUpload();
                       handleClose(event);
                     }}
                   >
-                    Change
+                    Upload Image
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>Delete</MenuItem>
+                  <MenuItem onClick={handleClose}>Delete Image</MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>

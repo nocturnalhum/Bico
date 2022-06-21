@@ -133,13 +133,13 @@ const ImageUpload = ({
           onChange={onSelectFile}
         />
         <Button variant='contained' onClick={triggerFileSelectPopup}>
-          Choose
+          Select
         </Button>
         <Button variant='contained' onClick={onClear}>
           Clear
         </Button>
         <Button variant='contained' onClick={onUpload}>
-          Upload
+          Confirm
         </Button>
       </div>
     </div>

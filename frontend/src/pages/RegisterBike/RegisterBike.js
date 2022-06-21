@@ -230,7 +230,7 @@ const RegisterBike = () => {
             <textarea
               type='text'
               id='description'
-              placeholder='Please do not include serial numbers or other information that you can use to confirm bike ownership ...'
+              placeholder='Please do not include serial numbers or other information that can be used to confirm bike ownership ...'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

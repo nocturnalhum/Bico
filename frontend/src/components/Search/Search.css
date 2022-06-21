@@ -1,0 +1,31 @@
+.search-inputs {
+  text-align: center;
+  display: flex;
+}
+
+.search-field input {
+  border: 1px solid gray;
+  border-radius: 1rem 0 0 1rem;
+  padding: 0.3rem;
+  width: 14rem;
+  text-indent: 0.6rem;
+  border-right: none;
+}
+
+.search-icon {
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid black;
+  border-left: none;
+  border-radius: 0 1rem 1rem 0;
+  width: 2rem;
+  padding-right: 0.1rem;
+  color: white;
+  background: black;
+  opacity: 0.8;
+}
+
+input:focus {
+  outline: none;
+}

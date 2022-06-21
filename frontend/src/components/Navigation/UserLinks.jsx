@@ -50,7 +50,17 @@ const Links = () => {
 
       <div className='dropdown'>
         <button className='settings-icon' onClick={clickHandler}>
-          <ion-icon name='settings-outline' />
+          {click ? (
+            <ion-icon name='close-outline' />
+          ) : (
+            <ion-icon name='reorder-four-outline' />
+          )}
+
+          {/* {click ? (
+            <ion-icon name='chevron-up-outline' />
+          ) : (
+            <ion-icon name='chevron-down-outline' />
+          )} */}
         </button>
         <div className={click ? 'dropdown-menu open' : ' dropdown-menu'}>
           <LiWithNavLink to='/messages'>
