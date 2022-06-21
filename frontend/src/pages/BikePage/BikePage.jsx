@@ -26,18 +26,19 @@ const BikePage = () => {
 
   return (
     <div className='bikepage-container'>
-      <div className='image-wrapper'>
-        <img
-          className='bikepage-image'
-          src={bike.bikeImage}
-          alt={bike.bikeModel}
-        />
+      <img
+        className='bikepage-image'
+        src={bike.bikeImage}
+        alt={bike.bikeModel}
+      />
+      <div
+        className={`bikepage-item ${
+          bike.status === 'found' ? 'found' : 'lost'
+        }`}
+      >
+        <span className='label'>Status:</span> {bike.status}
       </div>
       <div className='bikepage-details'>
-        <div className='bikepage-item'>
-          <span className='label'>Status:</span> {bike.status}
-        </div>
-        <hr />
         <div className='bikepage-item'>
           <span className='label'>Manufacturer:</span> {bike.manufacturer}
         </div>
@@ -55,12 +56,20 @@ const BikePage = () => {
         </div>
         <hr />
         <div className='bikepage-item'>
-          <span className='label'>Description:</span> {bike.description}
+          <div className='bikepage-description'>
+            <span className='label'>Description:</span>
+          </div>
         </div>
+        <div className='bikepage-item'>
+          <p>{bike.description}</p>
+        </div>
+        <hr />
         {bike.username === username ? (
-          <button>Edit</button>
+          <button className='btn btn-primary'>Edit</button>
         ) : (
-          <Link to='/messages'>Send Message</Link>
+          <button className='btn btn-primary'>
+            <Link to='/messages'>Send Message</Link>
+          </button>
         )}
       </div>
     </div>

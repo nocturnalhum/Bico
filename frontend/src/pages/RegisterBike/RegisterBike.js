@@ -52,7 +52,10 @@ const RegisterBike = () => {
           bikeImage,
           color,
           bikeType,
-          description,
+          description:
+            description === ''
+              ? 'No Description or details provided...'
+              : description,
           status,
         },
         config
