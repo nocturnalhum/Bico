@@ -86,6 +86,9 @@ Content-Type: application/json
 GET http://localhost:5000/api/v1/bike/
 Content-Type: application/json
 
+### GET BIKE BY ID
+GET http://localhost:5000/api/v1/bike/getbikebyid/62aeb9aff7fc60da89bb2b4f
+Content-Type: application/json
 
 ### UPDATE BIKE
 PUT http://localhost:5000/api/v1/bike/updatebike/629573e064c1aab0cabf049b

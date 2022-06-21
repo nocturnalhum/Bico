@@ -11,6 +11,7 @@ import RegisterBike from './pages/RegisterBike/RegisterBike';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Navbar from './components/Navigation/Navbar';
 import MyBikes from './pages/MyBikes/MyBikes';
+import BikePage from './pages/BikePage/BikePage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path='/upload' element={<ImageUpload />} />
           <Route path='/messages' element={<Messages />} />
           <Route path='/mybikes' element={<MyBikes />} />
+          <Route path='/bikepage/:bikeid' element={<BikePage />} />
 
           <Route
             path='/registerbike'
