@@ -10,7 +10,13 @@ const Bikes = ({ bikes }) => {
         return (
           <article className='bike-item' key={bike._id}>
             <Link to={`/bikepage/${bike._id}`}>
-              <div className='bike-card-status'>status: {bike.status}</div>
+              <div
+                className={`bike-card-status ${
+                  bike.status === 'found' ? 'found' : 'lost'
+                }`}
+              >
+                status: {bike.status}
+              </div>
               <div className='image-wrapper'>
                 <img
                   className='bike-card-image'
@@ -21,8 +27,9 @@ const Bikes = ({ bikes }) => {
 
               <div className='bike-info'>
                 <header>
-                  <h4>{bike.manufacturer}</h4>
-                  <h4>{bike.bikeModel}</h4>
+                  <div className='bikecard-item'>
+                    {bike.manufacturer} - {bike.bikeModel}
+                  </div>
                 </header>
                 <p className='bike-description'>{bike.description}</p>
               </div>

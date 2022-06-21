@@ -28,6 +28,13 @@
   text-transform: capitalize;
 }
 
+.bike-card-status.found {
+  background: linear-gradient(90deg, rgb(231, 171, 66) 10%, #000 130%);
+}
+.bike-card-status.lost {
+  background: linear-gradient(90deg, rgb(73, 168, 226) 35%, #000 130%);
+}
+
 .bike-card-image {
   object-fit: cover;
   width: 20rem;
@@ -44,7 +51,7 @@
 
 .bike-info header {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   padding: 5px 10px;
   margin-top: -2px;
   background: #ddd;
@@ -60,9 +67,9 @@
   position: relative;
   background: white;
   color: rgba(0, 0, 0, 0.6);
-  /* margin-bottom: 0; */
   height: inherit;
   width: 100%;
+  font-size: 0.8rem;
   padding: 1rem 1rem;
   border-radius: 0 0 15px 15px;
   text-transform: capitalize;
