@@ -31,13 +31,8 @@ const RegisterBike = () => {
 
     const authConfig = {
       headers: {
-        Authorization: localStorage.getItem('authToken'),
-      },
-    };
-
-    const config = {
-      header: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('authToken'),
       },
     };
 
@@ -58,7 +53,7 @@ const RegisterBike = () => {
               : description,
           status,
         },
-        config
+        authConfig
       );
 
       const id = localStorage.getItem('id');

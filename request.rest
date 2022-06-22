@@ -69,15 +69,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTYwNzVkM
 ### REGISTER BIKE
 POST http://localhost:5000/api/v1/bike/registerbike
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYTYwNzVkMjFiMDM0YWRmYmVmYmU5OSIsImlhdCI6MTY1NTkwOTkxOCwiZXhwIjoxNjU1OTEzNTE4fQ.knEuegUlV6uPgjL4a4RE0Nx0J6b9XSMqS4k1V7Uzmfw
 
 {
   "manufacturer": "Delete",
   "bikeModel": "S2",
-  "serialNum": 2342536265,
+  "serialNum": "RMB2342536265",
   "bikeImage": "",
   "color": "blue",
-  "category": 3,
-  "status": 1,
+  "category": "mountain",
+  "status": "lost",
   "description": "Bike was LOST on corner of St.Clair/Bathurst" 
 
 }

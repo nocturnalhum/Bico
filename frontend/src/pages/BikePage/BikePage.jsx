@@ -1,11 +1,15 @@
+import axios from 'axios';
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './BikePage.css';
 
 const BikePage = () => {
   const [bike, setBike] = useState({});
+  const [confirm, setConfirm] = useState(false);
+  const [error, setError] = useState('');
   const { bikeid } = useParams();
+  const navigate = useNavigate();
   const username = localStorage.getItem('username');
 
   useEffect(() => {
@@ -23,6 +27,27 @@ const BikePage = () => {
       setBike(response.data);
     })();
   }, [bikeid]);
+
+  const handleConfirm = () => {
+    setConfirm(true);
+  };
+  const handleDelete = async () => {
+    const authConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('authToken'),
+      },
+    };
+    try {
+      axios.delete(`/bike/deletebike/${bikeid}`, authConfig);
+      navigate('/mybikes');
+    } catch (error) {
+      setError(error.response.data.error);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  };
 
   return (
     <div className='bikepage-container'>
@@ -65,7 +90,38 @@ const BikePage = () => {
         </div>
         <hr />
         {bike.username === username ? (
-          <button className='btn btn-primary'>Edit</button>
+          <div className='bikepage-buttons'>
+            {confirm ? (
+              <div className='confirm-text'>
+                <p>Are You Sure?</p>
+                <div className='bikepage-buttons'>
+                  <button
+                    className='btn btn-primary delete'
+                    onClick={handleDelete}
+                  >
+                    Yes, Delete
+                  </button>
+                  <button
+                    className='btn btn-primary'
+                    onClick={() => setConfirm(false)}
+                  >
+                    {' '}
+                    Don't Delete
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className='bikepage-buttons'>
+                <button className='btn btn-primary'>Edit</button>
+                <button
+                  className='btn btn-primary delete'
+                  onClick={handleConfirm}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
         ) : (
           <button className='btn btn-primary'>
             <Link to='/messages'>Send Message</Link>

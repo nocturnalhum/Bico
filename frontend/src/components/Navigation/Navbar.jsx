@@ -15,11 +15,7 @@ const Navbar = () => {
         <div className='search'>
           <Search placeholder='Enter Bike Manufacturer' />
         </div>
-        {localStorage.getItem('authToken') ? (
-          <UserLinks />
-        ) : (
-          <GuestLinks></GuestLinks>
-        )}
+        {localStorage.getItem('authToken') ? <UserLinks /> : <GuestLinks />}
       </nav>
     </div>
   );

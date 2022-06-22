@@ -12,8 +12,29 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Navbar from './components/Navigation/Navbar';
 import MyBikes from './pages/MyBikes/MyBikes';
 import BikePage from './pages/BikePage/BikePage';
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
 
 function App() {
+  const [bikes, setBikes] = useState([]);
+
+  useEffect(() => {
+    (async function getBikes() {
+      const config = {
+        header: {
+          'Content-Type': 'application/json',
+        },
+      };
+      try {
+        const response = await Axios.get('/bike/', {}, config);
+        setBikes(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    console.log(bikes);
+  }, []);
+
   return (
     <>
       <Router>

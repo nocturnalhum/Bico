@@ -77,7 +77,6 @@ export default function Register() {
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
-              // localStorage.setItem('usernameStore', e.target.value);
             }}
           />
         </div>

@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { authHandler } = require('../middleware/authMiddleware');
+
 const {
   registerbike,
   getbikes,
@@ -7,10 +9,10 @@ const {
   deletebike,
 } = require('../controllers/bike');
 
-router.route('/registerbike').post(registerbike);
+router.route('/registerbike').post(authHandler, registerbike);
 router.route('/').get(getbikes);
 router.route('/getbikebyid/:bikeId').get(getbikebyid);
-router.route('/updatebike/:bikeId').put(updatebike);
-router.route('/deletebike/:bikeId').delete(deletebike);
+router.route('/updatebike/:bikeId').put(authHandler, updatebike);
+router.route('/deletebike/:bikeId').delete(authHandler, deletebike);
 
 module.exports = router;
