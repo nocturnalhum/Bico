@@ -1,5 +1,4 @@
-.upload-screen {
-  /* background: red; */
+/* .upload-screen {
   background-color: rgba(0, 0, 0, 0.95);
   position: absolute;
   left: 0;
@@ -20,7 +19,6 @@
 }
 
 .container-buttons {
-  /* background: red; */
   position: absolute;
   top: 70vh;
   height: 30%;
@@ -49,4 +47,4 @@
 .clear-icon:hover {
   background: rgba(255, 0, 0, 0.7);
   border-radius: 50%;
-}
+} */

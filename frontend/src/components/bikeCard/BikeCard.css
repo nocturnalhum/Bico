@@ -1,11 +1,12 @@
-.section-center {
-  width: 100vw;
+/* .section-center {
+  width: 90vw;
   height: 100%;
   margin: 0 auto;
   padding-bottom: 5vh;
-  max-width: 2060px;
+  max-width: 1400px;
   display: grid;
   gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   justify-items: center;
 }
 
@@ -22,7 +23,7 @@
   z-index: 0;
   background: #ddd;
   height: 1.75rem;
-  border-radius: 15px 15px 0 0;
+  border-radius: 7px 7px 0 0;
   padding: 5px 10px;
   padding-bottom: 10px;
   text-transform: capitalize;
@@ -46,7 +47,7 @@
 }
 
 .bike-card-image:hover {
-  transform: scale(1.05);
+  transform: scale(2);
 }
 
 .bike-info header {
@@ -80,31 +81,4 @@
 
 .bike-item:hover .bike-info .bike-description {
   display: block;
-}
-
-@media screen and (min-width: 350px) {
-  .section-center {
-    width: 90vw;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .section-center {
-    width: 90vw;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .section-center {
-    width: 90vw;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 1600px) {
-  .section-center {
-    width: 90vw;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
+} */
