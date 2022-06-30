@@ -1,12 +1,15 @@
-require('dotenv').config();
-const PORT = process.env.PORT || 5050;
 const {
   notFoundErrorHandling,
   errorHandling,
 } = require('./middleware/errorHandling');
+require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const app = express();
+const cors = require('cors');
+const { logger } = require('./middleware/eventLogger');
+const corsOptions = require('./config/corsOptions');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const authRoute = require('./routes/auth');
 const bikeRoute = require('./routes/bike');
 const privateRoute = require('./routes/private');
@@ -16,18 +19,33 @@ const privateRoute = require('./routes/private');
 // ============================================================================
 
 const mongoose = require('mongoose');
-const ConnectDB = require('./config/database');
-ConnectDB();
+const dbConnect = require('./config/dbConnect');
+const PORT = process.env.PORT || 5050;
+dbConnect();
 
 // ============================================================================
 // =================<<< Middleware >>>=========================================
 // ============================================================================
-app.use(cors(), express.json(), express.urlencoded({ extended: false }));
+
+// Custom middleware logger:
+app.use(logger);
+
+// Handle options credentials check - before CORS
+//  and fetch cookies credentials requirement:
+app.use(credentials);
+
+app.use(
+  cors(),
+  express.urlencoded({ extended: false }),
+  express.json(),
+  cookieParser()
+);
 
 // ============================================================================
 // =================<<< API Routes >>>=========================================
 // ============================================================================
 
+// Routes:
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/bike', bikeRoute);
 app.use('/api/v1/private', privateRoute);

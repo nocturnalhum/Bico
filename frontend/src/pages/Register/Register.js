@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from '../../api/axios';
-import './register.css';
+// import './register.css';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
 
 // Start with lower/uppercase letter followed by 3~23 characters:
@@ -9,7 +9,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 // Password requires 1 lowercase 1 uppercase 1 digit 1 special character 3-24 characters long:
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
+// Email requiring "mail@example.com" format:
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -52,22 +52,16 @@ export default function Register() {
 
   useEffect(() => {
     const isValid = USER_REGEX.test(username);
-    console.log(isValid);
-    console.log(username);
     setValidName(isValid);
   }, [username]);
 
   useEffect(() => {
     const isValid = EMAIL_REGEX.test(email);
-    console.log(isValid);
-    console.log(email);
     setValidEmail(isValid);
   }, [email]);
 
   useEffect(() => {
     const isValid = PASSWORD_REGEX.test(password);
-    console.log(isValid);
-    console.log(password);
     setValidPassword(isValid);
     const match = password === matchPassword;
     setValidMatch(match);
@@ -92,9 +86,10 @@ export default function Register() {
     }
 
     try {
+      console.log(profilePicture);
       const response = await Axios.post(
-        '/register',
-        JSON.stringify({ username, email, password }),
+        '/auth/register',
+        JSON.stringify({ username, email, password, profilePicture }),
         config
       );
       console.log(response.data);
@@ -112,39 +107,6 @@ export default function Register() {
       errRef.current.focus();
     }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const config = {
-  //     header: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-
-  //   if (password !== matchPassword) {
-  //     setPassword('');
-  //     setMatchPassword('');
-  //     setTimeout(() => {
-  //       setErrorMsg('');
-  //     }, 5000);
-  //     return setErrorMsg('Passwords do not match');
-  //   }
-  //   try {
-  //     console.log(profilePicture);
-  //     const { data } = await Axios.post(
-  //       '/auth/register',
-  //       { username, email, password, profilePicture },
-  //       config
-  //     );
-  //     setSuccess(data.data);
-  //     navigate('/login');
-  //   } catch (error) {
-  //     setErrorMsg(error.response.data.error);
-  //     setTimeout(() => {
-  //       setErrorMsg('');
-  //     }, 3000);
-  //   }
-  // };
 
   return (
     <>
@@ -336,6 +298,12 @@ export default function Register() {
                 Passwords don't match.
               </p>
             </div>
+
+            <RenderAvatar
+              profilePicture={profilePicture}
+              setProfilePicture={setProfilePicture}
+              registrationType='profile'
+            />
             {/* ==========<<< Submit Button >>>====================== */}
             <button
               className='btn btn-primary'

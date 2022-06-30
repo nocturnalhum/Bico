@@ -1,4 +1,4 @@
-/* .avatar-screen {
+.avatar-screen {
   width: 100%;
 }
 
@@ -38,7 +38,7 @@
 
 .avatar-popper {
   z-index: 100;
-} */
+}
 
 /* @media (max-width: 375px) {
   .avatar {
@@ -51,4 +51,5 @@
     bottom: 45px;
     left: 90px;
   }
-} */
+}
+*/
