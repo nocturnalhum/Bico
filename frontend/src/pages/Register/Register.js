@@ -7,10 +7,11 @@ import RenderAvatar from '../../components/avatar/RenderAvatar';
 // Start with lower/uppercase letter followed by 3~23 characters:
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 // Password requires 1 lowercase 1 uppercase 1 digit 1 special character 3-24 characters long:
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PASSWORD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const EMAIL_REGEX =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export default function Register() {
   // Username states:
@@ -45,12 +46,72 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const isValid = USER_REGEX.test(username);
+    console.log(isValid);
+    console.log(username);
+    setValidName(isValid);
+  }, [username]);
+
+  useEffect(() => {
+    const isValid = EMAIL_REGEX.test(email);
+    console.log(isValid);
+    console.log(email);
+    setValidEmail(isValid);
+  }, [email]);
+
+  useEffect(() => {
+    const isValid = PASSWORD_REGEX.test(password);
+    console.log(isValid);
+    console.log(password);
+    setValidPassword(isValid);
+    const match = password === matchPassword;
+    setValidMatch(match);
+  }, [password, matchPassword]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const valid1 = USER_REGEX.test(username);
+    const valid2 = USER_REGEX.test(email);
+    const valid3 = USER_REGEX.test(password);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    };
+
+    if (!valid1 || !valid2 || !valid3) {
+      setErrorMsg('Invalid Entry');
+      return;
+    }
+
+    try {
+      const response = await Axios.post(
+        '/register',
+        JSON.stringify({ username, email, password }),
+        config
+      );
+      console.log(response.data);
+      console.log(response.accessToken);
+      console.log(JSON.stringify(response));
+      setSuccess(true);
+    } catch (error) {
+      if (!error?.response) {
+        setErrorMsg('No Server Response');
+      } else if (error.response?.status === 409) {
+        setErrorMsg('Username Taken');
+      } else {
+        setErrorMsg('Registration Failed');
+      }
+      errRef.current.focus();
+    }
   };
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, []);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -87,6 +148,7 @@ export default function Register() {
 
   return (
     <>
+      {/* ==========<<< Success Field >>>========================*/}
       {success ? (
         <section>
           <h1>Registration Complete</h1>
@@ -98,6 +160,7 @@ export default function Register() {
         </section>
       ) : (
         <section>
+          {/* ==========<<< Error Field >>>========================*/}
           <p
             ref={errRef}
             className={errorMsg ? 'errmsg' : 'offscreen'}
@@ -105,58 +168,175 @@ export default function Register() {
           >
             {errorMsg}
           </p>
-          <div className='form__title'>Registration</div>
+          <div className='form-title'>Registration</div>
           <hr></hr>
           <form onSubmit={handleSubmit}>
+            {/* ==========<<< Username Field >>>===================== */}
             <div className='form-group'>
               <label htmlFor='username'>Username:</label>
-              <input
-                required
-                type='text'
-                id='username'
-                placeholder='Enter your username'
-                autoComplete='off'
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
-              <div className='form-group'>
-                <label htmlFor='email'>Email:</label>
+              <span className='input-check'>
+                <input
+                  required
+                  type='text'
+                  id='username'
+                  ref={userRef}
+                  placeholder='Enter your username'
+                  autoComplete='off'
+                  aria-invalid={validName ? 'false' : 'true'}
+                  aria-describedby='uidnote'
+                  onFocus={() => setUserFocus(true)}
+                  onBlur={() => setUserFocus(false)}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+                <span className={validName ? 'valid' : 'hide'}>
+                  {/* <ion-icon name='checkmark' /> */}
+                  <ion-icon name='checkmark-circle-outline' />
+                </span>
+                <span className={validName || !username ? 'hide' : 'invalid'}>
+                  <ion-icon name='close' />
+                  {/* <ion-icon name='close-circle-outline'/> */}
+                </span>
+              </span>
+              <p
+                id='uidnote'
+                className={
+                  userFocus && username && !validName
+                    ? 'hints flexStart'
+                    : 'offscreen flexStart'
+                }
+              >
+                <ion-icon name='information-circle-outline'></ion-icon>
+                Must be 4 to 24 characters.
+                <br />
+                Must begin with a letter. <br />
+                Letter, number, underscores, hyphens permitted.
+              </p>
+            </div>
+            {/* ==========<<< Email Field >>>======================== */}
+            <div className='form-group'>
+              <label htmlFor='email'>Email:</label>
+              <span className='input-check'>
                 <input
                   required
                   type='email'
                   id='email'
                   placeholder='Enter your email'
-                  value={email}
+                  aria-invalid={validEmail ? 'false' : 'true'}
+                  aria-describedby='emailnote'
+                  onFocus={() => setEmailFocus(true)}
+                  onBlur={() => setEmailFocus(false)}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='password'>Password:</label>
+                <span className={validEmail ? 'valid' : 'hide'}>
+                  {/* <ion-icon name='checkmark' /> */}
+                  <ion-icon name='checkmark-circle-outline' />
+                </span>
+                <span className={validEmail || !email ? 'hide' : 'invalid'}>
+                  <ion-icon name='close' />
+                  {/* <ion-icon name='close-circle-outline'/> */}
+                </span>
+              </span>
+              <p
+                id='emailnote'
+                className={
+                  emailFocus && email && !validEmail
+                    ? 'hints flexStart'
+                    : 'offscreen flexStart'
+                }
+              >
+                <ion-icon name='information-circle-outline'></ion-icon>
+                Enter a valid email address.
+              </p>
+            </div>
+            {/* ==========<<< Password Field >>>===================== */}
+            <div className='form-group'>
+              <label htmlFor='password'>Password:</label>
+              <span className='input-check'>
                 <input
                   required
                   type='password'
                   id='password'
                   placeholder='Enter your password'
-                  value={password}
+                  aria-invalid={validPassword ? 'false' : 'true'}
+                  aria-describedby='pwdnote'
+                  onFocus={() => setPasswordFocus(true)}
+                  onBlur={() => setPasswordFocus(false)}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
-              </div>
-              <div className='form-group'>
-                <label htmlFor='confirmPassword'>Confirm Password:</label>
+                <span className={validPassword ? 'valid' : 'hide'}>
+                  {/* <ion-icon name='checkmark' /> */}
+                  <ion-icon name='checkmark-circle-outline' />
+                </span>
+                <span
+                  className={validPassword || !password ? 'hide' : 'invalid'}
+                >
+                  <ion-icon name='close' />
+                  {/* <ion-icon name='close-circle-outline'/> */}
+                </span>
+              </span>
+              <p
+                id='pwdnote'
+                className={
+                  passwordFocus && !validPassword
+                    ? 'hints flexStart'
+                    : 'offscreen flexStart'
+                }
+              >
+                <ion-icon name='information-circle-outline'></ion-icon>
+                <span>
+                  Must be 8 to 24 characters.
+                  <br />
+                  Must include uppercase and lowercase letters, <br />
+                  a number, and a special character. <br />
+                  Allowed special characters: !@#$%
+                </span>
+              </p>
+            </div>
+            {/* ==========<<< Match Password Field >>>=============== */}
+            <div className='form-group'>
+              <label htmlFor='confirmPassword'>Confirm Password:</label>
+              <span className='input-check'>
                 <input
                   required
                   type='password'
                   id='confirmPassword'
                   placeholder='Confirm your password'
-                  value={matchPassword}
+                  aria-invalid={validMatch ? 'false' : 'true'}
+                  aria-describedby='confirmnote'
+                  onFocus={() => setMatchFocus(true)}
+                  onBlur={() => setMatchFocus(false)}
                   onChange={(e) => setMatchPassword(e.target.value)}
                 />
-              </div>
+                <span
+                  className={validMatch && matchPassword ? 'valid' : 'hide'}
+                >
+                  {/* <ion-icon name='checkmark' /> */}
+                  <ion-icon name='checkmark-circle-outline' />
+                </span>
+                <span
+                  className={validMatch || !matchPassword ? 'hide' : 'invalid'}
+                >
+                  <ion-icon name='close' />
+                  {/* <ion-icon name='close-circle-outline'/> */}
+                </span>
+              </span>
+              <p
+                id='confirmnote'
+                className={
+                  matchFocus && !validMatch
+                    ? 'hints flexStart'
+                    : 'offscreen flexStart'
+                }
+              >
+                <ion-icon name='information-circle-outline'></ion-icon>
+                Passwords don't match.
+              </p>
             </div>
+            {/* ==========<<< Submit Button >>>====================== */}
             <button
               className='btn btn-primary'
               disabled={
@@ -166,6 +346,11 @@ export default function Register() {
               Sign Up
             </button>
           </form>
+          {/* ==========<<< Already Have Account >>>================= */}
+          Already have an account?
+          <Link to='/login' className='link'>
+            Login
+          </Link>
         </section>
       )}
     </>

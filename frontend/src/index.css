@@ -9,8 +9,8 @@
 html {
   font-family: 'Poppins', 'Open Sans', 'Helvetica Neue', sans-serif;
   /* background: #000; */
-  line-height: 1.6;
-  letter-spacing: 0.2rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
   font-size: 12px;
   /* color: white; */
 }
@@ -29,9 +29,9 @@ body {
   min-height: 100vh;
 }
 
-/* ============================================================================ */
-/* ============<<< Navigation Bar >>>========================================== */
-/* ============================================================================ */
+/* ===================================================================== */
+/* =============<<< Navigation Bar >>>================================== */
+/* ===================================================================== */
 
 header,
 main {
@@ -73,8 +73,14 @@ ion-icon {
   align-items: center;
 }
 
-.search-bar {
-  flex-grow: 1;
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search-bar.flexCenter {
+  flex-grow: 0.5;
+  justify-content: center;
 }
 
 .title {
@@ -102,7 +108,7 @@ ion-icon {
 }
 
 .menu-icon ion-icon {
-  margin-right: 0;
+  margin-right: 0rem;
 }
 
 .menu {
@@ -184,8 +190,9 @@ a:focus {
 .subItem:focus-within > .subMenu {
   visibility: visible;
 }
-
-/* ============<<< Registration >>>============================================ */
+/* ================================================================== */
+/* ============<<< Registration >>>================================== */
+/* ================================================================== */
 
 section {
   width: 95vw;
@@ -200,7 +207,44 @@ section {
 .form-group label {
   display: flex;
 }
+
+.hide {
+  display: none;
+}
+
+.valid ion-icon {
+  --ionicon-stroke-width: 48px;
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.hints {
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -5px;
+}
+
+.offscreen {
+  position: absolute;
+  margin-left: -300%;
+}
+
+span,
+.input-check {
+  display: flex;
+}
+
 /* 
+
 
 .form__title {
   text-align: center;
