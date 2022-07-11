@@ -12,3 +12,10 @@
 20220711	13:38:23	POST	undefined	/register
 20220711	13:38:52	POST	undefined	/register
 20220711	13:40:20	POST	undefined	/register
+20220711	13:56:24	POST	undefined	/auth
+20220711	13:56:35	GET	undefined	/auth
+20220711	14:02:45	POST	undefined	/auth
+20220711	14:03:02	POST	undefined	/login
+20220711	14:04:18	POST	undefined	/login
+20220711	14:05:02	POST	undefined	/login
+20220711	14:06:44	POST	undefined	/login

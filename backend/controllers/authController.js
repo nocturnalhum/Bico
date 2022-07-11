@@ -7,67 +7,64 @@ const aws = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const bcrypt = require('bcryptjs');
-
-// ============================================================================
-// =================<<< Registration >>>=======================================
-// ============================================================================
-
-exports.register = async (req, res, next) => {
-  const { username, email, password, bikes, profilePicture } = req.body;
-
-  try {
-    const user = await User.create({
-      username,
-      email,
-      password,
-      bikes,
-      profilePicture,
-    });
-    res.status(201).json({
-      success: true,
-      token: user.getSignedToken(),
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+const jwt = require('jsonwebtoken');
 
 // ============================================================================
 // ==========<<< Login User >>>================================================
 // ============================================================================
 
-exports.login = async (req, res, next) => {
+exports.loginUser = async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return next(new ErrorResponse(400, 'Please provide username and password'));
+    return res
+      .status(400)
+      .json({ message: 'Username and password are required.' });
   }
 
   try {
     const user = await User.findOne({ username }).select('+password');
     if (!user) {
-      return next(new ErrorResponse(401, 'Invalid username and password'));
+      return res.sendStatus(401);
     }
 
     const validPassword = await user.validatePassword(password);
 
-    if (!validPassword) {
-      return next(new ErrorResponse(401, 'Invalid username and password'));
-    }
+    if (validPassword) {
+      const accessToken = jwt.sign(
+        { username: user.username },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: '120s' }
+      );
+      const refreshToken = jwt.sign(
+        { username: user.username },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: '1d' }
+      );
 
-    res.status(200).json({
-      success: true,
-      token: user.getSignedToken(),
-      user,
-    });
+      //  Save RefreshToken with current user:
+      user.refreshToken = refreshToken;
+      const result = await user.save();
+      console.log('LOGIN SAVE', result);
+
+      res.cookie('jwt', refreshToken, {
+        httpOnly: true,
+        sameSite: 'None',
+        // secure: true,
+        maxAge: 1000 * 60 * 60 * 24,
+      });
+      res.json({ accessToken });
+    } else {
+      res.sendStatus(401);
+    }
   } catch (error) {
     console.log(
-      `<< ERROR>>\n[controllers/auth.js]\Login Route: try-catch ==> `,
+      `<< ERROR>>\n[controllers/authController.js]\Login Route: try-catch ==> `,
       error.message
     );
     return res.status(500).json({
       success: false,
-      error: `<<controllers/auth.js>>-Register  ` + error.message,
+      error: `<<controllers/authController.js>>-Login  ` + error.message,
     });
   }
 };
