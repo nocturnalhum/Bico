@@ -7,7 +7,7 @@ const {
   getbikebyid,
   updatebike,
   deletebike,
-} = require('../controllers/bike');
+} = require('../controllers/bikeController');
 
 router.route('/registerbike').post(authHandler, registerbike);
 router.route('/').get(getbikes);

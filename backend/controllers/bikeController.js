@@ -6,7 +6,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // =================<<< Register Bike >>>======================================
 // ============================================================================
 
-exports.registerbike = async (req, res, next) => {
+exports.registerBike = async (req, res, next) => {
   const {
     manufacturer,
     bikeModel,
@@ -42,14 +42,14 @@ exports.registerbike = async (req, res, next) => {
 };
 
 // ============================================================================
-// =================<<< Get Bikes >>>==========================================
+// =================<<< Get All Bikes >>>==========================================
 // ============================================================================
 
-exports.getbikes = async (req, res, next) => {
+exports.getAllBikes = async (req, res, next) => {
   try {
-    const bikes = await Bike.find({});
+    const bikes = await Bike.find();
     if (!bikes) {
-      res.send({ success: false, message: 'Bike not found!' });
+      res.status(204).json({ success: false, message: 'Bikes not found!' });
     } else {
       res.status(200).json(bikes);
     }

@@ -1,27 +1,24 @@
-const {
-  notFoundErrorHandling,
-  errorHandling,
-} = require('./middleware/errorHandling');
 require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { logger } = require('./middleware/eventLogger');
 const corsOptions = require('./config/corsOptions');
+const { logger } = require('./middleware/eventLogger');
+const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
-const authRoute = require('./routes/auth');
-const bikeRoute = require('./routes/bike');
-const privateRoute = require('./routes/private');
+// const authRoute = require('./routes/auth');
+// const bikeRoute = require('./routes/bike');
+// const privateRoute = require('./routes/private');
 
 // ============================================================================
 // =================<<< Mongo DB Connect >>>===================================
 // ============================================================================
 
 const mongoose = require('mongoose');
-const dbConnect = require('./config/dbConnect');
+const connectDB = require('./config/connectDB');
 const PORT = process.env.PORT || 5050;
-dbConnect();
+connectDB();
 
 // ============================================================================
 // =================<<< Middleware >>>=========================================
@@ -46,16 +43,17 @@ app.use(
 // ============================================================================
 
 // Routes:
-app.use('/api/v1/auth', authRoute);
-app.use('/api/v1/bike', bikeRoute);
-app.use('/api/v1/private', privateRoute);
+app.use('/register', require('./routes/register'));
+// app.use('/api/v1/auth', authRoute);
+// app.use('/api/v1/bike', bikeRoute);
+// app.use('/api/v1/private', privateRoute);
 
 // ============================================================================
 // =================<<< ErrorHandling >>>======================================
 // ============================================================================
 
 // Errorhandler should be last piece of middleware:
-app.use(notFoundErrorHandling, errorHandling);
+app.use(errorHandler);
 
 // ============================================================================
 // =================<<< Server >>>=============================================
