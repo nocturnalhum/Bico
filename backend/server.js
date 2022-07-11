@@ -45,6 +45,7 @@ app.use(
 // Routes:
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/auth'));
+app.use('/refresh', require('./routes/refreshToken'));
 // app.use('/api/v1/auth', authRoute);
 // app.use('/api/v1/bike', bikeRoute);
 // app.use('/api/v1/private', privateRoute);
