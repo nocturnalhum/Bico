@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 
 const BikeSchema = new mongoose.Schema(
   {
-    manufacturer: {
+    brand: {
       type: String,
       require: true,
       trim: true,
     },
-    bikeModel: {
+    model: {
       type: String,
       trim: true,
     },
-    serialNum: {
+    serial: {
       type: String,
       unique: true,
       require: true,

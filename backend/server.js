@@ -7,9 +7,6 @@ const { logger } = require('./middleware/eventLogger');
 const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
-// const authRoute = require('./routes/auth');
-// const bikeRoute = require('./routes/bike');
-// const privateRoute = require('./routes/private');
 
 // ============================================================================
 // =================<<< Mongo DB Connect >>>===================================
@@ -47,6 +44,7 @@ app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/auth'));
 app.use('/refresh', require('./routes/refreshToken'));
 app.use('/logout', require('./routes/logout'));
+app.use('/bikes', require('./routes/api/bikes'));
 
 // app.use('/api/v1/auth', authRoute);
 // app.use('/api/v1/bike', bikeRoute);

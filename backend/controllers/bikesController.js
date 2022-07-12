@@ -7,10 +7,15 @@ const ErrorResponse = require('../utils/errorResponse');
 // ============================================================================
 
 exports.registerBike = async (req, res, next) => {
+  if (!req?.body.brand || !req?.body.model || !req?.body.model.serial)
+    return res
+      .status(400)
+      .json({ message: 'Brand, model, serial are required.' });
+
   const {
-    manufacturer,
-    bikeModel,
-    serialNum,
+    brand,
+    model,
+    serial,
     username,
     bikeImage,
     color,
@@ -20,9 +25,9 @@ exports.registerBike = async (req, res, next) => {
   } = req.body;
   try {
     const bike = await Bike.create({
-      manufacturer,
-      bikeModel,
-      serialNum,
+      brand,
+      model,
+      serial,
       username,
       bikeImage,
       color,
@@ -30,10 +35,7 @@ exports.registerBike = async (req, res, next) => {
       description,
       status,
     });
-    res.status(201).json({
-      success: true,
-      data: bike,
-    });
+    res.status(201).json({ bike });
   } catch (error) {
     res.status(500);
     console.log(error);
@@ -54,7 +56,7 @@ exports.getAllBikes = async (req, res, next) => {
       res.status(200).json(bikes);
     }
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 };
 
@@ -109,7 +111,7 @@ exports.deletebike = async (req, res, next) => {
     } else {
       res.status(200).json({
         success: true,
-        message: `Bike[Serial Number: ${bike.serialNum}] Deleted`,
+        message: `Bike[Serial Number: ${bike.serial}] Deleted`,
       });
     }
   } catch (error) {
