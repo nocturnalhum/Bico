@@ -18,7 +18,9 @@ const logoutUser = async (req, res) => {
   const result = await foundUser.save();
 
   res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-  res.sendStatus(204);
+  res
+    .status(200)
+    .json({ message: `User: ${foundUser.username} has logged out.` });
 };
 
 module.exports = { logoutUser };

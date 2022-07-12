@@ -6,7 +6,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // =================<<< Register Bike >>>======================================
 // ============================================================================
 
-exports.registerBike = async (req, res, next) => {
+exports.registerBike = async (req, res) => {
   if (!req?.body.brand || !req?.body.model || !req?.body.serial)
     return res
       .status(400)
@@ -47,7 +47,7 @@ exports.registerBike = async (req, res, next) => {
 // =================<<< Get All Bikes >>>==========================================
 // ============================================================================
 
-exports.getAllBikes = async (req, res, next) => {
+exports.getAllBikes = async (req, res) => {
   try {
     const bikes = await Bike.find();
     if (!bikes) {
@@ -64,7 +64,7 @@ exports.getAllBikes = async (req, res, next) => {
 // =================<<< Get Bike By ID >>>=====================================
 // ============================================================================
 
-exports.getBikeByID = async (req, res, next) => {
+exports.getBikeByID = async (req, res) => {
   if (!req?.params?.bikeID) {
     return res.status(400).json({ message: 'bikeID parameter required.' });
   }
@@ -86,7 +86,7 @@ exports.getBikeByID = async (req, res, next) => {
 // =================<<< Update Bike >>>========================================
 // ============================================================================
 
-exports.updateBike = async (req, res, next) => {
+exports.updateBike = async (req, res) => {
   console.log('TEST', req.user);
   if (!req?.body?.id) {
     return res.status(400).json({ message: 'ID parameter required.' });
@@ -119,18 +119,28 @@ exports.updateBike = async (req, res, next) => {
 // =================<<< Delete Bike >>>========================================
 // ============================================================================
 
-exports.deleteBike = async (req, res, next) => {
+exports.deleteBike = async (req, res) => {
+  if (!req?.body?.id) {
+    return res.status(400).json({ message: 'ID parameter required.' });
+  }
   try {
-    const bike = await Bike.findByIdAndDelete(req.params.bikeId);
+    const bike = await Bike.findById(req.body.id);
     if (!bike) {
-      res.send({ success: false, message: 'Bike not found!' });
+      return res
+        .status(204)
+        .json({ message: `Bike ${req.body.id} not found.` });
+    } else if (req.user !== bike.username) {
+      return res
+        .status(403)
+        .json({ success: false, message: 'Unauthorized to delete this bike.' });
     } else {
+      const result = await bike.deleteOne({ _id: req.body.id });
       res.status(200).json({
         success: true,
         message: `Bike[Serial Number: ${bike.serial}] Deleted`,
       });
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };

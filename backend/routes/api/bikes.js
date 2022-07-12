@@ -5,13 +5,15 @@ const {
   getAllBikes,
   getBikeByID,
   updateBike,
+  deleteBike,
 } = require('../../controllers/bikesController');
 
 router
   .route('/')
   .post(verifyJWT, registerBike)
   .get(getAllBikes)
-  .put(verifyJWT, updateBike);
+  .put(verifyJWT, updateBike)
+  .delete(verifyJWT, deleteBike);
 
 router.route('/:bikeID').get(getBikeByID);
 
