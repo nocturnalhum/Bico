@@ -32,3 +32,7 @@
 20220711	14:23:34	GET	undefined	/refresh
 20220711	14:23:36	GET	undefined	/refresh
 20220712	09:51:41	GET	undefined	/bikes
+20220712	09:55:33	GET	undefined	/register
+20220712	09:56:00	POST	undefined	/bikes/register
+20220712	09:56:33	POST	undefined	/bikes
+20220712	09:57:30	POST	undefined	/bikes

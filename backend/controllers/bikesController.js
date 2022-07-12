@@ -7,7 +7,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // ============================================================================
 
 exports.registerBike = async (req, res, next) => {
-  if (!req?.body.brand || !req?.body.model || !req?.body.model.serial)
+  if (!req?.body.brand || !req?.body.model || !req?.body.serial)
     return res
       .status(400)
       .json({ message: 'Brand, model, serial are required.' });
