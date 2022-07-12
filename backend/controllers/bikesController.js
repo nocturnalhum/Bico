@@ -86,21 +86,32 @@ exports.getBikeByID = async (req, res, next) => {
 // =================<<< Update Bike >>>========================================
 // ============================================================================
 
-exports.updatebike = async (req, res, next) => {
+exports.updateBike = async (req, res, next) => {
+  console.log('TEST', req.user);
+  if (!req?.body?.id) {
+    return res.status(400).json({ message: 'ID parameter required.' });
+  }
+
   try {
-    const bike = await Bike.findById(req.params.bikeId);
+    const bike = await Bike.findById(req.body.id);
+    console.log('BIKE', bike);
     if (!bike) {
-      res.send({ success: false, message: 'Bike not found!' });
+      return res
+        .status(204)
+        .json({ message: `Bike ${req.body.id} not found.` });
+    } else if (req.user !== bike.username) {
+      return res
+        .status(403)
+        .json({ message: 'Unauthorized to update this bike.' });
     } else {
-      const updatedBike = await Bike.findByIdAndUpdate(
-        req.params.bikeId,
-        req.body,
-        { new: true, runValidators: true }
-      );
+      const updatedBike = await Bike.findByIdAndUpdate(req.body.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
       res.status(200).json(updatedBike);
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 
@@ -108,7 +119,7 @@ exports.updatebike = async (req, res, next) => {
 // =================<<< Delete Bike >>>========================================
 // ============================================================================
 
-exports.deletebike = async (req, res, next) => {
+exports.deleteBike = async (req, res, next) => {
   try {
     const bike = await Bike.findByIdAndDelete(req.params.bikeId);
     if (!bike) {

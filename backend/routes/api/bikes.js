@@ -4,9 +4,14 @@ const {
   registerBike,
   getAllBikes,
   getBikeByID,
+  updateBike,
 } = require('../../controllers/bikesController');
 
-router.route('/').post(verifyJWT, registerBike).get(getAllBikes);
+router
+  .route('/')
+  .post(verifyJWT, registerBike)
+  .get(getAllBikes)
+  .put(verifyJWT, updateBike);
 
 router.route('/:bikeID').get(getBikeByID);
 
