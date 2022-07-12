@@ -64,16 +64,21 @@ exports.getAllBikes = async (req, res, next) => {
 // =================<<< Get Bike By ID >>>=====================================
 // ============================================================================
 
-exports.getbikebyid = async (req, res, next) => {
+exports.getBikeByID = async (req, res, next) => {
+  if (!req?.params?.bikeID) {
+    return res.status(400).json({ message: 'bikeID parameter required.' });
+  }
   try {
-    const bike = await Bike.findById(req.params.bikeId);
+    const bike = await Bike.findById(req.params.bikeID).exec();
     if (!bike) {
-      res.send({ success: false, message: 'Bike not found!' });
+      return res
+        .status(204)
+        .json({ message: `Bike ${req.params.bikeID} not found.` });
     } else {
       res.status(200).json(bike);
     }
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 
