@@ -12,3 +12,21 @@ exports.getAllUsers = async (req, res) => {
   console.log('USER', req.user);
   res.status(200).json(users);
 };
+
+// ============================================================================
+// =================<<< Get User By ID >>>=====================================
+// ============================================================================
+exports.getUserByID = async (req, res) => {
+  if (!req?.params?.userID) {
+    return res.status(400).json({ message: 'User ID required' });
+  }
+
+  const user = await User.findById({ _id: req.params.userID }).exec();
+  if (!user) {
+    return res
+      .status(204)
+      .json({ message: `User ${req.params.userID} not found.` });
+  }
+
+  res.json(user);
+};

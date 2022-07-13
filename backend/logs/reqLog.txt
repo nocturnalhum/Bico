@@ -121,3 +121,14 @@
 20220713	11:51:59	GET	undefined	/users
 20220713	11:52:19	GET	undefined	/users
 20220713	11:52:32	GET	undefined	/users
+20220713	12:06:14	GET	undefined	/users/62cc602c15fd15666dffad3c
+20220713	12:06:57	GET	undefined	/users/
+20220713	12:07:02	POST	undefined	/login
+20220713	12:07:13	GET	undefined	/users/
+20220713	12:07:35	GET	undefined	/users/62cc602c15fd15666dffad3c
+20220713	12:07:51	GET	undefined	/users/
+20220713	12:08:00	POST	undefined	/login
+20220713	12:08:12	GET	undefined	/users/
+20220713	12:08:40	GET	undefined	/users/62cc602c15fd15666dffad3c
+20220713	12:09:30	POST	undefined	/login
+20220713	12:09:40	GET	undefined	/users/62cc602c15fd15666dffad3c
