@@ -45,6 +45,7 @@ app.use('/login', require('./routes/auth'));
 app.use('/refresh', require('./routes/refreshToken'));
 app.use('/logout', require('./routes/logout'));
 app.use('/bikes', require('./routes/api/bikes'));
+app.use('/users', require('./routes/api/users'));
 
 // app.use('/api/v1/auth', authRoute);
 // app.use('/api/v1/bike', bikeRoute);
