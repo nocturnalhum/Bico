@@ -132,3 +132,10 @@
 20220713	12:08:40	GET	undefined	/users/62cc602c15fd15666dffad3c
 20220713	12:09:30	POST	undefined	/login
 20220713	12:09:40	GET	undefined	/users/62cc602c15fd15666dffad3c
+20220713	12:18:01	POST	undefined	/register
+20220713	12:18:11	POST	undefined	/login
+20220713	12:18:22	GET	undefined	/users/
+20220713	12:18:58	DELETE	undefined	/users/
+20220713	12:19:02	POST	undefined	/login
+20220713	12:19:12	DELETE	undefined	/users/
+20220713	12:19:23	GET	undefined	/users/

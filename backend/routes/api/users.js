@@ -1,11 +1,12 @@
 const router = require('express').Router();
+const verifyJWT = require('../../middleware/verifyJWT');
 const {
   getAllUsers,
   getUserByID,
+  deleteUser,
 } = require('../../controllers/usersController');
-const verifyJWT = require('../../middleware/verifyJWT');
 
-router.route('/').get(verifyJWT, getAllUsers);
+router.route('/').get(verifyJWT, getAllUsers).delete(verifyJWT, deleteUser);
 
 router.route('/:userID').get(verifyJWT, getUserByID);
 
