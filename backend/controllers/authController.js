@@ -31,7 +31,8 @@ exports.loginUser = async (req, res, next) => {
     const validPassword = await user.validatePassword(password);
 
     if (validPassword) {
-      const permissions = Object.values(user.permissions);
+      const permissions = Object.values(user.permissions).filter(Boolean);
+      console.log(permissions);
       const accessToken = jwt.sign(
         {
           UserInfo: {

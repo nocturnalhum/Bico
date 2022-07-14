@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
       email,
       password,
       profilePicture,
-      permissions: { User: 0001 },
+      permissions: { User: 1010 },
     });
     res.status(201).json({ success: `New user ${user.username} created.` });
   } catch (error) {
