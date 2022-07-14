@@ -52,9 +52,9 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
+    permissions: {
+      User: { type: Number, default: 1010 },
+      Admin: Number,
     },
     refreshToken: {
       type: String,

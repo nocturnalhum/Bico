@@ -8,15 +8,17 @@ const verifyJWT = (req, res, next) => {
   if (!token) {
     return res
       .sendStatus(401)
-      .json({ message: 'Not Authorized: NOT TOKEN Invalid Token' });
+      .json({ message: 'Not Authorized: Invalid Token' });
   }
 
-  console.log('VERIFY');
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
       return res.sendStatus(403);
     }
-    req.user = decoded.username;
+
+    console.log(decoded);
+    req.user = decoded.UserInfo.username;
+    req.permissions = decoded.UserInfo.permissions;
     next();
   });
 };

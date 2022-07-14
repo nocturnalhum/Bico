@@ -31,8 +31,14 @@ exports.loginUser = async (req, res, next) => {
     const validPassword = await user.validatePassword(password);
 
     if (validPassword) {
+      const permissions = Object.values(user.permissions);
       const accessToken = jwt.sign(
-        { username: user.username },
+        {
+          UserInfo: {
+            username: user.username,
+            permissions: permissions,
+          },
+        },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '120s' }
       );
@@ -45,7 +51,6 @@ exports.loginUser = async (req, res, next) => {
       //  Save RefreshToken with current user:
       user.refreshToken = refreshToken;
       const result = await user.save();
-      console.log('LOGIN SAVE', result);
 
       res.cookie('jwt', refreshToken, {
         httpOnly: true,

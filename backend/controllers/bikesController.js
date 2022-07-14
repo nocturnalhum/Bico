@@ -94,7 +94,6 @@ exports.updateBike = async (req, res) => {
 
   try {
     const bike = await Bike.findById(req.body.id);
-    console.log('BIKE', bike);
     if (!bike) {
       return res
         .status(204)
