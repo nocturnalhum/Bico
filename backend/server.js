@@ -40,12 +40,9 @@ app.use(
 // ============================================================================
 
 // Routes:
-app.use('/register', require('./routes/register'));
-app.use('/login', require('./routes/auth'));
-app.use('/forgotPassword', require('./routes/forgotPassword'));
-app.use('/resetPassword', require('./routes/resetPassword'));
+app.use('/auth', require('./routes/auth'));
+app.use('/authmanage', require('./routes/authManage'));
 app.use('/refresh', require('./routes/refreshToken'));
-app.use('/logout', require('./routes/logout'));
 app.use('/bikes', require('./routes/api/bikes'));
 app.use('/users', require('./routes/api/users'));
 
