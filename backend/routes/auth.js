@@ -4,8 +4,10 @@ const { loginUser } = require('../controllers/authController');
 const { logoutUser } = require('../controllers/logoutController');
 const registerUser = require('../controllers/registerController');
 
+// User Registration:
 router.post('/register', registerUser);
-router.post('/login', loginUser);
-router.get('/logout', logoutUser);
+
+// User Authentication:
+router.route('/').post(loginUser).get(logoutUser);
 
 module.exports = router;
