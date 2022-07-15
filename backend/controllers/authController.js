@@ -78,8 +78,9 @@ exports.loginUser = async (req, res, next) => {
 // ============================================================================
 // ==========<<< Forgot Password >>>===========================================
 // ============================================================================
-exports.forgotpassword = async (req, res, next) => {
+exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body;
+  console.log(email);
 
   try {
     const user = await User.findOne({ email });
@@ -120,7 +121,7 @@ exports.forgotpassword = async (req, res, next) => {
 // ==========<<< Reset Password >>>============================================
 // ============================================================================
 
-exports.resetpassword = async (req, res, next) => {
+exports.resetPassword = async (req, res, next) => {
   const resetPasswordToken = crypto
     .createHash('sha256')
     .update(req.params.resetToken)

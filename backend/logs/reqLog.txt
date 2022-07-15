@@ -219,3 +219,9 @@
 20220713	23:45:39	POST	undefined	/login
 20220713	23:46:37	POST	undefined	/login
 20220713	23:47:04	POST	undefined	/login
+20220715	11:30:19	POST	undefined	/register
+20220715	11:30:38	POST	undefined	/forgotPassword
+20220715	11:31:47	POST	undefined	/forgotPassword
+20220715	11:32:43	POST	undefined	/forgotPassword
+20220715	11:32:56	POST	undefined	/forgotPassword
+20220715	11:34:57	POST	undefined	/forgotPassword
