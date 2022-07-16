@@ -4,6 +4,7 @@ const {
   getAllUsers,
   getUserByID,
   deleteUser,
+  updateUser,
 } = require('../../controllers/usersController');
 const verifyPermissions = require('../../middleware/verifyPermissions');
 const { Admin, User } = require('../../config/permissions');
@@ -15,6 +16,7 @@ router
 
 router
   .route('/:userID')
-  .get(verifyJWT, verifyPermissions(Admin, User), getUserByID);
+  .get(verifyJWT, verifyPermissions(Admin, User), getUserByID)
+  .put(verifyJWT, verifyPermissions(Admin, User), updateUser);
 
 module.exports = router;
