@@ -8,7 +8,8 @@ const jwt = require('jsonwebtoken');
 // ============================================================================
 
 let validateEmail = function (email) {
-  let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  let regex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regex.test(email);
 };
 
@@ -33,10 +34,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       trim: true,
       validate: [validateEmail, 'Please enter a valid email address'],
-      match: [
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        'Please enter a valid email address',
-      ],
     },
     password: {
       type: String,
@@ -89,11 +86,15 @@ UserSchema.methods.validatePassword = async function (passwordInput) {
 // ==========<<< Get Signed Token Method >>>===================================
 // ============================================================================
 UserSchema.methods.getSignedToken = function () {
+  const permissions = Object.values(this.permissions).filter(Boolean);
   const payload = {
-    id: this._id,
+    UserInfo: {
+      username: this.username,
+      permissions: permissions,
+    },
   };
-  return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+  return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: '1200s',
   });
 };
 

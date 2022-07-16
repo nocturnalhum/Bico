@@ -31,18 +31,8 @@ exports.loginUser = async (req, res, next) => {
     const validPassword = await user.validatePassword(password);
 
     if (validPassword) {
-      const permissions = Object.values(user.permissions).filter(Boolean);
-      console.log(permissions);
-      const accessToken = jwt.sign(
-        {
-          UserInfo: {
-            username: user.username,
-            permissions: permissions,
-          },
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '120s' }
-      );
+      const accessToken = user.getSignedToken();
+
       const refreshToken = jwt.sign(
         { username: user.username },
         process.env.REFRESH_TOKEN_SECRET,

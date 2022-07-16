@@ -1,6 +1,9 @@
-20220712	10:18:39	Error: Cannot set headers after they are sent to the client
-20220713	23:06:08	TypeError: Cannot read property 'username' of undefined
-20220713	23:09:43	TypeError: Cannot read property 'permissions' of undefined
-20220713	23:10:56	ReferenceError: allowedRoles is not defined
-20220715	11:44:57	Error: Invalid Token
-20220715	11:48:16	Error: Invalid Token
+
+
+20220716	05:46:48	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62cf808cb541ba94d72cabd' }" (type Object) at path "_id" for model "User"
+20220716	05:46:50	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62cf808cb541ba94d72cabd' }" (type Object) at path "_id" for model "User"
+20220716	05:46:51	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62cf808cb541ba94d72cabd' }" (type Object) at path "_id" for model "User"
+20220716	05:55:36	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62cf808cb541ba94d72cabd' }" (type Object) at path "_id" for model "User"
+20220716	05:58:38	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43" (type string) at path "_id" for model "User"
+20220716	05:58:44	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43h" (type string) at path "_id" for model "User"
+20220716	05:58:49	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43hr" (type string) at path "_id" for model "User"

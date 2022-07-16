@@ -13,17 +13,7 @@ const handleRefreshToken = async (req, res) => {
     if (err || foundUser.username !== decoded.username) {
       return res.sendStatus(403);
     }
-    const permissions = Object.values(foundUser.permissions);
-    const accessToken = jwt.sign(
-      {
-        UserInfo: {
-          username: decoded.username,
-          permissions: permissions,
-        },
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '60s' }
-    );
+    const accessToken = foundUser.getSignedToken();
     res.json({ accessToken });
   });
 };
