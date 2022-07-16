@@ -9,3 +9,11 @@
 20220716	05:58:49	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43hr" (type string) at path "_id" for model "User"
 20220716	06:51:52	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62d298059680f4343519ec0' }" (type Object) at path "_id" for model "User"
 20220716	07:07:35	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62d2683239b00f2338f3a43' }" (type Object) at path "_id" for model "User"
+20220716	07:12:48	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:12:48	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:07	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:09	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:11	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:12	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:14	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }
+20220716	07:14:20	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "deleteUser" }

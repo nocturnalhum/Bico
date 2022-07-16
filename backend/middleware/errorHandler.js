@@ -7,13 +7,13 @@ const errorHandler = (err, req, res, next) => {
       `Code:${err.code || 500}\t${err.name}: ${err.message}`,
       'errLog.txt'
     );
-    res.status(400).send(err.message);
+    return res.status(400).send(err.message);
   }
 
   if (err.name === 'ValidationError') {
     const message = Object.values(err.errors).map((value) => value.message);
     logEvents(`Code:${err.code || 500}\t${err.name}: ${message}`, 'errLog.txt');
-    res.status(401).send(message);
+    return res.status(401).send(message);
   }
 
   console.log(err.message);
@@ -22,7 +22,7 @@ const errorHandler = (err, req, res, next) => {
     `Code:${err.code || 500}\t${err.name}: ${err.message}`,
     'errLog.txt'
   );
-  res
+  return res
     .status(err.code || 500)
     .json({ success: false, error: err.message || 'Server Error' });
 };

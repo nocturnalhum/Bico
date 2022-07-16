@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Bike = require('../models/Bike');
-const ErrorResponse = require('../utils/errorResponse');
 
 // ============================================================================
 // =================<<< Register Bike >>>======================================
@@ -16,7 +15,6 @@ exports.registerBike = async (req, res) => {
     brand,
     model,
     serial,
-    username,
     bikeImage,
     color,
     bikeType,
@@ -28,7 +26,7 @@ exports.registerBike = async (req, res) => {
       brand,
       model,
       serial,
-      username,
+      username: req.user,
       bikeImage,
       color,
       bikeType,
@@ -37,9 +35,7 @@ exports.registerBike = async (req, res) => {
     });
     res.status(201).json({ bike });
   } catch (error) {
-    res.status(500);
-    console.log(error);
-    throw new Error('Bike Registration Failed');
+    next(error);
   }
 };
 
@@ -47,7 +43,7 @@ exports.registerBike = async (req, res) => {
 // =================<<< Get All Bikes >>>==========================================
 // ============================================================================
 
-exports.getAllBikes = async (req, res) => {
+exports.getAllBikes = async (req, res, next) => {
   try {
     const bikes = await Bike.find();
     if (!bikes) {
@@ -56,7 +52,7 @@ exports.getAllBikes = async (req, res) => {
       res.status(200).json(bikes);
     }
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 };
 
@@ -64,7 +60,7 @@ exports.getAllBikes = async (req, res) => {
 // =================<<< Get Bike By ID >>>=====================================
 // ============================================================================
 
-exports.getBikeByID = async (req, res) => {
+exports.getBikeByID = async (req, res, next) => {
   if (!req?.params?.bikeID) {
     return res.status(400).json({ message: 'bikeID parameter required.' });
   }
@@ -78,7 +74,7 @@ exports.getBikeByID = async (req, res) => {
       res.status(200).json(bike);
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -86,7 +82,7 @@ exports.getBikeByID = async (req, res) => {
 // =================<<< Update Bike >>>========================================
 // ============================================================================
 
-exports.updateBike = async (req, res) => {
+exports.updateBike = async (req, res, next) => {
   console.log('TEST', req.user);
   if (!req?.body?.id) {
     return res.status(400).json({ message: 'ID parameter required.' });
@@ -98,7 +94,7 @@ exports.updateBike = async (req, res) => {
       return res
         .status(204)
         .json({ message: `Bike ${req.body.id} not found.` });
-    } else if (req.user !== bike.username) {
+    } else if (!req.permissions.includes(1111) && req.user !== bike.username) {
       return res
         .status(403)
         .json({ message: 'Unauthorized to update this bike.' });
@@ -110,7 +106,7 @@ exports.updateBike = async (req, res) => {
       res.status(200).json(updatedBike);
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
@@ -118,7 +114,7 @@ exports.updateBike = async (req, res) => {
 // =================<<< Delete Bike >>>========================================
 // ============================================================================
 
-exports.deleteBike = async (req, res) => {
+exports.deleteBike = async (req, res, next) => {
   if (!req?.body?.id) {
     return res.status(400).json({ message: 'ID parameter required.' });
   }
@@ -128,7 +124,7 @@ exports.deleteBike = async (req, res) => {
       return res
         .status(204)
         .json({ message: `Bike ${req.body.id} not found.` });
-    } else if (req.user !== bike.username) {
+    } else if (!req.permissions.includes(1111) && req.user !== bike.username) {
       return res
         .status(403)
         .json({ success: false, message: 'Unauthorized to delete this bike.' });
@@ -140,6 +136,6 @@ exports.deleteBike = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
