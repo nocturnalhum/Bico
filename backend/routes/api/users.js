@@ -12,11 +12,11 @@ const { Admin, User } = require('../../config/permissions');
 router
   .route('/')
   .get(verifyJWT, verifyPermissions(Admin), getAllUsers)
+  .put(verifyJWT, verifyPermissions(Admin, User), updateUser)
   .delete(verifyJWT, verifyPermissions(Admin, User), deleteUser);
 
 router
   .route('/:userID')
-  .get(verifyJWT, verifyPermissions(Admin, User), getUserByID)
-  .put(verifyJWT, verifyPermissions(Admin, User), updateUser);
+  .get(verifyJWT, verifyPermissions(Admin, User), getUserByID);
 
 module.exports = router;

@@ -2,8 +2,8 @@ const verifyPermissions = (...allowedPermissions) => {
   return (req, res, next) => {
     if (!req?.permissions) return res.sendStatus(401);
     const permissionsArray = [...allowedPermissions];
-    console.log('ARRAY', permissionsArray);
-    console.log('PERMISSIONS', req.permissions);
+    // console.log('ARRAY', permissionsArray);
+    // console.log('PERMISSIONS', req.permissions);
 
     const result = req.permissions
       .map((permission) => permissionsArray.includes(permission))

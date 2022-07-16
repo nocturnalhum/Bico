@@ -7,3 +7,5 @@
 20220716	05:58:38	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43" (type string) at path "_id" for model "User"
 20220716	05:58:44	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43h" (type string) at path "_id" for model "User"
 20220716	05:58:49	Code:500	CastError: Cast to ObjectId failed for value "62d2683239b00f2338f3a43hr" (type string) at path "_id" for model "User"
+20220716	06:51:52	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62d298059680f4343519ec0' }" (type Object) at path "_id" for model "User"
+20220716	07:07:35	Code:500	CastError: Cast to ObjectId failed for value "{ _id: '62d2683239b00f2338f3a43' }" (type Object) at path "_id" for model "User"
