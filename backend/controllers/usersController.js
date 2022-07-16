@@ -9,7 +9,6 @@ exports.getAllUsers = async (req, res) => {
     return res.status(204).json({ message: 'No users found.' });
   }
 
-  console.log('USER', req.user);
   res.status(200).json(users);
 };
 
@@ -23,12 +22,44 @@ exports.getUserByID = async (req, res) => {
 
   const user = await User.findById({ _id: req.params.userID }).exec();
   if (!user) {
-    return res
-      .status(204)
-      .json({ message: `User ${req.params.userID} not found.` });
+    return res.status(204).json({
+      success: false,
+      message: `User ID ${req.params.userID} not found`,
+    });
+  } else {
+    try {
+      res.json(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
+};
 
-  res.json(user);
+// ============================================================================
+// =================<<< Update User >>>========================================
+// ============================================================================
+
+exports.updateUser = async (req, res, next) => {
+  if (!req?.params?.userID)
+    return res.status(400).json({ message: 'User ID required' });
+  const user = await User.findById(req.params.userID);
+  if (!user) {
+    return res.status(204).json({
+      success: false,
+      message: `User ID ${req.params.userID} not found`,
+    });
+  } else {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.userID,
+        req.body,
+        { new: true, runValidators: true }
+      );
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 
 // ============================================================================
@@ -43,10 +74,16 @@ exports.deleteUser = async (req, res) => {
   const user = await User.findById({ _id: req.body.id });
 
   if (!user) {
-    return res.status(204).json({ message: `User ${req.body.id} not found.` });
+    return res.status(204).json({
+      success: false,
+      message: `User ID ${req.params.userID} not found`,
+    });
+  } else {
+    try {
+      const result = await user.deleteOne({ _id: req.body.id });
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  const result = await user.deleteOne({ _id: req.body.id });
-
-  res.json(result);
 };

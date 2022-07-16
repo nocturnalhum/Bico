@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-
+      required: [true, 'Please provide a username'],
       min: 4,
       max: 24,
       unique: true,
@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema(
 
     email: {
       type: String,
-
+      required: [true, 'Please provide email address'],
       unique: true,
       trim: true,
       validate: [validateEmail, 'Please enter a valid email address'],
@@ -56,9 +56,7 @@ const UserSchema = new mongoose.Schema(
       User: { type: Number, default: 1010 },
       Admin: Number,
     },
-    refreshToken: {
-      type: String,
-    },
+    refreshToken: String,
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
