@@ -5,6 +5,7 @@ import App from './App';
 import RenderSnackbar from './components/snackbar/Snackbar';
 import SimpleBackdrop from './components/backdrop/Backdrop';
 import { BikeProvider } from './components/Context/BikeContext';
+import { AuthProvider } from './components/Context/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <RenderSnackbar>
       <SimpleBackdrop>
         <BikeProvider>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </BikeProvider>
       </SimpleBackdrop>
     </RenderSnackbar>

@@ -1,107 +1,117 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Axios from 'axios';
-import './login.css';
-import { BackdropContext } from '../../components/backdrop/Backdrop';
+import { useRef, useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import Axios from '../../api/axios';
+import AuthContext from '../../components/Context/AuthProvider';
 
-export default function Login() {
+const Login = () => {
+  const userRef = useRef();
+  const errRef = useRef();
+  const { setAuth } = useContext(AuthContext);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const { closeBackdrop, showBackdrop } = useContext(BackdropContext);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem('id');
-    if (user) {
-      navigate('/');
-    }
-  }, [navigate]);
+    userRef.current.focus();
+  }, []);
 
-  const loginHandler = async (e) => {
+  useEffect(() => {
+    setErrorMsg('');
+  }, [username, password]);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const config = {
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true,
     };
 
     try {
-      showBackdrop();
-      const { data } = await Axios.post(
-        '/auth/login',
-        { username, password },
+      const response = await Axios.post(
+        '/auth',
+        JSON.stringify({ username, password }),
         config
       );
-      localStorage.setItem('authToken', 'Bearer ' + data.token);
-      localStorage.setItem('id', data.user._id);
-      localStorage.setItem('username', data.user.username);
-
-      closeBackdrop();
-      navigate('/');
-      window.location.reload(false);
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      const permissions = response?.data?.permissions;
+      setUsername('');
+      setPassword('');
+      setSuccess(true);
     } catch (error) {
-      closeBackdrop();
-      setError(error.response.data.error);
-      setTimeout(() => {
-        setError('');
-      }, 2000);
+      if (!error?.response) {
+        setErrorMsg('No Server Response');
+      } else if (error.response?.status === 400) {
+        setErrorMsg('Missing Username or password');
+      } else if (error.response?.status === 401) {
+        setErrorMsg('Unauthorized');
+      } else {
+        setErrorMsg('Sign In Failed');
+      }
+      errRef.current.focus();
     }
   };
-
   return (
-    <div className='login-screen'>
-      <form onSubmit={loginHandler} className='login-screen__form'>
-        <div className='login-screen__title'>Sign In</div>
-        <hr></hr>
-        {error && <span className='error-message'>{error}</span>}
-        <div className='form-group'>
-          <label htmlFor='username'>Username:</label>
-          <input
-            required
-            type='text'
-            id='username'
-            placeholder='Enter your username'
-            autoComplete='off'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            tabIndex={1}
-          />
-        </div>
-
-        <div className='form-group'>
-          <label htmlFor='password'>
-            Password:
-            <Link
-              to='/forgotpassword'
-              className='login-screen__forgotPassword '
-              tabIndex={3}
-            >
-              Forgot your password?
-            </Link>
-          </label>
-          <input
-            required
-            type='password'
-            id='password'
-            placeholder='Enter your password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            tabIndex={2}
-          />
-        </div>
-
-        <button type='submit' className='btn btn-primary' tabIndex={4}>
-          Login
-        </button>
-        <span className='login-screen__subtext'>
-          Don't have an account?
-          <Link to='/register' className='link' tabIndex={5}>
-            Register
-          </Link>
-        </span>
-      </form>
-    </div>
+    <>
+      {success ? (
+        <section>
+          <h1>You are Logged In!</h1>
+          <br />
+          <p>
+            <Link to='/'>Go to Home</Link>
+          </p>
+        </section>
+      ) : (
+        <section>
+          <p
+            ref={errRef}
+            className={errorMsg ? 'errmsg' : 'offscreen'}
+            aria-live='assertive'
+          >
+            {errorMsg}
+          </p>
+          <h1>Sign In</h1>
+          <form onSubmit={handleLogin}>
+            <div className='form-group'>
+              <label htmlFor='username'>Username:</label>
+              <input
+                type='text'
+                id='username'
+                ref={userRef}
+                autoComplete='off'
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                required
+              />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='password'>Password:</label>
+              <input
+                type='password'
+                id='password'
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+            </div>
+            <button>Sign In</button>
+          </form>
+          <p>
+            Need an Account?
+            <br />
+            <span className='line'>
+              <Link to='/register'>Register</Link>
+            </span>
+          </p>
+        </section>
+      )}
+    </>
   );
-}
+};
+
+export default Login;

@@ -31,6 +31,7 @@ exports.loginUser = async (req, res, next) => {
     const validPassword = await user.validatePassword(password);
 
     if (validPassword) {
+      const permissions = Object.values(user.permissions).filter(Boolean);
       const accessToken = user.getSignedToken();
 
       const refreshToken = jwt.sign(
@@ -49,7 +50,7 @@ exports.loginUser = async (req, res, next) => {
         secure: true,
         maxAge: 1000 * 60 * 60 * 24,
       });
-      res.json({ accessToken });
+      res.json({ permissions, accessToken });
     } else {
       res.sendStatus(401);
     }
