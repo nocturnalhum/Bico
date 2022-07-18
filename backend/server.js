@@ -14,6 +14,7 @@ const credentials = require('./middleware/credentials');
 
 const mongoose = require('mongoose');
 const connectDB = require('./config/connectDB');
+const allowedOrigins = require('./config/allowedOrigins');
 const PORT = process.env.PORT || 5050;
 connectDB();
 
@@ -29,7 +30,7 @@ app.use(logger);
 app.use(credentials);
 
 app.use(
-  cors(),
+  cors(corsOptions),
   express.urlencoded({ extended: false }),
   express.json(),
   cookieParser()

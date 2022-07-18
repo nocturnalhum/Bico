@@ -28,7 +28,7 @@ const Bikes = ({ bikes }) => {
               <div className='bike-info'>
                 <header>
                   <div className='bikecard-item'>
-                    {bike.manufacturer} - {bike.bikeModel}
+                    {bike.brand} - {bike.model}
                   </div>
                 </header>
                 <p className='bike-description'>{bike.description}</p>

@@ -22,7 +22,7 @@ export default function Home() {
         },
       };
       try {
-        const response = await Axios.get('/bike/', {}, config);
+        const response = await Axios.get('/bikes', {}, config);
         const lostAndFoundBikes = await response.data.filter(
           (bike) => bike.status !== 'owner'
         );

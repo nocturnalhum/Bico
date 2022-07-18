@@ -5,7 +5,7 @@ const Bike = require('../models/Bike');
 // =================<<< Register Bike >>>======================================
 // ============================================================================
 
-exports.registerBike = async (req, res) => {
+exports.registerBike = async (req, res, next) => {
   if (!req?.body.brand || !req?.body.model || !req?.body.serial)
     return res
       .status(400)
@@ -47,7 +47,7 @@ exports.getAllBikes = async (req, res, next) => {
   try {
     const bikes = await Bike.find();
     if (!bikes) {
-      res.status(204).json({ success: false, message: 'Bikes not found!' });
+      res.status(400).json({ success: false, message: 'Bikes not found!' });
     } else {
       res.status(200).json(bikes);
     }
@@ -68,7 +68,7 @@ exports.getBikeByID = async (req, res, next) => {
     const bike = await Bike.findById(req.params.bikeID).exec();
     if (!bike) {
       return res
-        .status(204)
+        .status(400)
         .json({ message: `Bike ${req.params.bikeID} not found.` });
     } else {
       res.status(200).json(bike);

@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
       `Code:${err.code || 500}\t${err.name}: ${err.message}`,
       'errLog.txt'
     );
-    return res.status(400).send(err.message);
+    return res.status(409).send(err.message);
   }
 
   if (err.name === 'ValidationError') {

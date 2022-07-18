@@ -15,10 +15,6 @@ const registerUser = async (req, res, next) => {
   // Check for duplicate keys in DB:
   const dupKey = await User.findOne({ username });
 
-  // if (dupKey)
-  //   return res
-  //     .status(409)
-  //     .json({ message: 'Duplicate Key: Entered Field Already Exists.' });
   try {
     const user = await User.create({
       username,

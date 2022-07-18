@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Axios from '../../api/axios';
-// import './register.css';
 import RenderAvatar from '../../components/avatar/RenderAvatar';
+// import './register.css';
 
 // Start with lower/uppercase letter followed by 3~23 characters:
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -44,23 +44,25 @@ export default function Register() {
   const userRef = useRef();
   const errRef = useRef();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
+    // Set focus on Username Input on load:
     userRef.current.focus();
   }, []);
 
   useEffect(() => {
+    // Username validation:
     const isValid = USER_REGEX.test(username);
     setValidName(isValid);
   }, [username]);
 
   useEffect(() => {
+    // Email validation:
     const isValid = EMAIL_REGEX.test(email);
     setValidEmail(isValid);
   }, [email]);
 
   useEffect(() => {
+    // Password validation:
     const isValid = PASSWORD_REGEX.test(password);
     setValidPassword(isValid);
     const match = password === matchPassword;
@@ -70,8 +72,13 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const valid1 = USER_REGEX.test(username);
-    const valid2 = USER_REGEX.test(email);
-    const valid3 = USER_REGEX.test(password);
+    const valid2 = EMAIL_REGEX.test(email);
+    const valid3 = PASSWORD_REGEX.test(password);
+
+    if (!valid1 || !valid2 || !valid3) {
+      setErrorMsg('Invalid Entry');
+      return;
+    }
 
     const config = {
       headers: {
@@ -79,11 +86,6 @@ export default function Register() {
       },
       withCredentials: true,
     };
-
-    if (!valid1 || !valid2 || !valid3) {
-      setErrorMsg('Invalid Entry');
-      return;
-    }
 
     try {
       console.log(profilePicture);
@@ -100,7 +102,16 @@ export default function Register() {
       if (!error?.response) {
         setErrorMsg('No Server Response');
       } else if (error.response?.status === 409) {
-        setErrorMsg('Username Taken');
+        const data = error.response.data;
+        if (data.includes('username')) {
+          setErrorMsg('Username Already Exists');
+        }
+        if (data.includes('email')) {
+          setErrorMsg('Emails Already Exists');
+        }
+        setTimeout(() => {
+          setErrorMsg('');
+        }, 5000);
       } else {
         setErrorMsg('Registration Failed');
       }
@@ -185,6 +196,7 @@ export default function Register() {
                   type='email'
                   id='email'
                   placeholder='Enter your email'
+                  autoComplete='off'
                   aria-invalid={validEmail ? 'false' : 'true'}
                   aria-describedby='emailnote'
                   onFocus={() => setEmailFocus(true)}
@@ -317,7 +329,7 @@ export default function Register() {
           {/* ==========<<< Already Have Account >>>================= */}
           Already have an account?
           <Link to='/login' className='link'>
-            Login
+            Sign In
           </Link>
         </section>
       )}
