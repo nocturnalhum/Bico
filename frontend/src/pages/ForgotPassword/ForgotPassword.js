@@ -17,11 +17,7 @@ const ForgotPassword = () => {
     };
 
     try {
-      const { data } = await axios.post(
-        '/auth/forgotpassword',
-        { email },
-        config
-      );
+      const { data } = await axios.post('/authReset', { email }, config);
       setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);

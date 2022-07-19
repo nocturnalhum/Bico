@@ -30,7 +30,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.put(
-        `/auth/resetpassword/${params.resetToken}`,
+        `/authReset/${params.resetToken}`,
         { password },
         config
       );

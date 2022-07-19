@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ImageUpload from './components/cropper/Cropper';
 import Error from './pages/Error/Error';
 import Home from './pages/Home/Home';
@@ -14,57 +14,73 @@ import MyBikes from './pages/MyBikes/MyBikes';
 import BikePage from './pages/BikePage/BikePage';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
+import Layout from './components/Layout/Layout';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
-  const [bikes, setBikes] = useState([]);
+  // const [bikes, setBikes] = useState([]);
 
-  useEffect(() => {
-    (async function getBikes() {
-      const config = {
-        header: {
-          'Content-Type': 'application/json',
-        },
-      };
-      try {
-        const response = await Axios.get('/bike/', {}, config);
-        setBikes(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-    console.log(bikes);
-  }, []);
+  // useEffect(() => {
+  //   (async function getBikes() {
+  //     const config = {
+  //       header: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     };
+  //     try {
+  //       const response = await Axios.get('/bike/', {}, config);
+  //       setBikes(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })();
+  //   console.log(bikes);
+  // }, []);
 
   return (
-    <main className='App'>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          {/* <Route path='/forgotpassword' element={<ForgotPassword />} />
-          <Route
-            path='/passwordreset/:resetToken'
-            element={<ResetPassword />}
-          /> */}
-          {/* <Route path='/upload' element={<ImageUpload />} />
-          <Route path='/messages' element={<Messages />} />
-          <Route path='/mybikes' element={<MyBikes />} />
-          <Route path='/bikepage/:bikeid' element={<BikePage />} /> */}
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        {/* Public: */}
+        <Route path='/' element={<Home />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/forgotPassword' element={<ForgotPassword />} />
+        <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />
 
-          {/* <Route
-            path='/registerbike'
-            element={
-              <PrivateRoute>
-                <RegisterBike />
-              </PrivateRoute>
-            }
-          /> */}
-          {/* <Route path='*' element={<Error />} /> */}
-        </Routes>
-      </Router>
-    </main>
+        {/* Protected: */}
+        <Route path='/registerBike' element={<RegisterBike />} />
+
+        {/* Catch all */}
+        <Route path='*' element={<PageNotFound />} />
+      </Route>
+    </Routes>
+    // <main className='App'>
+    //     <Navbar />
+    //     <Routes>
+    //       <Route path='/' element={<Home />} />
+    //       <Route path='/register' element={<Register />} />
+    //       <Route path='/login' element={<Login />} />
+    //       {/* <Route path='/forgotpassword' element={<ForgotPassword />} />
+    //       <Route
+    //         path='/passwordreset/:resetToken'
+    //         element={<ResetPassword />}
+    //       /> */}
+    //       {/* <Route path='/upload' element={<ImageUpload />} />
+    //       <Route path='/messages' element={<Messages />} />
+    //       <Route path='/mybikes' element={<MyBikes />} />
+    //       <Route path='/bikepage/:bikeid' element={<BikePage />} /> */}
+
+    //       {/* <Route
+    //         path='/registerbike'
+    //         element={
+    //           <PrivateRoute>
+    //             <RegisterBike />
+    //           </PrivateRoute>
+    //         }
+    //       /> */}
+    //       {/* <Route path='*' element={<Error />} /> */}
+    //     </Routes>
+    // </main>
   );
 }
 
