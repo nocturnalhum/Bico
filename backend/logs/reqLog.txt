@@ -764,3 +764,7 @@
 20220718	01:02:36	GET	undefined	/bikes
 20220718	01:02:49	OPTIONS	http://localhost:3000	/auth
 20220718	01:02:49	POST	http://localhost:3000	/auth
+20220719	12:29:08	GET	undefined	/bikes
+20220719	12:29:08	GET	undefined	/bike/
+20220719	12:29:08	GET	undefined	/bikes
+20220719	12:29:08	GET	undefined	/bike/

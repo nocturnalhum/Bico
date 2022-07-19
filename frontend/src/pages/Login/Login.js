@@ -40,6 +40,7 @@ const Login = () => {
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       const permissions = response?.data?.permissions;
+      setAuth({ username, password, permissions, accessToken });
       setUsername('');
       setPassword('');
       setSuccess(true);
