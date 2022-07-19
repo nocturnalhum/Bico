@@ -3,7 +3,7 @@ import './home.css';
 import Axios from 'axios';
 import Bikes from '../../components/bikeCard/BikeCard';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import BikeContext from '../../components/Context/BikeContext';
+import BikeContext from '../../Context/BikeContext';
 
 const allCategories = ['all', 'found', 'lost'];
 

@@ -15,7 +15,9 @@ import BikePage from './pages/BikePage/BikePage';
 import { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Layout from './components/Layout/Layout';
-import PageNotFound from './pages/PageNotFound';
+import UnAuthorized from './pages/UnAuthorized';
+import { RequireAuth } from './components/RequireAuth';
+import { Users } from './pages/Users/Users';
 
 function App() {
   // const [bikes, setBikes] = useState([]);
@@ -42,16 +44,21 @@ function App() {
       <Route path='/' element={<Layout />}>
         {/* Public: */}
         <Route path='/' element={<Home />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/forgotPassword' element={<ForgotPassword />} />
-        <Route path='/resetPassword/:resetToken' element={<ResetPassword />} />
+        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
+        <Route path='forgotPassword' element={<ForgotPassword />} />
+        <Route path='resetPassword/:resetToken' element={<ResetPassword />} />
+        <Route path='unauthorized' element={<UnAuthorized />} />
 
         {/* Protected: */}
-        <Route path='/registerBike' element={<RegisterBike />} />
-
+        <Route element={<RequireAuth allowedRoles={[1010, 1111]} />}>
+          <Route path='/registerBike' element={<RegisterBike />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={[1111]} />}>
+          <Route path='/users' element={<Users />} />
+        </Route>
         {/* Catch all */}
-        <Route path='*' element={<PageNotFound />} />
+        <Route path='*' element={<Error />} />
       </Route>
     </Routes>
     // <main className='App'>

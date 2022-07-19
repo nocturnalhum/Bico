@@ -5,8 +5,8 @@ import './index.css';
 import App from './App';
 import RenderSnackbar from './components/snackbar/Snackbar';
 import SimpleBackdrop from './components/backdrop/Backdrop';
-import { BikeProvider } from './components/Context/BikeContext';
-import { AuthProvider } from './components/Context/AuthProvider';
+import { BikeProvider } from './Context/BikeContext';
+import { AuthProvider } from './Context/AuthProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
