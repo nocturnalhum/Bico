@@ -9,7 +9,7 @@ const UnAuthorized = () => {
       <h1>UnAuthorized</h1>
       <br />
       <p>Cannot Access Requested Page</p>
-      <div className='flewGrow'>
+      <div className='flexGrow'>
         <button onClick={goBack}>Previous Page</button>
       </div>
     </section>

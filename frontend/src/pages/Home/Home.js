@@ -1,54 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
-import './home.css';
-import Axios from 'axios';
-import Bikes from '../../components/bikeCard/BikeCard';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import BikeContext from '../../Context/BikeContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../../Context/AuthProvider';
 
-const allCategories = ['all', 'found', 'lost'];
+const Home = () => {
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-export default function Home() {
-  const [allBikes, setAllBikes] = useState([]);
-  const [bikes, setBikes] = useState([]);
-  const [categories, setCategories] = useState([]);
-
-  const { item } = useContext(BikeContext);
-
-  useEffect(() => {
-    (async function getBikes() {
-      const config = {
-        header: {
-          'Content-Type': 'application/json',
-        },
-      };
-      try {
-        const response = await Axios.get('/bikes', {}, config);
-        const lostAndFoundBikes = await response.data.filter(
-          (bike) => bike.status !== 'owner'
-        );
-        await setAllBikes(lostAndFoundBikes);
-        await setBikes(lostAndFoundBikes);
-        setCategories(allCategories);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
-  const filterBikes = (category) => {
-    if (category === 'all') {
-      setBikes(allBikes);
-      return;
-    }
-    const filteredItems = allBikes.filter((bike) => bike.status === category);
-    setBikes(filteredItems);
+  const logout = async () => {
+    // if used in more components, this should be in context
+    // axios to /logout endpoint
+    setAuth({});
+    navigate('/linkpage');
   };
 
   return (
-    <section className='home-screen'>
-      <div className='bike-title'></div>
-      <SearchBar categories={categories} filterItems={filterBikes} />
-      <Bikes bikes={bikes} setBikes={setBikes} allBikes={allBikes} />
+    <section>
+      <h1>Home</h1>
+      <br />
+      <p>You are logged in!</p>
+      <br />
+      <Link to='/editor'>Go to the Editor page</Link>
+      <br />
+      <Link to='/admin'>Go to the Admin page</Link>
+      <br />
+      <Link to='/lounge'>Go to the Lounge</Link>
+      <br />
+      <Link to='/linkpage'>Go to the link page</Link>
+      <div className='flexGrow'>
+        <button onClick={logout}>Sign Out</button>
+      </div>
     </section>
   );
-}
+};
+
+export default Home;

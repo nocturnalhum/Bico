@@ -64,3 +64,5 @@
 20220717	23:02:51	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: email_1 dup key: { email: "claska2@yahoo.com" }
 20220717	23:03:02	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "claska2" }
 20220717	23:05:30	Code:11000	MongoServerError: E11000 duplicate key error collection: Bike.users index: username_1 dup key: { username: "claska" }
+20220720	13:42:28	Code:500	TypeError: Cannot read property 'authorization' of undefined
+20220720	13:44:46	Code:500	TypeError: Cannot read property 'authentication' of undefined

@@ -7,12 +7,14 @@ const bcrypt = require('bcryptjs');
 exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find();
+
     if (!users) {
       return res.status(204).json({ message: 'No users found.' });
     }
 
     res.status(200).json(users);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
