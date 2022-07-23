@@ -23,6 +23,7 @@ import UnAuthorized from './components/UnAuthorized';
 import LinkPage from './components/Admin/LinkPage';
 import Editor from './components/Admin/Editor';
 import Lounge from './components/Admin/Lounge';
+import PersistLogin from './components/PersistLogin';
 
 function App() {
   // const [bikes, setBikes] = useState([]);
@@ -57,14 +58,16 @@ function App() {
         <Route path='linkpage' element={<LinkPage />} />
 
         {/* Protected: */}
-        <Route element={<RequireAuth allowedRoles={[1010, 1111]} />}>
-          <Route path='registerBike' element={<RegisterBike />} />
-        </Route>
-        <Route element={<RequireAuth allowedRoles={[1111]} />}>
-          <Route path='admin' element={<Admin />} />
-          <Route path='editor' element={<Editor />} />
-          <Route path='lounge' element={<Lounge />} />
-          {/* <Route path='users' element={<Users />} /> */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth allowedRoles={[1010, 1111]} />}>
+            <Route path='registerBike' element={<RegisterBike />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[1111]} />}>
+            <Route path='admin' element={<Admin />} />
+            <Route path='editor' element={<Editor />} />
+            <Route path='lounge' element={<Lounge />} />
+            {/* <Route path='users' element={<Users />} /> */}
+          </Route>
         </Route>
         {/* Catch all */}
         <Route path='*' element={<Error />} />

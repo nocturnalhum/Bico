@@ -6,7 +6,7 @@ import Axios from '../../api/axios';
 const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
-  const { setAuth } = useAuth();
+  const { setAuth, persist, setPersist } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -59,6 +59,15 @@ const Login = () => {
       errRef.current.focus();
     }
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('persist', persist);
+  }, [persist]);
+
   return (
     <section>
       <p
@@ -93,6 +102,16 @@ const Login = () => {
           />
         </div>
         <button>Sign In</button>
+        <div className='persistCheck'>
+          <input
+            type='checkbox'
+            name='persist'
+            id='persist'
+            onChange={togglePersist}
+            checked={persist}
+          />
+          <label htmlFor='persist'>Trust This Device</label>
+        </div>
       </form>
       <p>
         Need an Account?

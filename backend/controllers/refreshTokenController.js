@@ -13,8 +13,9 @@ const handleRefreshToken = async (req, res) => {
     if (err || foundUser.username !== decoded.username) {
       return res.sendStatus(403);
     }
+    const permissions = Object.values(foundUser.permissions);
     const accessToken = foundUser.getSignedToken();
-    res.json({ accessToken });
+    res.json({ permissions, accessToken });
   });
 };
 

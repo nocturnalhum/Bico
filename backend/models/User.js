@@ -94,7 +94,7 @@ UserSchema.methods.getSignedToken = function () {
     },
   };
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: '120s',
+    expiresIn: '10s',
   });
 };
 
